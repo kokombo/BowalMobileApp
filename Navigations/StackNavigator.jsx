@@ -7,7 +7,10 @@ import {
   Verify,
   AccountType,
 } from '../src/Screens/Onboarding';
+import {AddProduct} from '../src/Screens/Seller';
 import TabNavigator from './TabNavigator';
+import {Image} from 'react-native';
+import {COLORS, assets} from '../constants';
 
 const RootStack = createStackNavigator();
 
@@ -41,6 +44,22 @@ const StackNavigator = () => {
         name="Verify"
         component={Verify}
         options={{headerShown: false}}></RootStack.Screen>
+      <RootStack.Screen
+        name="Add Product"
+        component={AddProduct}
+        options={{
+          headerShown: true,
+          headerBackTitleVisible: false,
+          headerShadowVisible: false,
+          headerBackgroundContainerStyle: {backgroundColor: COLORS.white},
+          headerTitleStyle: {color: COLORS.grey},
+          headerBackImage: () => (
+            <Image
+              source={assets.arrowbackblue}
+              style={{width: 20, height: 17, marginLeft: 10}}
+            />
+          ),
+        }}></RootStack.Screen>
       <RootStack.Screen
         name="VendorHome"
         component={TabNavigator}

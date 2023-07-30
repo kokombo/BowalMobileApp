@@ -21,6 +21,11 @@ import account from '../assets/icons/account.png';
 import focusedaccount from '../assets/icons/focusedaccount.png';
 import product from '../assets/icons/product.png';
 import focusedproduct from '../assets/icons/focusedproduct.png';
+import totalproducts from '../assets/icons/totalproducts.png';
+import visitors from '../assets/icons/visitors.png';
+import plus from '../assets/icons/plus.png';
+import searchicon from '../assets/icons/searchicon.png';
+import arrowbackblue from '../assets/icons/arrowbackblue.png';
 
 export default {
   bell,
@@ -46,4 +51,9 @@ export default {
   account,
   product,
   focusedproduct,
+  totalproducts,
+  visitors,
+  plus,
+  searchicon,
+  arrowbackblue,
 };

@@ -1,7 +1,8 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {Animated} from 'react-native';
-import DrawerNavigator from './Navigations/DrawerNavigator';
 import StackNavigator from './Navigations/StackNavigator';
+import {Provider} from 'react-redux';
+import {Store} from './src/Redux/Store';
 
 const av = new Animated.Value(0);
 av.addListener(() => {
@@ -10,9 +11,11 @@ av.addListener(() => {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <StackNavigator />
-    </NavigationContainer>
+    <Provider store={Store}>
+      <NavigationContainer>
+        <StackNavigator />
+      </NavigationContainer>
+    </Provider>
   );
 };
 
