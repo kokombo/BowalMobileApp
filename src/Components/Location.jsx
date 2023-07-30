@@ -3,7 +3,9 @@ import {Platform} from 'react-native';
 import {useEffect, useState} from 'react';
 import Geocoder from 'react-native-geocoding';
 
-Geocoder.init('AIzaSyDNHS4hA8m6VVV3ga527aGkxXobepYq56Y', {language: 'en'});
+const LOCATION_KEY = process.env.REACT_GOOGLE_MAP_KEY;
+
+Geocoder.init(LOCATION_KEY, {language: 'en'});
 
 const Location = () => {
   const [userLocation, setUserLocation] = useState({city: '', address: ''});
