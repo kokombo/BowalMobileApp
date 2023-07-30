@@ -26,6 +26,7 @@ import visitors from '../assets/icons/visitors.png';
 import plus from '../assets/icons/plus.png';
 import searchicon from '../assets/icons/searchicon.png';
 import arrowbackblue from '../assets/icons/arrowbackblue.png';
+import location from '../assets/icons/location.png';
 
 export default {
   bell,
@@ -56,4 +57,5 @@ export default {
   plus,
   searchicon,
   arrowbackblue,
+  location,
 };

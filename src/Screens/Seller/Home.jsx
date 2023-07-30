@@ -66,9 +66,13 @@ const styles = StyleSheet.create({
   },
   analytics_container: {
     gap: 20,
+    marginTop: 15,
   },
   welcome: {
     marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });
 export default Home;

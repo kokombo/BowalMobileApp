@@ -1,13 +1,14 @@
 import Geolocation from 'react-native-geolocation-service';
-import {Platform} from 'react-native';
 import {useEffect, useState} from 'react';
 import Geocoder from 'react-native-geocoding';
-
-const LOCATION_KEY = process.env.REACT_GOOGLE_MAP_KEY;
-
-Geocoder.init(LOCATION_KEY, {language: 'en'});
+import {request, PERMISSIONS} from 'react-native-permissions';
+import {REACT_GOOGLE_MAP_KEY} from '@env';
+import {Text, View, Image} from 'react-native';
+import {COLORS, assets} from '../../constants';
 
 const Location = () => {
+  Geocoder.init(REACT_GOOGLE_MAP_KEY, {language: 'en'});
+
   const [userLocation, setUserLocation] = useState({city: '', address: ''});
   const [userPosition, setUserPosition] = useState({
     latitude: 0,
@@ -15,28 +16,22 @@ const Location = () => {
   });
   const [permissionStatus, setPermissionStatus] = useState('');
 
-  const hasLocationPermission = async () => {
-    if (Platform.OS === 'ios') {
-      await Geolocation.requestAuthorization('whenInUse').then(status => {
-        if (status === 'disabled') {
-          setPermissionStatus('disabled');
-        }
-        if (status === 'granted') {
-          setPermissionStatus('granted');
-        }
-        if (status === 'denied') {
-          setPermissionStatus('denied');
-        }
-        if (status === 'restricted') {
-          setPermissionStatus('restricted');
-        }
-      });
-      geoLocation();
+  useEffect(() => {
+    requestLocalPermision();
+  }, []);
+  const requestLocalPermision = async () => {
+    try {
+      const granted = await request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+      if (granted === 'granted') {
+        setPermissionStatus('Location permission granted');
+      }
+    } catch (error) {
+      console.log('error', error);
     }
   };
 
   const geoLocation = () => {
-    if (hasLocationPermission) {
+    if (requestLocalPermision) {
       Geolocation.getCurrentPosition(
         position => {
           setUserPosition({
@@ -51,22 +46,32 @@ const Location = () => {
       );
     }
   };
-  console.log(userPosition);
 
   useEffect(() => {
     geoLocation();
   }, []);
 
   setTimeout(() => {
-    Geocoder.from(userPosition.latitude, userPosition.longitude)
-      .then(json => {
-        let formatted_address = json.results[0].formatted_address[0];
-        let city_address = json.results[5].formatted_address.split(',')[0];
-        setUserLocation({address: formatted_address, city: city_address});
-      })
-      .catch(error => console.log(error));
+    Geocoder.from(userPosition.latitude, userPosition.longitude).then(json => {
+      let formatted_address = json.results[2].formatted_address;
+      let city_address = json.results[5].formatted_address;
+      setUserLocation({address: formatted_address, city: city_address});
+    });
   }, 150);
 
-  console.log(userLocation);
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 2,
+      }}>
+      <Image source={assets.location} style={{height: 20, width: 20}} />
+      <Text style={{color: COLORS.gray, fontSize: 18}}>
+        {userLocation.address}{' '}
+      </Text>
+    </View>
+  );
 };
 export default Location;
