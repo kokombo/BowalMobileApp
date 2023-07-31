@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>17551773120-aommnel0199p123otq5b8aign4ka454s.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.17551773120-aommnel0199p123otq5b8aign4ka454s</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAjvTk9ITNujmrutV6R1DbxTCmQ-3b6Dc0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>17551773120</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>Bowal</string>
+	<key>PROJECT_ID</key>
+	<string>bowalmobileapp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bowalmobileapp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:17551773120:ios:64cb5202e8787e2d5f4c25</string>
+</dict>
+</plist>

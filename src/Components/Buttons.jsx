@@ -18,6 +18,7 @@ export default CustomButton = ({title, onPress}) => {
           fontSize: 18,
           color: COLORS.white,
           textTransform: 'capitalize',
+          fontWeight: '600',
         }}>
         {title}
       </Text>

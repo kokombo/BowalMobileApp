@@ -11,6 +11,7 @@ export const selectImage = createAsyncThunk(
   async () => {
     try {
       const result = await launchImageLibrary({mediaType: 'photo', quality: 1});
+      console.log(result);
       return result;
     } catch (error) {
       return error.message;

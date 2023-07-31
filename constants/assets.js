@@ -27,6 +27,7 @@ import plus from '../assets/icons/plus.png';
 import searchicon from '../assets/icons/searchicon.png';
 import arrowbackblue from '../assets/icons/arrowbackblue.png';
 import location from '../assets/icons/location.png';
+import selectimage from '../assets/icons/selectimage.png';
 
 export default {
   bell,
@@ -58,4 +59,5 @@ export default {
   searchicon,
   arrowbackblue,
   location,
+  selectimage,
 };
