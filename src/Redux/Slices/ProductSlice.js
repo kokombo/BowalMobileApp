@@ -9,9 +9,9 @@ const initialState = {
 
 export const addProduct = createAsyncThunk(
   'product/addProduct',
-  productInfo => {
+  async productInfo => {
     try {
-      database()
+      await database()
         .ref('/users/product')
         .set({
           ...productInfo,

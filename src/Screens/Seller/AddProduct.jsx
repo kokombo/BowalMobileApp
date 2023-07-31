@@ -16,12 +16,13 @@ import {useSelector, useDispatch} from 'react-redux';
 import {selectImage} from '../../Redux/Slices/ImageSelectorSlice';
 import {addProduct} from '../../Redux/Slices/ProductSlice';
 
-const AddProduct = () => {
+const AddProduct = ({navigation}) => {
   const [productName, setProductName] = useState('');
   const [productCategory, setProductCategory] = useState('');
   const [productPrice, setProductPrice] = useState('');
   const [productDescription, setProductDescription] = useState('');
   const [productImages, setProductImages] = useState([]);
+  const [error, setError] = useState('');
 
   const dispatch = useDispatch();
 
@@ -49,6 +50,8 @@ const AddProduct = () => {
         productImages,
       }),
     );
+    Alert.alert('Product Added', 'you have successfully added a new product');
+    navigation.navigate('Products');
   };
 
   Boolean(
@@ -88,7 +91,7 @@ const AddProduct = () => {
             <Text style={styles.label}>Price</Text>
             <TextInput
               style={styles.input}
-              keyboardType="number"
+              keyboardType="numberic"
               onChangeText={value => setProductPrice(value)}
             />
           </View>
