@@ -1,5 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {createAsyncThunk} from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {launchImageLibrary} from 'react-native-image-picker';
 
 const initialState = {

@@ -9,7 +9,7 @@ const initialState = {
 
 export const addProduct = createAsyncThunk(
   'product/addProduct',
-  async productInfo => {
+  async (productInfo) => {
     try {
       await database()
         .ref('/users/product')
@@ -22,7 +22,7 @@ export const addProduct = createAsyncThunk(
   },
 );
 
-const ProductSlice = createSlice({
+const productSlice = createSlice({
   name: 'product',
   initialState,
   reducer: {},
@@ -34,11 +34,11 @@ const ProductSlice = createSlice({
       .addCase(addProduct.fulfilled, (state, action) => {
         state.status = 'succeeded';
       })
-      .addCase(addProduct.failed, (state, action) => {
+      .addCase(addProduct.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });
   },
 });
 
-export default ProductSlice.reducer;
+export default productSlice.reducer;

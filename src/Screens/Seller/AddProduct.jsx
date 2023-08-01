@@ -30,7 +30,7 @@ const AddProduct = ({navigation}) => {
     dispatch(selectImage());
   };
 
-  //Handling product info storage to firebase using the firebase set method (this is inside productSlice in redux)
+  //Handling product info storage to firebase using set method (this is inside productSlice in redux)
   const submit = () => {
     const canNotSave =
       !productName || !productCategory || !productPrice || !productDescription;
@@ -41,17 +41,20 @@ const AddProduct = ({navigation}) => {
         'Please provide all product details before submitting',
       );
     }
-    dispatch(
-      addProduct({
-        productName,
-        productCategory,
-        productPrice,
-        productDescription,
-        productImages,
-      }),
-    );
-    Alert.alert('Product Added', 'you have successfully added a new product');
-    navigation.navigate('Products');
+    else{
+      dispatch(
+        addProduct({
+          productName,
+          productCategory,
+          productPrice,
+          productDescription,
+          productImages,
+        }),
+      );
+      Alert.alert('Product Added', 'you have successfully added a new product');
+      navigation.navigate('Products');
+    }
+   
   };
 
   Boolean(
@@ -91,7 +94,7 @@ const AddProduct = ({navigation}) => {
             <Text style={styles.label}>Price</Text>
             <TextInput
               style={styles.input}
-              keyboardType="numberic"
+              keyboardType="numeric"
               onChangeText={value => setProductPrice(value)}
             />
           </View>
