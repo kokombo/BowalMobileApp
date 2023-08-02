@@ -12,7 +12,7 @@ export const addProduct = createAsyncThunk(
   async (productInfo) => {
     try {
       await database()
-        .ref('/users/product')
+        .ref('products')
         .set({
           ...productInfo,
         });

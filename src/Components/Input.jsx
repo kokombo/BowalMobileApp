@@ -4,7 +4,7 @@ import {COLORS} from '../../constants';
 const Input = ({
   value,
   placeholder,
-  onChange,
+  onChangeText,
   keyboardType,
   secureTextEntry,
 }) => {
@@ -12,7 +12,7 @@ const Input = ({
     <TextInput
       value={value}
       placeholder={placeholder}
-      onChange={onChange}
+      onChangeText={onChangeText}
       placeholderTextColor={COLORS.gray}
       keyboardType={keyboardType}
       secureTextEntry={secureTextEntry}

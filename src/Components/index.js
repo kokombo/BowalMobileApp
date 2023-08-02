@@ -6,6 +6,7 @@ import Location from './Location';
 import Greeting from './Greeting';
 import Analytics from './Analytics';
 import Search from './Search';
+import CustomAlert from './CustomAlert';
 
 export {
   Input,
@@ -16,4 +17,5 @@ export {
   Location,
   Analytics,
   Search,
+  CustomAlert
 };

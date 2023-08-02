@@ -15,6 +15,8 @@ import {COLORS, assets} from '../../../constants';
 import {useSelector, useDispatch} from 'react-redux';
 import {selectImage} from '../../Redux/Slices/ImageSelectorSlice';
 import {addProduct} from '../../Redux/Slices/ProductSlice';
+import { CustomAlert } from '../../Components';
+
 
 const AddProduct = ({navigation}) => {
   const [productName, setProductName] = useState('');
@@ -30,7 +32,7 @@ const AddProduct = ({navigation}) => {
     dispatch(selectImage());
   };
 
-  //Handling product info storage to firebase using set method (this is inside productSlice in redux)
+//Handle product info storage to firebase using set method (this is inside productSlice in redux)
   const submit = () => {
     const canNotSave =
       !productName || !productCategory || !productPrice || !productDescription;
@@ -40,6 +42,7 @@ const AddProduct = ({navigation}) => {
         "Can't Add Product!",
         'Please provide all product details before submitting',
       );
+      // return <CustomAlert text = {"Can't add product"} />
     }
     else{
       dispatch(
@@ -57,9 +60,7 @@ const AddProduct = ({navigation}) => {
    
   };
 
-  Boolean(
-    !productName || !productCategory || !productPrice || !productDescription,
-  );
+console.log(productName, productCategory, productPrice)
 
   return (
     <ScrollView>
