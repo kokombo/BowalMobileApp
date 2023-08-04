@@ -7,7 +7,7 @@ import {
   Verify,
   AccountType,
 } from '../src/Screens/Onboarding';
-import {AddProduct} from '../src/Screens/Seller';
+import {AddProduct, Notifications} from '../src/Screens/Seller';
 import TabNavigator from './TabNavigator';
 import {Image, TouchableOpacity} from 'react-native';
 import {COLORS, assets} from '../constants';
@@ -54,7 +54,27 @@ const StackNavigator = () => {
         name="Add Product"
         component={AddProduct}
         options={{
-          headerShown: true,
+          headerBackTitleVisible: false,
+          headerShadowVisible: false,
+          headerBackgroundContainerStyle: {backgroundColor: COLORS.white},
+          headerTitleStyle: {color: COLORS.grey},
+          headerBackImage: () => (
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(clearImages());
+                navigation.goBack();
+              }}>
+              <Image
+                source={assets.arrowbackblue}
+                style={{width: 20, height: 17, marginLeft: 10}}
+              />
+            </TouchableOpacity>
+          ),
+        }}></RootStack.Screen>
+      <RootStack.Screen
+        name="Notifications"
+        component={Notifications}
+        options={{
           headerBackTitleVisible: false,
           headerShadowVisible: false,
           headerBackgroundContainerStyle: {backgroundColor: COLORS.white},

@@ -41,6 +41,7 @@ import navigate from '../assets/icons/navigate.png';
 import about from '../assets/icons/about.png';
 import terms from '../assets/icons/terms.png';
 import profilepicture from '../assets/images/profilepicture.png';
+import nonotification from '../assets/images/nonotification.png';
 
 export default {
   bell,
@@ -87,4 +88,5 @@ export default {
   profile,
   terms,
   profilepicture,
+  nonotification,
 };

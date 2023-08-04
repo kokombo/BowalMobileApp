@@ -6,8 +6,6 @@ import {
   TextInput,
   ScrollView,
   Alert,
-  ActivityIndicator,
-  Platform,
 } from 'react-native';
 import CustomButton from '../../Components/Buttons';
 import {COLORS} from '../../../constants';
@@ -61,48 +59,46 @@ const AddProduct = ({navigation}) => {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.container}>
-        <AddProductImage />
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+      <AddProductImage />
 
-        <View style={styles.product_info_container}>
-          <View style={styles.input_wrapper}>
-            <Text style={styles.label}>Product Name</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={value => setProductName(value)}
-              autoCorrect={false}
-            />
-          </View>
-          <View style={styles.input_wrapper}>
-            <Text style={styles.label}>Category</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={value => setProductCategory(value)}
-              autoCorrect={false}
-            />
-          </View>
-          <View style={styles.input_wrapper}>
-            <Text style={styles.label}>Price</Text>
-            <TextInput
-              style={styles.input}
-              keyboardType="numeric"
-              onChangeText={value => setProductPrice(value)}
-              autoCorrect={false}
-            />
-          </View>
-          <View style={styles.input_wrapper}>
-            <Text style={styles.label}>Description</Text>
-            <TextInput
-              style={[styles.input, styles.description]}
-              multiline
-              onChangeText={value => setProductDescription(value)}
-            />
-          </View>
+      <View style={styles.product_info_container}>
+        <View style={styles.input_wrapper}>
+          <Text style={styles.label}>Product Name</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={value => setProductName(value)}
+            autoCorrect={false}
+          />
+        </View>
+        <View style={styles.input_wrapper}>
+          <Text style={styles.label}>Category</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={value => setProductCategory(value)}
+            autoCorrect={false}
+          />
+        </View>
+        <View style={styles.input_wrapper}>
+          <Text style={styles.label}>Price</Text>
+          <TextInput
+            style={styles.input}
+            keyboardType="numeric"
+            onChangeText={value => setProductPrice(value)}
+            autoCorrect={false}
+          />
+        </View>
+        <View style={styles.input_wrapper}>
+          <Text style={styles.label}>Description</Text>
+          <TextInput
+            style={[styles.input, styles.description]}
+            multiline
+            onChangeText={value => setProductDescription(value)}
+          />
+        </View>
 
-          <View style={styles.button_container}>
-            <CustomButton title={'add'} onPress={submit} />
-          </View>
+        <View style={styles.button_container}>
+          <CustomButton title={'add'} onPress={submit} />
         </View>
       </View>
     </ScrollView>

@@ -1,4 +1,10 @@
-import {View, StyleSheet, SafeAreaView, Image} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  Image,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import {COLORS, assets} from '../../../constants';
 import HomeHeader from './HomeHeader';
 import {ProfilePicture} from '../../Components';
@@ -10,7 +16,12 @@ const Home = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.heading}>
         <ProfilePicture width={50} height={50} />
-        <Image source={assets.bell} style={styles.bell} />
+        <TouchableWithoutFeedback
+          onPress={() => {
+            navigation.navigate('Notifications');
+          }}>
+          <Image source={assets.bell} style={styles.bell} />
+        </TouchableWithoutFeedback>
       </View>
 
       <ProductsContainer ListHeaderComponent={<HomeHeader />} />
