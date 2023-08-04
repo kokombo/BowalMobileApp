@@ -1,12 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit';
 import imageSelectorReducer from './Slices/ImageSelectorSlice';
-import productReducer from "./Slices/ProductSlice"
-import customAlertReducer from "./Slices/customAlertSlice"
+import productReducer from './Slices/ProductSlice';
+import customAlertReducer from './Slices/customAlertSlice';
 
-export const Store = configureStore({
+export const store = configureStore({
   reducer: {
     imageSelector: imageSelectorReducer,
     product: productReducer,
-    alert: customAlertReducer
+    alert: customAlertReducer,
   },
 });

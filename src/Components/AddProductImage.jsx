@@ -1,4 +1,12 @@
-import {View, TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Image,
+  Alert,
+  Platform,
+} from 'react-native';
 import {COLORS, assets} from '../../constants';
 import {selectImage} from '../Redux/Slices/ImageSelectorSlice';
 import {useDispatch, useSelector} from 'react-redux';
@@ -6,6 +14,10 @@ import {useDispatch, useSelector} from 'react-redux';
 const AddProductImage = () => {
   const dispatch = useDispatch();
   const {selectedImages} = useSelector(store => store.imageSelector);
+
+  if (selectedImages.length > 3) {
+    Alert.alert('Warning!', 'You can only select up to three images');
+  }
 
   const ImagePreview = () => {
     if (selectedImages.length > 0 && selectedImages !== null) {
@@ -15,6 +27,7 @@ const AddProductImage = () => {
             <Image
               source={{uri: `${selectedImages[index]}`}}
               style={styles.preview_image}
+              key={index}
             />
           ))}
         </View>
@@ -69,9 +82,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    alignSelf: 'center',
     marginTop: 30,
-    gap: 15,
+    gap: 20,
   },
   preview_image: {
     width: '30%',
@@ -79,9 +91,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   info: {
-    color: COLORS.blue,
+    color: COLORS.grey,
     fontSize: 12,
     marginTop: 5,
+    fontStyle: 'italic',
   },
 });
 export default AddProductImage;

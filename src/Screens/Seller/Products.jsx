@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {COLORS, assets} from '../../../constants';
 import {Search} from '../../Components';
+import ProductsContainer from './ProductsContainer';
 
 const Products = ({navigation}) => {
   return (
@@ -29,6 +30,9 @@ const Products = ({navigation}) => {
           </View>
         </View>
         <Search />
+        <View style={styles.product_wrapper}>
+          <ProductsContainer />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -43,7 +47,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginTop: StatusBar.currentHeight,
   },
-
   heading: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -58,6 +61,9 @@ const styles = StyleSheet.create({
   plus_icon: {
     width: 30,
     height: 30,
+  },
+  product_wrapper: {
+    marginTop: 30,
   },
 });
 export default Products;

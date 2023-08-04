@@ -7,6 +7,7 @@ import {
   ScrollView,
   Alert,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import CustomButton from '../../Components/Buttons';
 import {COLORS} from '../../../constants';
@@ -26,16 +27,21 @@ const AddProduct = ({navigation}) => {
   const {status} = useSelector(store => store.product);
   const {selectedImages} = useSelector(store => store.imageSelector);
 
-  //Handle product info storage to firebase using set method (this is inside productSlice in redux)
+  //To further ensure exactly 3 images are uploaded to the backend for each product.
+
+  const productImages = selectedImages.slice(0, 3);
+
+  // const submit handles product storage to firestore database using set method (this is inside the productSlice in redux). If a user fail to provide every necessary product detail, an error prompt will pop up saying user can not add product.
+
   const submit = () => {
     const canNotSave =
-      !productName || !productCategory || !productPrice || !productDescription;
-
+      selectedImages.length === 0 ||
+      !productName ||
+      !productCategory ||
+      !productPrice ||
+      !productDescription;
     if (canNotSave) {
-      Alert.alert(
-        "Can't Add Product!",
-        'Please provide all product details before submitting',
-      );
+      Alert.alert('Oops!', 'Please provide all product details before adding.');
       // return <CustomAlert text = {"Can't add product"} />
     } else {
       dispatch(
@@ -44,7 +50,7 @@ const AddProduct = ({navigation}) => {
           productCategory,
           productPrice,
           productDescription,
-          selectedImages,
+          productImages,
         }),
       );
       dispatch(clearImages());
@@ -55,7 +61,7 @@ const AddProduct = ({navigation}) => {
   };
 
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <AddProductImage />
 

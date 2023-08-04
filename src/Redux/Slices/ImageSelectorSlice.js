@@ -1,4 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import {Platform} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 
 const initialState = {
@@ -16,7 +17,9 @@ export const selectImage = createAsyncThunk(
         selectionLimit: 3,
       });
       const uri = result?.assets[0].uri;
-      return uri;
+      const uploadUri =
+        Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+      return uploadUri;
     } catch (error) {
       return error.message;
     }
@@ -34,7 +37,6 @@ const imageSelectorSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(selectImage.fulfilled, (state, action) => {
       state.selectedImages.push(action.payload);
-      // state.status = '';
     });
   },
 });

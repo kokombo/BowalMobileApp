@@ -1,46 +1,19 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  Image,
-} from 'react-native';
+import {View, StyleSheet, SafeAreaView, Image} from 'react-native';
 import {COLORS, assets} from '../../../constants';
-import {ProfilePicture, Location, Greeting, Analytics} from '../../Components';
+import HomeHeader from './HomeHeader';
+import {ProfilePicture} from '../../Components';
+
+import ProductsContainer from './ProductsContainer';
 
 const Home = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.body}>
-        <View style={styles.heading}>
-          <ProfilePicture width={50} height={50} />
-          <Image source={assets.bell} style={styles.bell} />
-        </View>
-
-        <View style={styles.welcome}>
-          <Greeting />
-          <Location />
-        </View>
-
-        <View style={styles.analytics_container}>
-          <Analytics
-            title={'Total Products'}
-            icon={assets.totalproducts}
-            value={'1234'}
-          />
-          <Analytics
-            title={'Total Visitors'}
-            icon={assets.visitors}
-            value={'12345'}
-          />
-        </View>
-
-        <View style={styles.product_container}>
-          <Text style={styles.product_container_heading}>Products</Text>
-        </View>
+      <View style={styles.heading}>
+        <ProfilePicture width={50} height={50} />
+        <Image source={assets.bell} style={styles.bell} />
       </View>
+
+      <ProductsContainer ListHeaderComponent={<HomeHeader />} />
     </SafeAreaView>
   );
 };
@@ -49,38 +22,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
-  },
-  body: {
-    paddingHorizontal: 15,
-    gap: 10,
-    marginTop: StatusBar.currentHeight,
+    width: '100%',
   },
   heading: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: 15,
+    paddingBottom: 10,
   },
   bell: {
     width: 30,
     height: 30,
-  },
-  analytics_container: {
-    gap: 20,
-    marginTop: 15,
-  },
-  welcome: {
-    marginTop: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  product_container_heading: {
-    color: COLORS.grey,
-    fontSize: 20,
-    fontWeight: '600',
-  },
-  product_container: {
-    marginTop: 20,
   },
 });
 export default Home;

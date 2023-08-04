@@ -25,7 +25,7 @@ const Account = () => {
       <FlatList
         data={accountTabData}
         renderItem={renderItem}
-        keyExtractor={item => item.text.toString()}
+        keyExtractor={item => item.id}
         style={{padding: 15}}
         showsVerticalScrollIndicator={false}
       />
