@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>17551773120-aommnel0199p123otq5b8aign4ka454s.apps.googleusercontent.com</string>
+	<string>1082745142207-mj2ial867n0sut3bhjadoul8o2t3aioo.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.17551773120-aommnel0199p123otq5b8aign4ka454s</string>
+	<string>com.googleusercontent.apps.1082745142207-mj2ial867n0sut3bhjadoul8o2t3aioo</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAjvTk9ITNujmrutV6R1DbxTCmQ-3b6Dc0</string>
+	<string>AIzaSyDCtjTYeZwiGEiskvqvhqHe87Z9qcfQ_qk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>17551773120</string>
+	<string>1082745142207</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>Bowal</string>
+	<string>org.reactjs.native.example.BowalMobileApp</string>
 	<key>PROJECT_ID</key>
-	<string>bowalmobileapp</string>
+	<string>bowal-app</string>
 	<key>STORAGE_BUCKET</key>
-	<string>bowalmobileapp.appspot.com</string>
+	<string>bowal-app.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:17551773120:ios:64cb5202e8787e2d5f4c25</string>
+	<string>1:1082745142207:ios:df3e32988327002885bf0a</string>
+	<key>DATABASE_URL</key>
+	<string>https://bowal-app-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>
