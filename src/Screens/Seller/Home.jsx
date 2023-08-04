@@ -15,7 +15,7 @@ const Home = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>
         <View style={styles.heading}>
-          <ProfilePicture />
+          <ProfilePicture width={50} height={50} />
           <Image source={assets.bell} style={styles.bell} />
         </View>
 
@@ -37,8 +37,8 @@ const Home = ({navigation}) => {
           />
         </View>
 
-        <View>
-          <Text>Total Products</Text>
+        <View style={styles.product_container}>
+          <Text style={styles.product_container_heading}>Products</Text>
         </View>
       </View>
     </SafeAreaView>
@@ -73,6 +73,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  product_container_heading: {
+    color: COLORS.grey,
+    fontSize: 20,
+    fontWeight: '600',
+  },
+  product_container: {
+    marginTop: 20,
   },
 });
 export default Home;

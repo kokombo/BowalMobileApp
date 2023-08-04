@@ -1,5 +1,5 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {assets} from '../constants';
+import {COLORS, assets} from '../constants';
 import {Home, Products, Chats, Orders, Account} from '../src/Screens/Seller';
 import {Image} from 'react-native';
 
@@ -70,7 +70,9 @@ const TabNavigator = () => {
       <Tab.Screen
         name="Account"
         component={Account}
-        options={{headerShown: false}}></Tab.Screen>
+        options={{
+          headerShown: false,
+        }}></Tab.Screen>
     </Tab.Navigator>
   );
 };

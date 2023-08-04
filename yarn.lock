@@ -1734,6 +1734,11 @@
   resolved "https://registry.npmjs.org/@react-native-firebase/database/-/database-18.3.0.tgz"
   integrity sha512-5brbU6HCM9+JvlxOiRBdpTz712cUP+7Jnp0GwPE7QUi97oUv45dm2945B8cNBfk3pSg2Dh57eOWuzkbo7PqfUA==
 
+"@react-native-firebase/firestore@^18.3.0":
+  version "18.3.0"
+  resolved "https://registry.npmjs.org/@react-native-firebase/firestore/-/firestore-18.3.0.tgz"
+  integrity sha512-lf++MjazL+5JH0wvlFb2WFqEtUvULaNy4ahlLYOoNwlCjDyvR3L9mYov6cbBVoSu1AJrQcv9u2aHZApEJKaFZg==
+
 "@react-native-masked-view/masked-view@^0.2.9":
   version "0.2.9"
   resolved "https://registry.npmjs.org/@react-native-masked-view/masked-view/-/masked-view-0.2.9.tgz"

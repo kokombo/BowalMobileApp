@@ -7,6 +7,9 @@ import Greeting from './Greeting';
 import Analytics from './Analytics';
 import Search from './Search';
 import CustomAlert from './CustomAlert';
+import Mode from './Mode';
+import NavigationCard from './NavigationCard';
+import AddProductImage from './AddProductImage';
 
 export {
   Input,
@@ -17,5 +20,8 @@ export {
   Location,
   Analytics,
   Search,
-  CustomAlert
+  CustomAlert,
+  Mode,
+  NavigationCard,
+  AddProductImage,
 };

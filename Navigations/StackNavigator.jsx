@@ -9,12 +9,18 @@ import {
 } from '../src/Screens/Onboarding';
 import {AddProduct} from '../src/Screens/Seller';
 import TabNavigator from './TabNavigator';
-import {Image} from 'react-native';
+import {Image, TouchableOpacity} from 'react-native';
 import {COLORS, assets} from '../constants';
+import {useDispatch} from 'react-redux';
+import {clearImages} from '../src/Redux/Slices/ImageSelectorSlice';
+import {useNavigation} from '@react-navigation/native';
 
 const RootStack = createStackNavigator();
 
 const StackNavigator = () => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+
   return (
     <RootStack.Navigator>
       <RootStack.Screen
@@ -54,10 +60,16 @@ const StackNavigator = () => {
           headerBackgroundContainerStyle: {backgroundColor: COLORS.white},
           headerTitleStyle: {color: COLORS.grey},
           headerBackImage: () => (
-            <Image
-              source={assets.arrowbackblue}
-              style={{width: 20, height: 17, marginLeft: 10}}
-            />
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(clearImages());
+                navigation.goBack();
+              }}>
+              <Image
+                source={assets.arrowbackblue}
+                style={{width: 20, height: 17, marginLeft: 10}}
+              />
+            </TouchableOpacity>
           ),
         }}></RootStack.Screen>
       <RootStack.Screen

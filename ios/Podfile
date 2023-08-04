@@ -25,19 +25,17 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-$RNFirebaseAnalyticsWithoutAdIdSupport=true
-
 target 'BowalMobileApp' do
   config = use_native_modules!
-  # use_frameworks! :linkage => :static
+
   # Flags change depending on the env values.
   flags = get_default_flags()
   pod 'FirebaseCoreInternal', :modular_headers => true
   pod 'FirebaseCore', :modular_headers => true
-  # # pod 'Firebase/Messaging', :modular_headers => true
   pod 'GoogleUtilities', :modular_headers => true
   pod 'GoogleAnalytics', :modular_headers => true
   pod 'Firebase', :modular_headers => true
+
   use_react_native!(
     :path => config[:reactNativePath],
     # Hermes is now enabled by default. Disable by setting this flag to false.

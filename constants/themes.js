@@ -7,4 +7,5 @@ export const COLORS = {
   gray: '#CECECE',
   snow: '#F2F5F9',
   cloud: '#F4F4F4',
+  chalk: '#F0F0F0',
 };

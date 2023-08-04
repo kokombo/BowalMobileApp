@@ -28,6 +28,19 @@ import searchicon from '../assets/icons/searchicon.png';
 import arrowbackblue from '../assets/icons/arrowbackblue.png';
 import location from '../assets/icons/location.png';
 import selectimage from '../assets/icons/selectimage.png';
+import mode from '../assets/icons/mode.png';
+import profile from '../assets/icons/profile.png';
+import identity from '../assets/icons/identity.png';
+import settings from '../assets/icons/settings.png';
+import bank from '../assets/icons/bank.png';
+import support from '../assets/icons/support.png';
+import faq from '../assets/icons/faq.png';
+import policy from '../assets/icons/policy.png';
+import logout from '../assets/icons/logout.png';
+import navigate from '../assets/icons/navigate.png';
+import about from '../assets/icons/about.png';
+import terms from '../assets/icons/terms.png';
+import profilepicture from '../assets/images/profilepicture.png';
 
 export default {
   bell,
@@ -60,4 +73,18 @@ export default {
   arrowbackblue,
   location,
   selectimage,
+  mode,
+  navigate,
+  profile,
+  faq,
+  policy,
+  logout,
+  about,
+  support,
+  bank,
+  settings,
+  identity,
+  profile,
+  terms,
+  profilepicture,
 };
