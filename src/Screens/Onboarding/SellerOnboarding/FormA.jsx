@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {COLORS, assets} from '../../../../constants';
 import OnboardingCTA from '../Components/OnboardingCTA';
 import OnboardingHeading from '../Components/OnboardingHeading';
@@ -22,7 +22,7 @@ const FormA = ({navigation}) => {
 
       <View style={styles.body}>
         <View>
-          <OnboardingHeading title={'Registration'} />
+          <OnboardingHeading heading={'Registration'} />
         </View>
         <View style={styles.form}>
           <View style={styles.inputs}>

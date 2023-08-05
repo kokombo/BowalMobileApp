@@ -22,7 +22,7 @@ const FormB = ({navigation}) => {
       </View>
       <View style={styles.body}>
         <View>
-          <OnboardingHeading title={'Registration'} />
+          <OnboardingHeading heading={'Registration'} />
         </View>
         <View style={styles.form}>
           <View style={styles.inputs}>

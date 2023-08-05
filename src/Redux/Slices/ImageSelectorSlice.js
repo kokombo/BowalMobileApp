@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {Platform} from 'react-native';
+import {Alert, Platform} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 
 const initialState = {
@@ -16,10 +16,12 @@ export const selectImage = createAsyncThunk(
         quality: 1,
         selectionLimit: 3,
       });
-      const uri = result?.assets[0].uri;
-      const uploadUri =
-        Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
-      return uploadUri;
+      if (!result.didCancel) {
+        const uri = result?.assets[0]?.uri;
+        const uploadUri =
+          Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+        return uploadUri;
+      }
     } catch (error) {
       return error.message;
     }

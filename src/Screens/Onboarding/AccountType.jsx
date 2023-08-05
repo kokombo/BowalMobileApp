@@ -9,7 +9,7 @@ const AccountType = ({navigation}) => {
       <View style={styles.header}></View>
       <View style={styles.body}>
         <View style={styles.tagline_container}>
-          <OnboardingHeading title={'Buy easily, sell swiftly'} />
+          <OnboardingHeading heading={'Buy easily, sell swiftly'} />
         </View>
         <View style={styles.account_type}>
           <TouchableOpacity style={styles.image_container}>
@@ -77,8 +77,6 @@ const styles = StyleSheet.create({
     gap: 20,
     padding: 15,
     marginBottom: 120,
-    // borderTopRightRadius: 15,
-    // borderTopLeftRadius: 15,
   },
   header: {
     height: 150,

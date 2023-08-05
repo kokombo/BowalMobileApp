@@ -11,6 +11,7 @@ import Mode from './Mode';
 import NavigationCard from './NavigationCard';
 import AddProductImage from './AddProductImage';
 import RefreshController from './RefreshControl';
+import PasswordInput from './PasswordInput';
 
 export {
   Input,
@@ -26,4 +27,5 @@ export {
   NavigationCard,
   AddProductImage,
   RefreshController,
+  PasswordInput,
 };

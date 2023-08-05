@@ -14,6 +14,7 @@ import {useDispatch, useSelector} from 'react-redux';
 const AddProductImage = () => {
   const dispatch = useDispatch();
   const {selectedImages} = useSelector(store => store.imageSelector);
+  console.log(selectedImages.length);
 
   if (selectedImages.length > 3) {
     Alert.alert('Warning!', 'You can only select up to three images');
@@ -23,7 +24,7 @@ const AddProductImage = () => {
     if (selectedImages.length > 0 && selectedImages !== null) {
       return (
         <View style={styles.image_preview_container}>
-          {selectedImages.slice(0, 3).map((item, index) => (
+          {selectedImages?.slice(0, 3).map((item, index) => (
             <Image
               source={{uri: `${selectedImages[index]}`}}
               style={styles.preview_image}
@@ -38,6 +39,7 @@ const AddProductImage = () => {
   const handlePress = () => {
     dispatch(selectImage());
   };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.selectImage} onPress={handlePress}>

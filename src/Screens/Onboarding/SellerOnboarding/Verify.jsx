@@ -26,7 +26,7 @@ const Verify = ({navigation}) => {
       </View>
       <View style={styles.body}>
         <View style={styles.heading_container}>
-          <OnboardingHeading title={'Verify your account'} />
+          <OnboardingHeading heading={'Verify your account'} />
           <Text style={styles.text}>
             We sent a verification code to your mobile email. Enter the codes
             below

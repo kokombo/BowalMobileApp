@@ -14,6 +14,7 @@ import {COLORS, assets} from '../constants';
 import {useDispatch} from 'react-redux';
 import {clearImages} from '../src/Redux/Slices/ImageSelectorSlice';
 import {useNavigation} from '@react-navigation/native';
+import {LoginPage} from '../src/Screens/Authorization';
 
 const RootStack = createStackNavigator();
 
@@ -51,6 +52,10 @@ const StackNavigator = () => {
         component={Verify}
         options={{headerShown: false}}></RootStack.Screen>
       <RootStack.Screen
+        name="Signin"
+        component={LoginPage}
+        options={{headerShown: false}}></RootStack.Screen>
+      <RootStack.Screen
         name="Add Product"
         component={AddProduct}
         options={{
@@ -61,8 +66,8 @@ const StackNavigator = () => {
           headerBackImage: () => (
             <TouchableOpacity
               onPress={() => {
-                dispatch(clearImages());
                 navigation.goBack();
+                dispatch(clearImages());
               }}>
               <Image
                 source={assets.arrowbackblue}
