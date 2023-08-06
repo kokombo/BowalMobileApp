@@ -1,5 +1,5 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {COLORS, assets} from '../constants';
+import {assets, COLORS} from '../constants';
 import {Home, Products, Chats, Orders, Account} from '../src/Screens/Seller';
 import {Image} from 'react-native';
 
@@ -8,6 +8,7 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
+        headerShadowVisible: false,
         tabBarIcon: ({focused}) => {
           if (route.name === 'Home') {
             return (
@@ -71,7 +72,9 @@ const TabNavigator = () => {
         name="Account"
         component={Account}
         options={{
-          headerShown: false,
+          headerTitle: 'Profile',
+          headerStyle: {backgroundColor: COLORS.blue},
+          headerTitleStyle: {color: COLORS.white},
         }}></Tab.Screen>
     </Tab.Navigator>
   );

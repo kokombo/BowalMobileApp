@@ -1,35 +1,25 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {Profile} from '../src/Screens/Seller';
-import {assets} from '../constants';
-import {Image} from 'react-native';
-import TabNavigator from './TabNavigator';
+import {COLORS, assets} from '../constants';
+import BuyerTabNavigator from './BuyerTabNavigator';
+import {Aside} from '../src/Components';
 
 const Drawer = createDrawerNavigator();
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator
+      initialRouteName=" "
+      drawerContent={() => <Aside />}
       screenOptions={{
         drawerType: 'front',
-        drawerStyle: {width: 300},
+        drawerStyle: {width: 330},
+        headerShown: false,
+        drawerActiveBackgroundColor: 'transparent',
+        drawerLabelStyle: {color: COLORS.grey, fontSize: 18, fontWeight: '300'},
       }}>
       <Drawer.Screen
         name=" "
-        component={TabNavigator}
-        options={{
-          title: '',
-          drawerIcon: () => (
-            <Image source={assets.home} style={{width: 16, height: 16}} />
-          ),
-        }}></Drawer.Screen>
-      <Drawer.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          title: 'Profile',
-          drawerIcon: () => (
-            <Image source={assets.home} style={{width: 16, height: 16}} />
-          ),
-        }}></Drawer.Screen>
+        component={BuyerTabNavigator}
+        options={{}}></Drawer.Screen>
     </Drawer.Navigator>
   );
 };

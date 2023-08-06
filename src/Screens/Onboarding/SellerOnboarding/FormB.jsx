@@ -21,12 +21,10 @@ const FormB = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View style={styles.body}>
-        <View>
-          <OnboardingHeading heading={'Registration'} />
-        </View>
+        <OnboardingHeading heading={'Vendor Registration'} />
         <View style={styles.form}>
           <View style={styles.inputs}>
-            <Input placeholder={'Email'} />
+            <Input placeholder={'Email'} textContentType={'emailAddress'} />
             <View style={styles.number}>
               <View style={styles.country}>
                 {/* <View style={{position: 'absolute', bottom: 100}}>
@@ -38,7 +36,11 @@ const FormB = ({navigation}) => {
               </View>
 
               <View style={{width: '91%'}}>
-                <Input placeholder={'Phone Number'} keyboardType={'numeric'} />
+                <Input
+                  placeholder={'Phone Number'}
+                  keyboardType={'numeric'}
+                  textContentType={'telephoneNumber'}
+                />
               </View>
             </View>
           </View>
@@ -59,6 +61,7 @@ const FormB = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.white,
   },
   header: {
     height: 150,
@@ -75,7 +78,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingTop: 40,
     paddingBottom: 80,
-    backgroundColor: COLORS.white,
     flexDirection: 'column',
     justifyContent: 'space-between',
   },

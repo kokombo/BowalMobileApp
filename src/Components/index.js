@@ -12,6 +12,8 @@ import NavigationCard from './NavigationCard';
 import AddProductImage from './AddProductImage';
 import RefreshController from './RefreshControl';
 import PasswordInput from './PasswordInput';
+import SideBarToggle from './SideBarToggle';
+import Aside from './Aside';
 
 export {
   Input,
@@ -28,4 +30,6 @@ export {
   AddProductImage,
   RefreshController,
   PasswordInput,
+  SideBarToggle,
+  Aside,
 };

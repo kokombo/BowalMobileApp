@@ -8,4 +8,5 @@ export const COLORS = {
   snow: '#F2F5F9',
   cloud: '#F4F4F4',
   chalk: '#F0F0F0',
+  lightyellow: '#FEFBF4',
 };

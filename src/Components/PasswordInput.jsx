@@ -16,6 +16,9 @@ const PasswordInput = ({onChangeText, value}) => {
         onChangeText={onChangeText}
         placeholderTextColor={COLORS.gray}
         style={styles.input}
+        secureTextEntry={true}
+        autoCorrect={false}
+        textContentType="password"
       />
       <TouchableOpacity style={styles.visibility}>
         <Image source={assets.visibility} style={styles.icon} />
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
   visibility: {
     position: 'absolute',
     right: 0,
-    top: 1 / 2,
+    top: 5,
   },
 });
 export default PasswordInput;

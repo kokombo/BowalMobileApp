@@ -42,6 +42,24 @@ import about from '../assets/icons/about.png';
 import terms from '../assets/icons/terms.png';
 import profilepicture from '../assets/images/profilepicture.png';
 import nonotification from '../assets/images/nonotification.png';
+import category from '../assets/icons/category.png';
+import focusedcategory from '../assets/icons/focusedcategory.png';
+import logistics from '../assets/icons/logistics.png';
+import focusedlogistics from '../assets/icons/focusedlogistics.png';
+import sidebartoggle from '../assets/icons/sidebartoggle.png';
+import cart from '../assets/icons/cart.png';
+import wave from '../assets/icons/wave.png';
+import banner1 from '../assets/images/banner.png';
+import greydot from '../assets/icons/greydot.png';
+import bluedot from '../assets/icons/bluedot.png';
+import logisticscomingsoon from '../assets/images/logisticscomingsoon.png';
+import whitetoggle from '../assets/icons/whitetoggle.png';
+import love from '../assets/icons/love.png';
+import coloredcategory from '../assets/icons/coloredcategory.png';
+import coloredsupport from '../assets/icons/coloredsupport.png';
+import colorednotification from '../assets/icons/colorednotification.png';
+import coloredcart from '../assets/icons/coloredcart.png';
+import nomessage from '../assets/icons/nomessage.png';
 
 export default {
   bell,
@@ -89,4 +107,22 @@ export default {
   terms,
   profilepicture,
   nonotification,
+  category,
+  focusedcategory,
+  logistics,
+  focusedlogistics,
+  sidebartoggle,
+  cart,
+  wave,
+  banner1,
+  greydot,
+  bluedot,
+  logisticscomingsoon,
+  whitetoggle,
+  love,
+  coloredcategory,
+  coloredsupport,
+  coloredcart,
+  colorednotification,
+  nomessage,
 };

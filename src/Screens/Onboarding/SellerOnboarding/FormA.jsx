@@ -22,12 +22,15 @@ const FormA = ({navigation}) => {
 
       <View style={styles.body}>
         <View>
-          <OnboardingHeading heading={'Registration'} />
+          <OnboardingHeading heading={'Vendor Registration'} />
         </View>
         <View style={styles.form}>
           <View style={styles.inputs}>
-            <Input placeholder={'Full name'} />
-            <Input placeholder={'Business name'} />
+            <Input placeholder={'Full name'} textContentType={'name'} />
+            <Input
+              placeholder={'Business name'}
+              textContentType={'organizationName'}
+            />
             <Input placeholder={'Business description'} />
           </View>
           <CustomButton

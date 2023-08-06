@@ -29,10 +29,12 @@ const Products = ({navigation}) => {
             </TouchableOpacity>
           </View>
         </View>
-        <Search />
-        <View style={styles.product_wrapper}>
-          <ProductsContainer />
+
+        <View style={styles.search_container}>
+          <Search placeholder={'Search'} />
         </View>
+
+        <ProductsContainer />
       </View>
     </SafeAreaView>
   );
@@ -44,8 +46,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   body: {
-    paddingHorizontal: 15,
     marginTop: StatusBar.currentHeight,
+    paddingHorizontal: 15,
+    gap: 30,
   },
   heading: {
     flexDirection: 'row',
@@ -61,9 +64,6 @@ const styles = StyleSheet.create({
   plus_icon: {
     width: 30,
     height: 30,
-  },
-  product_wrapper: {
-    marginTop: 30,
   },
 });
 export default Products;

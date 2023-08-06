@@ -1,7 +1,6 @@
 import {View, Text, StyleSheet, SafeAreaView, FlatList} from 'react-native';
 import {ProfilePicture, Mode, NavigationCard} from '../../Components';
 import {COLORS} from '../../../constants';
-import {ScrollView} from 'react-native';
 import {accountTabData} from '../../../constants/data';
 
 const Account = () => {
@@ -12,7 +11,6 @@ const Account = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.text}>Profile</Text>
         <View style={styles.profile_picture_frame}>
           <ProfilePicture width={100} height={100} style={styles.picture} />
         </View>
@@ -43,11 +41,12 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: COLORS.blue,
-    height: 331,
+    height: 321,
     flexDirection: 'column',
     alignItems: 'center',
     paddingTop: 45,
     gap: 20,
+    position: 'relative',
   },
   text: {
     color: COLORS.white,
@@ -69,9 +68,9 @@ const styles = StyleSheet.create({
     height: 50,
     width: '100%',
     position: 'absolute',
-    borderTopRightRadius: 60,
-    borderTopLeftRadius: 60,
-    top: 355,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    top: 275,
     backgroundColor: COLORS.white,
   },
   mode_wrapper: {
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     marginHorizontal: 30,
-    top: 320,
+    top: 242,
   },
 });
 export default Account;

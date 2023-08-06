@@ -1,4 +1,11 @@
-import {View, TouchableOpacity, Image, StyleSheet, Text} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Text,
+  Button,
+} from 'react-native';
 import {assets, COLORS} from '../../../../constants';
 import OnboardingHeading from '../Components/OnboardingHeading';
 import {TextInput} from 'react-native-gesture-handler';
@@ -41,7 +48,8 @@ const Verify = ({navigation}) => {
             style={styles.input}
             onChangeText={handleChange}
             maxLength={1}
-            returnKeyType="default"
+            returnKeyType="next"
+            textContentType="oneTimeCode"
           />
           <TextInput
             keyboardType="numeric"
@@ -49,6 +57,7 @@ const Verify = ({navigation}) => {
             onChangeText={handleChange}
             returnKeyType="next"
             maxLength={1}
+            textContentType="oneTimeCode"
           />
           <TextInput
             keyboardType="numeric"
@@ -56,23 +65,25 @@ const Verify = ({navigation}) => {
             onChangeText={handleChange}
             returnKeyType="next"
             maxLength={1}
+            textContentType="oneTimeCode"
           />
           <TextInput
             keyboardType="numeric"
             style={styles.input}
             onChangeText={handleChange}
-            returnKeyType="next"
+            returnKeyType="done"
             maxLength={1}
+            textContentType="oneTimeCode"
           />
         </View>
-        <View style={styles.cta}>
-          <Text>
-            Didn't receive code?{' '}
-            <Text style={{color: COLORS.blue, fontWeight: 'bold'}}>
-              Resend Code
-            </Text>{' '}
-          </Text>
+
+        <View style={styles.cta_wrapper}>
+          <Text style={styles.text}> Didn't receive code?</Text>
+          <TouchableOpacity>
+            <Text style={[styles.text, styles.link]}>Resend Code</Text>
+          </TouchableOpacity>
         </View>
+
         <View>
           <CustomButton
             title={'proceed'}
@@ -135,15 +146,22 @@ const styles = StyleSheet.create({
   heading_container: {
     paddingHorizontal: 60,
   },
-  cta: {
+  cta_wrapper: {
     alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 30,
+    flexDirection: 'row',
+    gap: 5,
   },
   text: {
     fontSize: 18,
     textAlign: 'center',
-    marginTop: 10,
-    fontWeight: '200',
+    fontWeight: '300',
+    color: COLORS.grey,
+  },
+  link: {
+    color: COLORS.blue,
+    fontWeight: '500',
   },
 });
 export default Verify;

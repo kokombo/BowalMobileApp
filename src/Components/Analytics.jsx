@@ -19,7 +19,7 @@ const Analytics = ({title, icon, value}) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: '99%',
     height: 121,
     borderRadius: 10,
     flexDirection: 'column',
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     backgroundColor: COLORS.white,
+    alignSelf: 'center',
   },
   heading: {
     flexDirection: 'row',

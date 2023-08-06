@@ -83,7 +83,7 @@ const AddProduct = ({navigation}) => {
           <Text style={styles.label}>Price</Text>
           <TextInput
             style={styles.input}
-            keyboardType="numeric"
+            keyboardType="numbers-and-punctuation"
             onChangeText={value => setProductPrice(value)}
             autoCorrect={false}
           />

@@ -1,6 +1,6 @@
 import {View, StyleSheet, Text} from 'react-native';
-import {assets, COLORS} from '../../../constants';
-import {Location, Greeting, Analytics} from '../../Components';
+import {assets, COLORS} from '../../../../constants';
+import {Location, Greeting, Analytics} from '../../../Components';
 
 const HomeHeader = () => {
   return (
@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
   body: {
     gap: 10,
     minWidth: '100%',
-    paddingHorizontal: 15,
   },
 
   analytics_container: {

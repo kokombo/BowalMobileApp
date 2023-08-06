@@ -22,12 +22,15 @@ const FormC = ({navigation}) => {
 
       <View style={styles.body}>
         <View>
-          <OnboardingHeading heading={'registration'} />
+          <OnboardingHeading heading={'vendor registration'} />
         </View>
 
         <View style={styles.form}>
           <View style={styles.inputs}>
-            <BusinessCategory />
+            <View>
+              <BusinessCategory />
+              <Image source={assets.dropdown} style={styles.dropdown_icon} />
+            </View>
           </View>
 
           <View>
@@ -77,6 +80,13 @@ const styles = StyleSheet.create({
   },
   login: {
     alignItems: 'center',
+  },
+  dropdown_icon: {
+    position: 'absolute',
+    right: 0,
+    width: 14,
+    height: 7,
+    top: 16,
   },
 });
 

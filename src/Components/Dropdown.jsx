@@ -20,6 +20,7 @@ export default BusinessCategory = () => {
         backgroundColor: COLORS.white,
         borderBottomWidth: 1,
         borderBottomColor: COLORS.gray,
+        height: 32,
       }}
       buttonTextStyle={{
         color: COLORS.gray,

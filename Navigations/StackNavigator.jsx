@@ -9,12 +9,15 @@ import {
 } from '../src/Screens/Onboarding';
 import {AddProduct, Notifications} from '../src/Screens/Seller';
 import TabNavigator from './TabNavigator';
+import BuyerTabNavigator from './BuyerTabNavigator';
 import {Image, TouchableOpacity} from 'react-native';
 import {COLORS, assets} from '../constants';
 import {useDispatch} from 'react-redux';
 import {clearImages} from '../src/Redux/Slices/ImageSelectorSlice';
 import {useNavigation} from '@react-navigation/native';
 import {LoginPage} from '../src/Screens/Authorization';
+import {BuyerSignUp} from '../src/Screens/Onboarding/BuyerOnboarding';
+import DrawerNavigator from './DrawerNavigator';
 
 const RootStack = createStackNavigator();
 
@@ -56,6 +59,10 @@ const StackNavigator = () => {
         component={LoginPage}
         options={{headerShown: false}}></RootStack.Screen>
       <RootStack.Screen
+        name="BuyerSignUp"
+        component={BuyerSignUp}
+        options={{headerShown: false}}></RootStack.Screen>
+      <RootStack.Screen
         name="Add Product"
         component={AddProduct}
         options={{
@@ -87,7 +94,6 @@ const StackNavigator = () => {
           headerBackImage: () => (
             <TouchableOpacity
               onPress={() => {
-                dispatch(clearImages());
                 navigation.goBack();
               }}>
               <Image
@@ -100,6 +106,10 @@ const StackNavigator = () => {
       <RootStack.Screen
         name="VendorHome"
         component={TabNavigator}
+        options={{headerShown: false}}></RootStack.Screen>
+      <RootStack.Screen
+        name="BuyerHome"
+        component={DrawerNavigator}
         options={{headerShown: false}}></RootStack.Screen>
     </RootStack.Navigator>
   );

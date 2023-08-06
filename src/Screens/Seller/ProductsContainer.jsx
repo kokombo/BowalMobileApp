@@ -1,4 +1,10 @@
-import {View, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  FlatList,
+  Alert,
+} from 'react-native';
 import {ProductCard, RefreshController} from '../../Components';
 import {fetchProducts} from '../../Redux/Slices/ProductSlice';
 import {useEffect} from 'react';
@@ -26,8 +32,9 @@ const ProductsContainer = ({ListHeaderComponent}) => {
           <ActivityIndicator size={'large'} color={COLORS.blue} />
         </View>
       );
-    }
-    if (status === 'succeeded') {
+    } else if (status === 'failed') {
+      return Alert.alert('Error!', 'something went wrong, please try again');
+    } else {
       return (
         <FlatList
           numColumns={2}
@@ -38,9 +45,9 @@ const ProductsContainer = ({ListHeaderComponent}) => {
           refreshControl={<RefreshController />}
           ListHeaderComponent={ListHeaderComponent}
           columnWrapperStyle={{
-            justifyContent: 'center',
+            justifyContent: 'space-between',
             alignItems: 'center',
-            gap: 30,
+            paddingHorizontal: 5,
           }}
         />
       );
@@ -56,8 +63,6 @@ const styles = StyleSheet.create({
   products_container: {
     width: '100%',
     height: '100%',
-
-    alignItems: 'center',
   },
   activity_container: {
     marginTop: 150,

@@ -12,7 +12,11 @@ const AccountType = ({navigation}) => {
           <OnboardingHeading heading={'Buy easily, sell swiftly'} />
         </View>
         <View style={styles.account_type}>
-          <TouchableOpacity style={styles.image_container}>
+          <TouchableOpacity
+            style={styles.image_container}
+            onPress={() => {
+              navigation.navigate('BuyerSignUp');
+            }}>
             <Image source={assets.buyer} style={styles.image} />
             <View style={styles.cta}>
               <Text style={styles.cta_text}>Become a buyer</Text>
