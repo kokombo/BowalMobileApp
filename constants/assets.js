@@ -60,6 +60,24 @@ import coloredsupport from '../assets/icons/coloredsupport.png';
 import colorednotification from '../assets/icons/colorednotification.png';
 import coloredcart from '../assets/icons/coloredcart.png';
 import nomessage from '../assets/icons/nomessage.png';
+import food from '../assets/images/food.png';
+import gift from '../assets/images/gift.png';
+import bedding from '../assets/images/bedding.png';
+import electronics from '../assets/images/electronics.png';
+import menfashion from '../assets/images/menfashion.png';
+import womenfashion from '../assets/images/womenfashion.png';
+import phone from '../assets/images/phone.png';
+import beauty from '../assets/images/beauty.png';
+import furniture from '../assets/images/furniture.png';
+import computer from '../assets/images/computer.png';
+import arts from '../assets/images/arts.png';
+import kids from '../assets/images/kids.png';
+import automotive from '../assets/images/automotive.png';
+import appliances from '../assets/images/appliances.png';
+import gaming from '../assets/images/gaming.png';
+import baggage from '../assets/images/baggage.png';
+import baking from '../assets/images/baking.png';
+import decor from '../assets/images/decor.png';
 
 export default {
   bell,
@@ -125,4 +143,22 @@ export default {
   coloredcart,
   colorednotification,
   nomessage,
+  food,
+  gift,
+  bedding,
+  electronics,
+  menfashion,
+  womenfashion,
+  phone,
+  beauty,
+  furniture,
+  computer,
+  arts,
+  kids,
+  automotive,
+  appliances,
+  gaming,
+  baggage,
+  baking,
+  decor,
 };

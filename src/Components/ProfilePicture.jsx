@@ -4,7 +4,11 @@ import {assets} from '../../constants';
 const ProfilePicture = ({width, height}) => {
   return (
     <View style={{width: width, height: height}}>
-      <Image source={assets.profilepicture} style={styles.image} />
+      <Image
+        source={assets.profilepicture}
+        style={styles.image}
+        resizeMode="contain"
+      />
     </View>
   );
 };

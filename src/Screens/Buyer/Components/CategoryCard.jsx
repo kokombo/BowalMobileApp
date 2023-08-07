@@ -1,4 +1,4 @@
-import {TouchableOpacity, View, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
 import {COLORS} from '../../../../constants';
 
 const CategoryCard = ({item}) => {
@@ -9,8 +9,12 @@ const CategoryCard = ({item}) => {
           height: 97,
           width: 97,
           borderRadius: 10,
+          alignItems: 'center',
+          justifyContent: 'center',
           backgroundColor: `${item.backgroundColor}`,
-        }}></TouchableOpacity>
+        }}>
+        <Image source={item.image} style={styles.image} resizeMode="contain" />
+      </TouchableOpacity>
       <Text style={styles.text}>{item.name} </Text>
     </TouchableOpacity>
   );
@@ -29,6 +33,10 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
     fontWeight: '300',
     textAlign: 'center',
+  },
+  image: {
+    width: 70,
+    height: 70,
   },
 });
 export default CategoryCard;
