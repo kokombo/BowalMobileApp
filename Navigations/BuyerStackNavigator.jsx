@@ -5,8 +5,10 @@ import {Notifications} from '../src/Screens/Seller';
 import BuyerTabNavigator from './BuyerTabNavigator';
 import {Image, TouchableOpacity} from 'react-native';
 import {COLORS, assets} from '../constants';
+import {SavedBusinesses} from '../src/Screens/Buyer';
 
 import {useNavigation} from '@react-navigation/native';
+import DrawerNavigator from './DrawerNavigator';
 
 const RootStack = createStackNavigator();
 
@@ -14,8 +16,8 @@ const BuyerStackNavigator = () => {
   const navigation = useNavigation();
 
   return (
-    <RootStack.Navigator>
-      <RootStack.Screen
+    <RootStack.Navigator initialRouteName="E">
+      {/* <RootStack.Screen
         name="Notifications"
         component={Notifications}
         options={{
@@ -34,11 +36,20 @@ const BuyerStackNavigator = () => {
               />
             </TouchableOpacity>
           ),
-        }}></RootStack.Screen>
+        }}></RootStack.Screen> */}
+
+      {/* <RootStack.Screen
+        name="D"
+        component={BuyerTabNavigator}
+        options={{headerShown: false}}></RootStack.Screen> */}
+
+      {/* <RootStack.Screen
+        name="Saved Businesses"
+        component={SavedBusinesses}></RootStack.Screen> */}
 
       <RootStack.Screen
-        name="BuyerHome"
-        component={BuyerTabNavigator}
+        name="E"
+        component={DrawerNavigator}
         options={{headerShown: false}}></RootStack.Screen>
     </RootStack.Navigator>
   );

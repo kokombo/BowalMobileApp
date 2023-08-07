@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   text: {
-    fontSize: 18,
+    fontSize: 13,
     color: COLORS.grey,
     textTransform: 'capitalize',
     fontWeight: '300',

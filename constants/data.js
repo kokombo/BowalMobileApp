@@ -193,27 +193,22 @@ export const cagtegoriesData = [
 export const sidebarData = [
   {
     id: 1,
-    icon: assets.coloredcategory,
-    text: 'categories',
+    icon: assets.love,
+    text: 'Saved Businesses',
   },
   {
     id: 2,
-    icon: assets.love,
-    text: 'saved businesses',
+    icon: assets.colorednotification,
+    text: 'Notifications',
   },
   {
     id: 3,
-    icon: assets.colorednotification,
-    text: 'notifications',
+    icon: assets.coloredcart,
+    text: 'Cart',
   },
   {
     id: 4,
-    icon: assets.coloredcart,
-    text: 'cart',
-  },
-  {
-    id: 5,
     icon: assets.coloredsupport,
-    text: 'help & support',
+    text: 'Help & Support',
   },
 ];

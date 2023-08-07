@@ -9,7 +9,6 @@ import {
 } from '../src/Screens/Onboarding';
 import {AddProduct, Notifications} from '../src/Screens/Seller';
 import TabNavigator from './TabNavigator';
-import BuyerTabNavigator from './BuyerTabNavigator';
 import {Image, TouchableOpacity} from 'react-native';
 import {COLORS, assets} from '../constants';
 import {useDispatch} from 'react-redux';
@@ -18,6 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 import {LoginPage} from '../src/Screens/Authorization';
 import {BuyerSignUp} from '../src/Screens/Onboarding/BuyerOnboarding';
 import DrawerNavigator from './DrawerNavigator';
+import {SavedBusinesses} from '../src/Screens/Buyer';
 
 const RootStack = createStackNavigator();
 
@@ -26,7 +26,17 @@ const StackNavigator = () => {
   const navigation = useNavigation();
 
   return (
-    <RootStack.Navigator>
+    <RootStack.Navigator
+      screenOptions={{
+        headerShadowVisible: false,
+        headerTitleStyle: {
+          color: COLORS.grey,
+          fontSize: 20,
+          fontWeight: '600',
+        },
+        headerBackTitleVisible: false,
+        headerShadowVisible: false,
+      }}>
       <RootStack.Screen
         name="Splash"
         component={Splash}
@@ -66,10 +76,7 @@ const StackNavigator = () => {
         name="Add Product"
         component={AddProduct}
         options={{
-          headerBackTitleVisible: false,
-          headerShadowVisible: false,
           headerBackgroundContainerStyle: {backgroundColor: COLORS.white},
-          headerTitleStyle: {color: COLORS.grey},
           headerBackImage: () => (
             <TouchableOpacity
               onPress={() => {
@@ -87,10 +94,7 @@ const StackNavigator = () => {
         name="Notifications"
         component={Notifications}
         options={{
-          headerBackTitleVisible: false,
-          headerShadowVisible: false,
           headerBackgroundContainerStyle: {backgroundColor: COLORS.white},
-          headerTitleStyle: {color: COLORS.grey},
           headerBackImage: () => (
             <TouchableOpacity
               onPress={() => {
@@ -103,6 +107,7 @@ const StackNavigator = () => {
             </TouchableOpacity>
           ),
         }}></RootStack.Screen>
+
       <RootStack.Screen
         name="VendorHome"
         component={TabNavigator}
@@ -111,6 +116,24 @@ const StackNavigator = () => {
         name="BuyerHome"
         component={DrawerNavigator}
         options={{headerShown: false}}></RootStack.Screen>
+
+      <RootStack.Screen
+        name="Saved Businesses"
+        component={SavedBusinesses}
+        options={{
+          title: 'Saved Businesses',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('BuyerHome');
+              }}>
+              <Image
+                source={assets.arrowbackblue}
+                style={{width: 20, height: 17, marginLeft: 10}}
+              />
+            </TouchableOpacity>
+          ),
+        }}></RootStack.Screen>
     </RootStack.Navigator>
   );
 };

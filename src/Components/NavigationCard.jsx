@@ -1,7 +1,10 @@
 import {Image, TouchableOpacity, View, StyleSheet, Text} from 'react-native';
 import {COLORS, assets} from '../../constants';
+import {useNavigation} from '@react-navigation/native';
 
-const NavigationCard = ({data, navigation}) => {
+const NavigationCard = ({data}) => {
+  const navigation = useNavigation();
+
   const handlePress = () => {
     navigation.navigate(`${data.text}`);
   };

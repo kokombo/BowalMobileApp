@@ -9,9 +9,11 @@ import {
 import {Chats} from '../src/Screens/Seller';
 import {COLORS, assets} from '../constants';
 import {SideBarToggle} from '../src/Components';
+import {useNavigation} from '@react-navigation/native';
 
 const BuyerTabNavigator = () => {
   const Tab = createBottomTabNavigator();
+  const navigation = useNavigation();
 
   return (
     <Tab.Navigator
@@ -84,9 +86,16 @@ const BuyerTabNavigator = () => {
         options={{
           headerTitle: 'Profile',
           headerStyle: {backgroundColor: COLORS.blue},
-          headerTitleStyle: {color: COLORS.white},
+          headerTitleStyle: {
+            color: COLORS.white,
+            fontSize: 20,
+            fontWeight: '600',
+          },
           headerLeft: () => (
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.openDrawer();
+              }}>
               <Image
                 source={assets.whitetoggle}
                 style={{width: 30, height: 30}}

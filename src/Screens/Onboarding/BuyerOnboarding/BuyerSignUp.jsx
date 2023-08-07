@@ -27,13 +27,13 @@ const BuyerSignUp = ({navigation}) => {
 
         <View>
           <View style={styles.input_field}>
+            <Input placeholder={'Full Name'} />
             <Input placeholder={'Email'} />
-            <Input placeholder={'Username'} />
             <PasswordInput />
           </View>
 
           <View style={styles.button_container}>
-            <CustomButton title={'Login'} />
+            <CustomButton title={'Sign Up'} />
           </View>
         </View>
 

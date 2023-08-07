@@ -10,9 +10,11 @@ import ProfilePicture from './ProfilePicture';
 import {COLORS, assets} from '../../constants';
 import {sidebarData} from '../../constants/data';
 import {useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 const Aside = () => {
   const [aside] = useState(sidebarData);
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView>
@@ -28,7 +30,12 @@ const Aside = () => {
         <View style={styles.navigations_container}>
           {aside.map(item => {
             return (
-              <TouchableOpacity key={item.id} style={styles.card}>
+              <TouchableOpacity
+                key={item.id}
+                style={styles.card}
+                onPress={() => {
+                  navigation.navigate(`${item.text}`);
+                }}>
                 <View style={styles.icon_wrapper}>
                   <Image source={item.icon} style={styles.icon} />
                 </View>
@@ -68,7 +75,7 @@ const styles = StyleSheet.create({
   user_name: {
     fontSize: 20,
     color: COLORS.white,
-    fontWeight: '500',
+    fontWeight: '600',
   },
   icon: {
     width: 24,
@@ -102,6 +109,8 @@ const styles = StyleSheet.create({
   aside_body: {
     padding: 15,
     gap: 30,
+    backgroundColor: COLORS.white,
+    height: '100%',
   },
   menu: {
     fontSize: 18,
