@@ -111,7 +111,7 @@ export const cagtegoriesData = [
   },
   {
     id: 3,
-    name: 'Bedding',
+    name: 'Beddings',
     backgroundColor: COLORS.snow,
     image: assets.bedding,
   },

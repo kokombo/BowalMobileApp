@@ -14,6 +14,7 @@ import RefreshController from './RefreshControl';
 import PasswordInput from './PasswordInput';
 import SideBarToggle from './SideBarToggle';
 import Aside from './Aside';
+import Loader from './Loader';
 
 export {
   Input,
@@ -32,4 +33,5 @@ export {
   PasswordInput,
   SideBarToggle,
   Aside,
+  Loader,
 };

@@ -1,9 +1,15 @@
-import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
+import {Text, TouchableOpacity, View, StyleSheet, FlatList} from 'react-native';
 import {COLORS} from '../../../../constants';
 import {useNavigation} from '@react-navigation/native';
+import {cagtegoriesData} from '../../../../constants/data';
+import CategoryCard from './CategoryCard';
 
 const FeaturedCategories = () => {
   const navigation = useNavigation();
+
+  const renderItem = ({item}) => {
+    return <CategoryCard item={item} />;
+  };
   return (
     <View>
       <View style={styles.heading_wrapper}>
@@ -14,6 +20,16 @@ const FeaturedCategories = () => {
           }}>
           <Text style={styles.heading_link}>See all</Text>
         </TouchableOpacity>
+      </View>
+      <View style={styles.category_container}>
+        <FlatList
+          data={cagtegoriesData.slice(0, 6)}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          horizontal
+          contentContainerStyle={{gap: 15}}
+          showsHorizontalScrollIndicator={false}
+        />
       </View>
     </View>
   );
@@ -34,6 +50,9 @@ const styles = StyleSheet.create({
     color: COLORS.blue,
     fontSize: 18,
     fontWeight: '300',
+  },
+  category_container: {
+    paddingVertical: 20,
   },
 });
 

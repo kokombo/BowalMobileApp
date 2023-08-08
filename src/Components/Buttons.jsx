@@ -1,18 +1,19 @@
-import {Text, TouchableOpacity} from 'react-native';
+import {Text, Pressable} from 'react-native';
 import {COLORS} from '../../constants';
 
-export default CustomButton = ({title, onPress}) => {
+export default CustomButton = ({title, onPress, disabled}) => {
   return (
-    <TouchableOpacity
+    <Pressable
       style={{
-        backgroundColor: COLORS.blue,
+        backgroundColor: disabled ? COLORS.snow : COLORS.blue,
         width: '100%',
         height: 50,
         borderRadius: 50,
         alignItems: 'center',
         justifyContent: 'center',
       }}
-      onPress={onPress}>
+      onPress={onPress}
+      disabled={disabled}>
       <Text
         style={{
           fontSize: 18,
@@ -22,6 +23,6 @@ export default CustomButton = ({title, onPress}) => {
         }}>
         {title}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
