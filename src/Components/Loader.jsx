@@ -1,9 +1,10 @@
-import {View, ActivityIndicator} from 'react-native';
+import {View, ActivityIndicator, Modal} from 'react-native';
 import {COLORS} from '../../constants';
 
 const Loader = () => {
   return (
-    <View
+    <Modal
+      presentationStyle="fullScreen"
       style={{
         flex: 1,
         alignItems: 'center',
@@ -18,10 +19,11 @@ const Loader = () => {
           height: 80,
           width: 80,
           borderRadius: 10,
+          marginTop: 400,
         }}>
         <ActivityIndicator size={'large'} color={COLORS.blue} />
       </View>
-    </View>
+    </Modal>
   );
 };
 export default Loader;

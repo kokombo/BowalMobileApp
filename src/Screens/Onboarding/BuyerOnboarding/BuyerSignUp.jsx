@@ -7,6 +7,10 @@ import {QuickSignIn} from '../../Authorization';
 import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
+import {updateUserProfile} from '../../../utilities/updateUserProfile';
+import {useEffect} from 'react';
+import {login, signout} from '../../../Redux/Slices/currentUserSlice';
+import {useDispatch} from 'react-redux';
 
 const BuyerSignUp = () => {
   const [fullname, setFullName] = useState('');
@@ -16,6 +20,25 @@ const BuyerSignUp = () => {
   const [pageError, setPageError] = useState('');
   const [authError, setAuthError] = useState('');
   const navigation = useNavigation();
+
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   const listener = auth().onAuthStateChanged(activeUser => {
+  //     if (activeUser) {
+  //       dispatch(
+  //         login({
+  //           displayName: activeUser.displayName,
+  //           email: activeUser.email,
+  //           uid: activeUser.uid,
+  //         }),
+  //       );
+  //     } else {
+  //       dispatch(signout());
+  //     }
+  //   });
+  //   listener();
+  // }, []);
 
   //A user(seller) must provide fullname, email, and password before signup. Button is disabled until the three conditions are met.
   const canSignUp = Boolean(fullname && email && password);
@@ -30,6 +53,7 @@ const BuyerSignUp = () => {
       await auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
+          updateUserProfile({displayName: fullname});
           navigation.navigate('BuyerHome');
           Alert.alert(
             'Account created',

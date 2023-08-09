@@ -11,7 +11,7 @@ import {AddProduct, Notifications} from '../src/Screens/Seller';
 import TabNavigator from './TabNavigator';
 import {Image, TouchableOpacity, View} from 'react-native';
 import {COLORS, assets} from '../constants';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {clearImages} from '../src/Redux/Slices/ImageSelectorSlice';
 import {useNavigation} from '@react-navigation/native';
 import {LoginPage} from '../src/Screens/Authorization';
@@ -19,12 +19,34 @@ import {BuyerSignUp} from '../src/Screens/Onboarding/BuyerOnboarding';
 import DrawerNavigator from './DrawerNavigator';
 import {SavedBusinesses} from '../src/Screens/Buyer';
 import {GoBack} from '../src/Components';
+import {useEffect} from 'react';
+import auth from '@react-native-firebase/auth';
+import {login, signout} from '../src/Redux/Slices/currentUserSlice';
 
 const RootStack = createStackNavigator();
 
 const StackNavigator = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const listener = auth().onAuthStateChanged(activeUser => {
+      if (activeUser) {
+        dispatch(
+          login({
+            displayName: activeUser.displayName,
+            email: activeUser.email,
+            uid: activeUser.uid,
+          }),
+        );
+      } else {
+        dispatch(signout());
+      }
+    });
+    return () => {
+      listener();
+    };
+  }, []);
 
   return (
     <RootStack.Navigator
@@ -90,7 +112,13 @@ const StackNavigator = () => {
       <RootStack.Screen
         name="Signin"
         component={LoginPage}
-        options={{headerShown: false}}></RootStack.Screen>
+        options={{
+          headerLeft: () => {
+            return <GoBack />;
+          },
+          headerStyle: {backgroundColor: COLORS.blue},
+          title: '',
+        }}></RootStack.Screen>
       <RootStack.Screen
         name="BuyerSignUp"
         component={BuyerSignUp}

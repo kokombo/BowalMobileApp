@@ -11,10 +11,23 @@ import {COLORS, assets} from '../../constants';
 import {sidebarData} from '../../constants/data';
 import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
+import {useSelector} from 'react-redux';
 
 const Aside = () => {
   const [aside] = useState(sidebarData);
   const navigation = useNavigation();
+
+  const {user} = useSelector(store => store.currentUser);
+
+  const logOut = () => {
+    try {
+      auth().signOut;
+      navigation.navigate('Signin');
+    } catch (error) {
+      return error.message;
+    }
+  };
 
   return (
     <SafeAreaView>
@@ -22,7 +35,7 @@ const Aside = () => {
         <View style={styles.picture_container}>
           <ProfilePicture width={73} height={73} />
         </View>
-        <Text style={styles.user_name}>Samuel Oluwanbowa</Text>
+        <Text style={styles.user_name}>{user.displayName}</Text>
       </View>
 
       <View style={styles.aside_body}>
@@ -45,7 +58,7 @@ const Aside = () => {
           })}
         </View>
 
-        <TouchableOpacity style={[styles.card, styles.logout]}>
+        <TouchableOpacity style={[styles.card, styles.logout]} onPress={logOut}>
           <View style={styles.icon_wrapper}>
             <Image source={assets.logout} style={styles.icon} />
           </View>
