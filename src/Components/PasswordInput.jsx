@@ -6,8 +6,11 @@ import {
   StyleSheet,
 } from 'react-native';
 import {assets, COLORS} from '../../constants';
+import {useState} from 'react';
 
 const PasswordInput = ({onChangeText, value}) => {
+  const [isVisible, setIsVisible] = useState(false);
+
   return (
     <View>
       <TextInput
@@ -16,11 +19,13 @@ const PasswordInput = ({onChangeText, value}) => {
         onChangeText={onChangeText}
         placeholderTextColor={COLORS.gray}
         style={styles.input}
-        secureTextEntry={true}
+        secureTextEntry={isVisible ? false : true}
         autoCorrect={false}
         textContentType="password"
       />
-      <TouchableOpacity style={styles.visibility}>
+      <TouchableOpacity
+        style={styles.visibility}
+        onPress={() => setIsVisible(!isVisible)}>
         <Image source={assets.visibility} style={styles.icon} />
       </TouchableOpacity>
     </View>

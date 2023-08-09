@@ -6,7 +6,6 @@ import OnboardingHeading from './Components/OnboardingHeading';
 const AccountType = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <View style={styles.header}></View>
       <View style={styles.body}>
         <View style={styles.tagline_container}>
           <OnboardingHeading heading={'Buy easily, sell swiftly'} />
@@ -82,11 +81,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginBottom: 120,
   },
-  header: {
-    height: 150,
-    backgroundColor: COLORS.blue,
-    width: '100%',
-  },
+
   tagline_container: {},
 
   login: {

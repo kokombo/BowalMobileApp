@@ -19,95 +19,72 @@ const Verify = ({navigation}) => {
     setNum(value);
   };
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}>
-          <Image
-            source={assets.arrowback}
-            style={{height: 18, width: 20, marginLeft: 15}}
-          />
+    <View style={styles.body}>
+      <View style={styles.heading_container}>
+        <OnboardingHeading heading={'Verify your account'} />
+        <Text style={styles.text}>
+          We sent a verification code to your email address. Enter the codes
+          below
+        </Text>
+      </View>
+      <View style={styles.image_container}>
+        <Image source={assets.verify} style={styles.image} />
+      </View>
+      <View style={styles.input_container}>
+        <TextInput
+          keyboardType="numeric"
+          style={styles.input}
+          onChangeText={handleChange}
+          maxLength={1}
+          returnKeyType="next"
+          textContentType="oneTimeCode"
+        />
+        <TextInput
+          keyboardType="numeric"
+          style={styles.input}
+          onChangeText={handleChange}
+          returnKeyType="next"
+          maxLength={1}
+          textContentType="oneTimeCode"
+        />
+        <TextInput
+          keyboardType="numeric"
+          style={styles.input}
+          onChangeText={handleChange}
+          returnKeyType="next"
+          maxLength={1}
+          textContentType="oneTimeCode"
+        />
+        <TextInput
+          keyboardType="numeric"
+          style={styles.input}
+          onChangeText={handleChange}
+          returnKeyType="done"
+          maxLength={1}
+          textContentType="oneTimeCode"
+        />
+      </View>
+
+      <View style={styles.cta_wrapper}>
+        <Text style={styles.text}> Didn't receive code?</Text>
+        <TouchableOpacity>
+          <Text style={[styles.text, styles.link]}>Resend Code</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.body}>
-        <View style={styles.heading_container}>
-          <OnboardingHeading heading={'Verify your account'} />
-          <Text style={styles.text}>
-            We sent a verification code to your mobile email. Enter the codes
-            below
-          </Text>
-        </View>
-        <View style={styles.image_container}>
-          <Image source={assets.verify} style={styles.image} />
-        </View>
-        <View style={styles.input_container}>
-          <TextInput
-            keyboardType="numeric"
-            style={styles.input}
-            onChangeText={handleChange}
-            maxLength={1}
-            returnKeyType="next"
-            textContentType="oneTimeCode"
-          />
-          <TextInput
-            keyboardType="numeric"
-            style={styles.input}
-            onChangeText={handleChange}
-            returnKeyType="next"
-            maxLength={1}
-            textContentType="oneTimeCode"
-          />
-          <TextInput
-            keyboardType="numeric"
-            style={styles.input}
-            onChangeText={handleChange}
-            returnKeyType="next"
-            maxLength={1}
-            textContentType="oneTimeCode"
-          />
-          <TextInput
-            keyboardType="numeric"
-            style={styles.input}
-            onChangeText={handleChange}
-            returnKeyType="done"
-            maxLength={1}
-            textContentType="oneTimeCode"
-          />
-        </View>
 
-        <View style={styles.cta_wrapper}>
-          <Text style={styles.text}> Didn't receive code?</Text>
-          <TouchableOpacity>
-            <Text style={[styles.text, styles.link]}>Resend Code</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View>
-          <CustomButton
-            title={'proceed'}
-            onPress={() => {
-              navigation.navigate('VendorHome');
-            }}
-          />
-        </View>
+      <View>
+        <CustomButton
+          title={'proceed'}
+          onPress={() => {
+            navigation.navigate('VendorHome');
+          }}
+        />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    height: 150,
-    backgroundColor: COLORS.blue,
-    width: '100%',
-    justifyContent: 'center',
-    paddingTop: 60,
-  },
   body: {
     flex: 1,
     backgroundColor: COLORS.white,

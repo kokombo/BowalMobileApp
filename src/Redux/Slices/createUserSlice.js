@@ -4,16 +4,18 @@ import auth from '@react-native-firebase/auth';
 const initialState = {
   status: 'idle',
   error: '',
-  user: [],
 };
 
-export const createUser = createAsyncThunk('createUser/signup', async cred => {
-  try {
-    await auth().createUserWithEmailAndPassword({...cred});
-  } catch (error) {
-    return error.message;
-  }
-});
+export const createUser = createAsyncThunk(
+  'user/createUser',
+  async (email, password) => {
+    try {
+      await auth().createUserWithEmailAndPassword(email, password);
+    } catch (error) {
+      return error.message;
+    }
+  },
+);
 
 const createUserSlice = createSlice({
   name: 'user',
@@ -25,8 +27,7 @@ const createUserSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(createUser.fulfilled, (state, action) => {
-        state.loading = 'succedded';
-        state.user = action.payload;
+        state.loading = 'succeeded';
       })
       .addCase(createUser.rejected, (state, action) => {
         (state.loading = 'failed'), (state.error = action.error.message);

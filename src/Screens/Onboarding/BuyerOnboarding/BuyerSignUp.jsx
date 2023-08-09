@@ -1,12 +1,5 @@
-import {
-  View,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-  Text,
-  Alert,
-} from 'react-native';
-import {COLORS, assets} from '../../../../constants';
+import {View, StyleSheet, Text, Alert} from 'react-native';
+import {COLORS} from '../../../../constants';
 import OnboardingHeading from '../Components/OnboardingHeading';
 import {Input, Loader, PasswordInput} from '../../../Components';
 import CustomButton from '../../../Components/Buttons';
@@ -24,48 +17,59 @@ const BuyerSignUp = () => {
   const [authError, setAuthError] = useState('');
   const navigation = useNavigation();
 
-  const handleSignUp = async () => {
-    setLoading(true);
-    await auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        navigation.navigate('BuyerHome');
-        Alert.alert(
-          'Account created',
-          'you have successfully created your account',
-        );
-      })
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          Alert.alert('Email already in use');
-          setAuthError('Email already in use');
-        }
-        if (error.code === 'auth/invalid-email') {
-          setAuthError('Invalid email address');
-        }
-        console.log(error);
-      });
-    setLoading(false);
-  };
-
+  //A user(seller) must provide fullname, email, and password before signup. Button is disabled until the three conditions are met.
   const canSignUp = Boolean(fullname && email && password);
+
+  //This is the onPress function that handles user signup. If the email address entered does not contain "@" and ".com", an error will pop up. Firebase auth error is used to handle credential validation and network errors.
+
+  const handleSignUp = async () => {
+    if (!email.includes('@' && '.com')) {
+      setPageError("That doesn't look like an email address");
+    } else {
+      setLoading(true);
+      await auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          navigation.navigate('BuyerHome');
+          Alert.alert(
+            'Account created',
+            'you have successfully created your account',
+          );
+        })
+        .catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            Alert.alert('Email already in use');
+            setAuthError('Email already in use');
+          }
+          if (error.code === 'auth/invalid-email') {
+            setAuthError('Invalid email address');
+          }
+          if (error.code === 'auth/weak-password') {
+            setAuthError(
+              'Password not strong enough, please choose a stronger password',
+            );
+          }
+          if (error.code === 'auth/network-request-failed') {
+            Alert.alert(
+              'Oops!',
+              'A network error has occured, please check your connectivity and try again.',
+            );
+            setAuthError(
+              'A network error has occured, please check your connectivity and try again.',
+            );
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  };
 
   if (loading) {
     return <Loader />;
   }
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}>
-          <Image
-            source={assets.arrowback}
-            style={{height: 18, width: 20, marginLeft: 15}}
-          />
-        </TouchableOpacity>
-      </View>
       <View style={styles.body}>
         <OnboardingHeading
           heading={'welcome !'}
@@ -77,13 +81,13 @@ const BuyerSignUp = () => {
             <Input
               placeholder={'Full Name'}
               value={fullname}
-              onChangeText={value => setFullName(value)}
+              onChangeText={setFullName}
             />
             <View>
               <Input
                 placeholder={'Email'}
                 value={email}
-                onChangeText={value => setEmail(value)}
+                onChangeText={setEmail}
               />
               <View>
                 {pageError && (
@@ -92,15 +96,12 @@ const BuyerSignUp = () => {
               </View>
             </View>
 
-            <PasswordInput
-              value={password}
-              onChangeText={value => setPassword(value)}
-            />
+            <PasswordInput value={password} onChangeText={setPassword} />
           </View>
 
           <View style={styles.button_container}>
             <CustomButton
-              title={'Sign Up'}
+              title={'Create My Account'}
               onPress={handleSignUp}
               disabled={!canSignUp}
             />
@@ -125,13 +126,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
   },
-  header: {
-    height: 150,
-    backgroundColor: COLORS.blue,
-    width: '100%',
-    justifyContent: 'center',
-    paddingTop: 60,
-  },
+
   body: {
     flex: 1,
     paddingHorizontal: 15,
@@ -150,6 +145,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: 'red',
     fontWeight: '300',
+    position: 'absolute',
   },
 });
 export default BuyerSignUp;

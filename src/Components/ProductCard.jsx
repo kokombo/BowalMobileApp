@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   image_container: {
-    minWidth: 180,
+    width: 170,
     height: 132,
     backgroundColor: COLORS.snow,
     borderRadius: 10,

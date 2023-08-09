@@ -7,6 +7,8 @@ const Input = ({
   onChangeText,
   keyboardType,
   textContentType,
+  onPressIn,
+  onPressOut,
 }) => {
   return (
     <TextInput
@@ -18,6 +20,8 @@ const Input = ({
       style={styles.input}
       autoCorrect={false}
       textContentType={textContentType}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
     />
   );
 };

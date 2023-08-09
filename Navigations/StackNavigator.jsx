@@ -9,7 +9,7 @@ import {
 } from '../src/Screens/Onboarding';
 import {AddProduct, Notifications} from '../src/Screens/Seller';
 import TabNavigator from './TabNavigator';
-import {Image, TouchableOpacity} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import {COLORS, assets} from '../constants';
 import {useDispatch} from 'react-redux';
 import {clearImages} from '../src/Redux/Slices/ImageSelectorSlice';
@@ -18,6 +18,7 @@ import {LoginPage} from '../src/Screens/Authorization';
 import {BuyerSignUp} from '../src/Screens/Onboarding/BuyerOnboarding';
 import DrawerNavigator from './DrawerNavigator';
 import {SavedBusinesses} from '../src/Screens/Buyer';
+import {GoBack} from '../src/Components';
 
 const RootStack = createStackNavigator();
 
@@ -44,26 +45,48 @@ const StackNavigator = () => {
       <RootStack.Screen
         name="AccountType"
         component={AccountType}
-        options={{headerShown: false}}></RootStack.Screen>
-      {/* seller onboarding screens */}
+        options={{
+          headerStyle: {backgroundColor: COLORS.blue},
+          title: '',
+        }}></RootStack.Screen>
+
       <RootStack.Screen
         name="FormA"
         component={FormA}
         options={{
-          headerShown: false,
+          headerLeft: () => {
+            return <GoBack />;
+          },
+          headerStyle: {backgroundColor: COLORS.blue},
+          title: '',
         }}></RootStack.Screen>
       <RootStack.Screen
         name="FormB"
         component={FormB}
-        options={{headerShown: false}}></RootStack.Screen>
+        options={{
+          headerStyle: {backgroundColor: COLORS.blue},
+          title: '',
+        }}></RootStack.Screen>
       <RootStack.Screen
         name="FormC"
         component={FormC}
-        options={{headerShown: false}}></RootStack.Screen>
+        options={{
+          headerLeft: () => {
+            return <GoBack />;
+          },
+          headerStyle: {backgroundColor: COLORS.blue},
+          title: '',
+        }}></RootStack.Screen>
       <RootStack.Screen
         name="Verify"
         component={Verify}
-        options={{headerShown: false}}></RootStack.Screen>
+        options={{
+          headerLeft: () => {
+            return <GoBack />;
+          },
+          headerStyle: {backgroundColor: COLORS.blue},
+          title: '',
+        }}></RootStack.Screen>
       <RootStack.Screen
         name="Signin"
         component={LoginPage}
@@ -71,7 +94,13 @@ const StackNavigator = () => {
       <RootStack.Screen
         name="BuyerSignUp"
         component={BuyerSignUp}
-        options={{headerShown: false}}></RootStack.Screen>
+        options={{
+          headerLeft: () => {
+            return <GoBack />;
+          },
+          headerStyle: {backgroundColor: COLORS.blue},
+          title: '',
+        }}></RootStack.Screen>
       <RootStack.Screen
         name="Add Product"
         component={AddProduct}

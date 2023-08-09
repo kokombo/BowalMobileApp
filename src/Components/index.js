@@ -15,6 +15,7 @@ import PasswordInput from './PasswordInput';
 import SideBarToggle from './SideBarToggle';
 import Aside from './Aside';
 import Loader from './Loader';
+import GoBack from './GoBack';
 
 export {
   Input,
@@ -34,4 +35,5 @@ export {
   SideBarToggle,
   Aside,
   Loader,
+  GoBack,
 };

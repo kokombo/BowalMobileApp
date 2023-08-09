@@ -8,18 +8,6 @@ import {BusinessCategory} from '../../../Components';
 const FormC = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}>
-          <Image
-            source={assets.arrowback}
-            style={{height: 18, width: 20, marginLeft: 15}}
-          />
-        </TouchableOpacity>
-      </View>
-
       <View style={styles.body}>
         <View>
           <OnboardingHeading heading={'vendor registration'} />
@@ -54,13 +42,6 @@ const FormC = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  header: {
-    height: 150,
-    backgroundColor: COLORS.blue,
-    width: '100%',
-    justifyContent: 'center',
-    paddingTop: 60,
   },
   form: {
     gap: 50,
