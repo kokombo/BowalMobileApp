@@ -5,7 +5,6 @@ import {
   StyleSheet,
   Image,
   Alert,
-  Platform,
 } from 'react-native';
 import {COLORS, assets} from '../../constants';
 import {selectImage} from '../Redux/Slices/ImageSelectorSlice';

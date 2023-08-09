@@ -1,7 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {assets, COLORS} from '../constants';
 import {Home, Products, Chats, Orders, Account} from '../src/Screens/Seller';
-import {Image, Text, View} from 'react-native';
+import {Image, Text} from 'react-native';
 import {AddProductIcon, Bell} from '../src/Screens/Seller/Components';
 import {ProfilePicture} from '../src/Components';
 

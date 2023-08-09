@@ -7,6 +7,7 @@ import {Input, Loader, PasswordInput} from '../../../Components';
 import {useEffect, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
+import {updateUserProfile} from '../../../utilities/updateUserProfile';
 
 const FormA = () => {
   const [fullname, setFullname] = useState('');
@@ -22,12 +23,6 @@ const FormA = () => {
   //A user (vendor) must provide fullname, email, and password before signup. Button is disabled until the three conditions are met.
   const canSignUp = Boolean(fullname && email && password && phone);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setPageErrorVisible(false);
-    }, 2000);
-  }, []);
-
   //This is the onPress function that handles user signup. If the email address entered does not contain "@" and ".com", an error will pop up. Firebase auth error is used to handle credential validation and network errors.
   const handleSignUp = async () => {
     if (!email.includes('@' && '.com')) {
@@ -38,6 +33,11 @@ const FormA = () => {
       await auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
+          updateUserProfile({
+            displayName: fullname,
+            phoneNumber: phone,
+            accountType: 'seller',
+          });
           navigation.navigate('FormB');
           Alert.alert('Welcome!', 'You have successfully created your account');
         })
@@ -71,6 +71,12 @@ const FormA = () => {
         });
     }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setPageErrorVisible(false);
+    }, 2000);
+  }, []);
 
   if (loading) {
     return <Loader />;

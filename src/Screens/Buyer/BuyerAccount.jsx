@@ -2,8 +2,11 @@ import {View, Text, StyleSheet, SafeAreaView, FlatList} from 'react-native';
 import {ProfilePicture, Mode, NavigationCard} from '../../Components';
 import {COLORS} from '../../../constants';
 import {buyerAccountTabData} from '../../../constants/data';
+import {useSelector} from 'react-redux';
 
 const BuyerAccount = () => {
+  const {user} = useSelector(store => store.currentUser);
+
   const renderItem = ({item}) => {
     return <NavigationCard data={item} />;
   };
@@ -14,7 +17,7 @@ const BuyerAccount = () => {
         <View style={styles.profile_picture_frame}>
           <ProfilePicture width={100} height={100} style={styles.picture} />
         </View>
-        <Text style={styles.text}>Samuel Oluwanbowa</Text>
+        <Text style={styles.text}>{user.displayName}</Text>
       </View>
 
       <View style={styles.curve}></View>

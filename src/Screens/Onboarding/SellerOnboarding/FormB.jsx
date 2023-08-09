@@ -4,9 +4,24 @@ import {COLORS} from '../../../../constants';
 import {Input, BusinessCategory} from '../../../Components';
 import CustomButton from '../../../Components/Buttons';
 import {useState} from 'react';
+import {updateUserProfile} from '../../../utilities/updateUserProfile';
+import {useNavigation} from '@react-navigation/native';
 
-const FormB = ({navigation}) => {
+const FormB = () => {
   const [category, setCategory] = useState('');
+  const [businessName, setBusinessName] = useState('');
+  const [businessDescription, setBusinessDescription] = useState('');
+
+  const navigation = useNavigation();
+
+  const canSubmit = Boolean(category && businessName && businessDescription);
+
+  const handleSubmit = () => {
+    if (canSubmit) {
+      updateUserProfile({category, businessName, businessDescription});
+      navigation.navigate('Verify');
+    }
+  };
 
   return (
     <View style={styles.body}>
@@ -20,19 +35,22 @@ const FormB = ({navigation}) => {
           <Input
             placeholder={'Enter your business name'}
             textContentType={'organizationName'}
+            value={businessName}
+            onChangeText={setBusinessName}
           />
           <BusinessCategory category={category} setCategory={setCategory} />
           <TextInput
             placeholder={'Write a brief description of your business...'}
             multiline={true}
             style={styles.business_description_input}
+            value={businessDescription}
+            onChangeText={setBusinessDescription}
           />
         </View>
         <CustomButton
           title="continue"
-          onPress={() => {
-            navigation.navigate('Verify');
-          }}
+          onPress={handleSubmit}
+          disabled={!canSubmit}
         />
       </View>
     </View>
