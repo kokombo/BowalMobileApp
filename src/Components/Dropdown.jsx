@@ -5,8 +5,9 @@ import Input from './Input';
 import {useState} from 'react';
 import {cagtegoriesData} from '../../constants/data';
 
-export default BusinessCategory = ({category, setCategory}) => {
+const BusinessCategory = ({category, setCategory}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [labelVisible, setLabelVisible] = useState(false);
 
   const renderItem = ({item}) => {
     return (
@@ -21,20 +22,29 @@ export default BusinessCategory = ({category, setCategory}) => {
     );
   };
 
+  const onPressIn = () => {
+    setModalVisible(true), setLabelVisible(true);
+  };
+
+  const onRequestClose = () => {
+    setModalVisible(false);
+  };
+
   return (
     <View>
-      <Input
-        placeholder={'Select your business category'}
-        onPressIn={() => setModalVisible(true)}
-        value={category}
-      />
+      <View>
+        {labelVisible && <Text style={styles.label}>Business Category</Text>}
+        <Input
+          placeholder={'Select your business category'}
+          onPressIn={onPressIn}
+          value={category}
+        />
+      </View>
       <Modal
         animationType="slide"
         visible={modalVisible}
         presentationStyle="pageSheet"
-        onRequestClose={() => {
-          setModalVisible(false);
-        }}>
+        onRequestClose={onRequestClose}>
         <View style={styles.modal_view}>
           <FlatList
             data={cagtegoriesData}
@@ -73,4 +83,12 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
     fontWeight: '300',
   },
+  label: {
+    position: 'absolute',
+    left: 0,
+    top: -20,
+    color: COLORS.grey,
+  },
 });
+
+export default BusinessCategory;

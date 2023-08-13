@@ -25,7 +25,7 @@ const Location = () => {
       }
     } catch (error) {
       // console.log('error', error);
-      Alert.alert(error);
+      Alert.alert(error.message);
     }
   };
   useEffect(() => {
@@ -55,8 +55,7 @@ const Location = () => {
     geoLocation();
   }, []);
 
-  //The below code converts the user's geo position to exact address. The city and state info is extracted.
-
+  //Converting user's geo position to exact address. The city and state info is extracted.
   setTimeout(() => {
     Geocoder.from(userPosition.latitude, userPosition.longitude).then(json => {
       let formatted_address = json?.results[0].formatted_address;

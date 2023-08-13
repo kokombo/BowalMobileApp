@@ -1,25 +1,30 @@
 import {Modal, View, Text, StyleSheet, StatusBar, Platform} from 'react-native';
 import {COLORS} from '../../constants';
-import {useEffect} from 'react';
-import {showAlert, closeAlert} from '../Redux/Slices/customAlertSlice';
+import {useEffect, useState} from 'react';
+import {closeAlert} from '../Redux/Slices/customAlertSlice';
 import {useDispatch, useSelector} from 'react-redux';
 
-const CustomAlert = ({text}) => {
+const CustomAlert = ({text, color}) => {
   const {alertShown} = useSelector(store => store.alert);
+  console.log(alertShown);
   const dispatch = useDispatch();
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(showAlert());
+      dispatch(closeAlert());
     }, 2000);
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View>
       {alertShown && (
-        <View style={styles.body}>
-          <Text>{text}</Text>
-        </View>
+        <Modal animationType="none" transparent={true}>
+          <View style={styles.container}>
+            <View style={styles.body}>
+              <Text style={{color: color}}>{text}</Text>
+            </View>
+          </View>
+        </Modal>
       )}
     </View>
   );
@@ -27,18 +32,16 @@ const CustomAlert = ({text}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: 70,
+    width: '100%',
     position: 'absolute',
+    top: Platform.OS === 'ios' ? 50 : StatusBar.currentHeight + 10,
+    alignItems: 'flex-start',
   },
   body: {
-    height: 100,
-    width: 300,
-    backgroundColor: COLORS.gray,
-
-    top: Platform.OS === 'ios' ? 100 : StatusBar.currentHeight + 10,
-    left: 0,
-    borderWidth: 1,
-    borderColor: COLORS.grey,
+    backgroundColor: COLORS.grey,
+    height: Platform.OS === 'ios' ? 100 : StatusBar.currentHeight,
+    width: '100%',
   },
 });
 export default CustomAlert;

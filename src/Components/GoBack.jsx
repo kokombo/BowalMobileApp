@@ -1,5 +1,5 @@
 import {View, TouchableOpacity, StyleSheet, Image} from 'react-native';
-import {assets, COLORS} from '../../constants';
+import {assets} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
 
 const GoBack = () => {

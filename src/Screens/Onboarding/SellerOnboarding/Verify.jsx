@@ -1,11 +1,4 @@
-import {
-  View,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-  Text,
-  Button,
-} from 'react-native';
+import {View, TouchableOpacity, Image, StyleSheet, Text} from 'react-native';
 import {assets, COLORS} from '../../../../constants';
 import OnboardingHeading from '../Components/OnboardingHeading';
 import {TextInput} from 'react-native-gesture-handler';
@@ -76,7 +69,7 @@ const Verify = ({navigation}) => {
         <CustomButton
           title={'proceed'}
           onPress={() => {
-            navigation.navigate('VendorHome');
+            navigation.navigate('VendorStack');
           }}
         />
       </View>

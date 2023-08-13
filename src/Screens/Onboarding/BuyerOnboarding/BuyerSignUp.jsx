@@ -7,7 +7,7 @@ import {QuickSignIn} from '../../Authorization';
 import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
-import {updateUserProfile} from '../../../utilities/updateUserProfile';
+import {updateUserProfile, saveToStorage} from '../../../utilities';
 import {useEffect} from 'react';
 import {login, signout} from '../../../Redux/Slices/currentUserSlice';
 import {useDispatch} from 'react-redux';
@@ -17,7 +17,8 @@ const BuyerSignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [pageError, setPageError] = useState('');
+  const [pageError, setPageError] = useState(''); // This is used to monitor email format error
+  const [passwordError, setPasswordError] = useState(''); //This is used to monitor password format error
   const [authError, setAuthError] = useState('');
   const navigation = useNavigation();
 
@@ -40,21 +41,28 @@ const BuyerSignUp = () => {
     listener();
   }, []);
 
-  //A user(seller) must provide fullname, email, and password before signup. Button is disabled until the three conditions are met.
+  /*A user(seller) must provide fullname, email, and password before signup. Button is disabled until the three conditions are met. */
   const canSignUp = Boolean(fullname && email && password);
 
-  //This is the onPress function that handles user signup. If the email address entered does not contain "@" and ".com", an error will pop up. Firebase auth error is used to handle credential validation and network errors.
+  /*This is the onPress function that handles user signup. If the email address entered does not contain "@" and ".com", an error will pop up. Firebase auth error is used to handle credential validation and network errors.
+  
+  Once a buyer signup with email and password, the inputted fullname would be updated in firebase as displayName. The updateUserProfile function is written in the utilities folder. Also, the saveToStorage function (also in utilities folder) will be called to store the information in firebase database storage. 
+  */
 
   const handleSignUp = async () => {
-    if (!email.includes('@' && '.com')) {
-      setPageError("That doesn't look like an email address");
+    if (!email.includes('@') || !email.includes('.com')) {
+      setPageError('Please enter a valid email address');
+    } else if (password.length < 6) {
+      setPasswordError('Password should be at least 6 characters');
     } else {
       setLoading(true);
       await auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
-          updateUserProfile({displayName: fullname, accountType: 'buyer'});
-          navigation.navigate('BuyerHome');
+          setPassword(' ');
+          updateUserProfile({displayName: fullname});
+          saveToStorage({name: fullname, accountType: 'buyer'});
+          navigation.navigate('BuyerStack');
           Alert.alert(
             'Account created',
             'you have successfully created your account',
@@ -75,8 +83,8 @@ const BuyerSignUp = () => {
           }
           if (error.code === 'auth/network-request-failed') {
             Alert.alert(
-              'Oops!',
-              'A network error has occured, please check your connectivity and try again.',
+              'Network error!',
+              'Please check your internet connection and try again.',
             );
             setAuthError(
               'A network error has occured, please check your connectivity and try again.',
@@ -89,11 +97,10 @@ const BuyerSignUp = () => {
     }
   };
 
-  if (loading) {
-    return <Loader />;
-  }
   return (
     <View style={styles.container}>
+      {loading && <Loader />}
+
       <View style={styles.body}>
         <OnboardingHeading
           heading={'welcome !'}
@@ -119,8 +126,14 @@ const BuyerSignUp = () => {
                 )}
               </View>
             </View>
-
-            <PasswordInput value={password} onChangeText={setPassword} />
+            <View>
+              <View>
+                <PasswordInput value={password} onChangeText={setPassword} />
+                {passwordError && (
+                  <Text style={styles.email_error}>{passwordError}</Text> //This displays the email format error when there is one.
+                )}
+              </View>
+            </View>
           </View>
 
           <View style={styles.button_container}>
@@ -131,12 +144,11 @@ const BuyerSignUp = () => {
             />
           </View>
         </View>
-
         <QuickSignIn
           heading={'or sign up with'}
           cta={'Already have an account?'}
           link={'Sign in'}
-          onPress={() => {
+          onPressLink={() => {
             navigation.navigate('Signin');
           }}
         />

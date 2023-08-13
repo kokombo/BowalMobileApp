@@ -11,22 +11,29 @@ import {useNavigation} from '@react-navigation/native';
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [pageError, setPageError] = useState('');
+  const [pageError, setPageError] = useState(''); //This is used to monitor email format error
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
+  /* We check if the user has inputed email and password. The login button remains disabled at default until the user inputs their credentials. */
   const canLogin = Boolean(email && password);
 
+  /* 
+  We check if the email address inputted by user is valid by inspecting if it includes (@) && '.com'. If the inputted does not include either of the two, an error message will show up when the user fires the login button.
+
+  if user provides correct credential format, the authentication process begins. Every possible authentication error has been handled. 
+  */
+
   const Login = async () => {
-    if (!email.includes('@' && '.com')) {
-      setPageError('That does not look like an email address');
+    if (!email.includes('@') || !email.includes('.com')) {
+      setPageError('Please enter a valid email address');
     } else {
       setLoading(true);
       await auth()
         .signInWithEmailAndPassword(email, password)
         .then(() => {
-          navigation.navigate('BuyerHome');
-          setPassword('');
+          navigation.navigate('BuyerStack');
+          setPassword(' ');
         })
         .catch(error => {
           if (error.code === 'auth/invalid-email') {
@@ -46,8 +53,8 @@ const LoginPage = () => {
           }
           if (error.code === 'auth/network-request-failed') {
             Alert.alert(
-              'Oops!',
-              'A network error has occured, please check your connectivity and try again.',
+              'Network error!',
+              'Please check your internet connection and try again.',
             );
           }
         })
@@ -57,11 +64,10 @@ const LoginPage = () => {
     }
   };
 
-  if (loading) {
-    return <Loader />;
-  }
   return (
     <View style={styles.container}>
+      {loading && <Loader />}
+
       <View style={styles.body}>
         <OnboardingHeading
           heading={'welcome !'}
@@ -78,7 +84,7 @@ const LoginPage = () => {
               />
               <View>
                 {pageError && (
-                  <Text style={styles.email_error}>{pageError}</Text>
+                  <Text style={styles.email_error}>{pageError}</Text> // This displays the email format error when there is one.
                 )}
               </View>
             </View>
@@ -94,7 +100,7 @@ const LoginPage = () => {
           heading={'or sign in with'}
           cta={"Don't have an account yet?"}
           link={'Sign up'}
-          onPress={() => {
+          onPressLink={() => {
             navigation.navigate('AccountType');
           }}
         />

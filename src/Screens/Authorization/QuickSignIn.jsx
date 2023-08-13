@@ -1,7 +1,7 @@
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {COLORS, assets} from '../../../constants';
 
-const QuickSignIn = ({heading, cta, link, onPress}) => {
+const QuickSignIn = ({heading, cta, link, onPressLink}) => {
   return (
     <View style={styles.container}>
       <View>
@@ -16,7 +16,7 @@ const QuickSignIn = ({heading, cta, link, onPress}) => {
 
       <View style={styles.cta_wrapper}>
         <Text style={styles.text}>{cta}</Text>
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={onPressLink}>
           <Text style={[styles.text, styles.link]}>{link}</Text>
         </TouchableOpacity>
       </View>

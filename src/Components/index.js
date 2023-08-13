@@ -16,6 +16,7 @@ import SideBarToggle from './SideBarToggle';
 import Aside from './Aside';
 import Loader from './Loader';
 import GoBack from './GoBack';
+import DisplayName from './DisplayName';
 
 export {
   Input,
@@ -36,4 +37,5 @@ export {
   Aside,
   Loader,
   GoBack,
+  DisplayName,
 };

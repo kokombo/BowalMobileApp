@@ -1,11 +1,16 @@
 import {View, Text, StyleSheet, Image} from 'react-native';
 import {COLORS, assets} from '../../../constants';
 import {useEffect} from 'react';
+import {useSelector} from 'react-redux';
 
 const Splash = ({navigation}) => {
+  const {user} = useSelector(store => store.currentUser);
   useEffect(() => {
     setTimeout(() => {
-      navigation.replace('AccountType');
+      if (user) {
+        navigation.replace('BuyerStack');
+      }
+      navigation.replace('OnboardingStack');
     }, 3000);
   }, []);
 

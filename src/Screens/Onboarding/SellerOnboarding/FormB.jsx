@@ -1,16 +1,17 @@
 import {View, StyleSheet, TextInput} from 'react-native';
 import OnboardingHeading from '../Components/OnboardingHeading';
 import {COLORS} from '../../../../constants';
-import {Input, BusinessCategory} from '../../../Components';
+import {Input, BusinessCategory, Loader} from '../../../Components';
 import CustomButton from '../../../Components/Buttons';
 import {useState} from 'react';
-import {updateUserProfile} from '../../../utilities/updateUserProfile';
 import {useNavigation} from '@react-navigation/native';
+import {saveToStorage} from '../../../utilities';
 
 const FormB = () => {
   const [category, setCategory] = useState('');
   const [businessName, setBusinessName] = useState('');
   const [businessDescription, setBusinessDescription] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
 
@@ -18,13 +19,16 @@ const FormB = () => {
 
   const handleSubmit = () => {
     if (canSubmit) {
-      updateUserProfile({category, businessName, businessDescription});
+      setLoading(true);
+      saveToStorage({category, businessName, businessDescription});
       navigation.navigate('Verify');
+      setLoading(false);
     }
   };
 
   return (
     <View style={styles.body}>
+      {loading && <Loader />}
       <OnboardingHeading
         heading={'Almost there!'}
         subheading={'Set up your store details'}

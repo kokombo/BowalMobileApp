@@ -1,5 +1,6 @@
-import {TextInput, StyleSheet} from 'react-native';
+import {TextInput, StyleSheet, View, Text} from 'react-native';
 import {COLORS} from '../../constants';
+import {useState} from 'react';
 
 const Input = ({
   value,
@@ -7,22 +8,30 @@ const Input = ({
   onChangeText,
   keyboardType,
   textContentType,
-  onPressIn,
   onPressOut,
 }) => {
+  const [labelVisible, setLabelVisible] = useState(false);
+
+  const onPressIn = () => {
+    setLabelVisible(true);
+  };
+
   return (
-    <TextInput
-      value={value}
-      placeholder={placeholder}
-      onChangeText={onChangeText}
-      placeholderTextColor={COLORS.gray}
-      keyboardType={keyboardType}
-      style={styles.input}
-      autoCorrect={false}
-      textContentType={textContentType}
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
-    />
+    <View>
+      {labelVisible && <Text style={styles.label}>{placeholder}</Text>}
+      <TextInput
+        value={value}
+        placeholder={labelVisible ? ' ' : placeholder}
+        onChangeText={onChangeText}
+        placeholderTextColor={COLORS.gray}
+        keyboardType={keyboardType}
+        style={styles.input}
+        autoCorrect={false}
+        textContentType={textContentType}
+        onPressOut={onPressOut}
+        onPressIn={onPressIn}
+      />
+    </View>
   );
 };
 
@@ -32,6 +41,12 @@ const styles = StyleSheet.create({
     borderColor: COLORS.gray,
     borderBottomWidth: 1,
     fontSize: 18,
+    color: COLORS.grey,
+  },
+  label: {
+    position: 'absolute',
+    left: 0,
+    top: -20,
     color: COLORS.grey,
   },
 });

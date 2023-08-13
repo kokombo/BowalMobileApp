@@ -12,7 +12,7 @@ const customAlertSlice = createSlice({
       state.alertShown = true;
     },
     closeAlert: (state, action) => {
-      state.alertShown.false;
+      state.alertShown = false;
     },
   },
 });

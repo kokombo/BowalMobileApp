@@ -1,5 +1,10 @@
 import {View, Text, StyleSheet, SafeAreaView, FlatList} from 'react-native';
-import {ProfilePicture, Mode, NavigationCard} from '../../Components';
+import {
+  ProfilePicture,
+  Mode,
+  NavigationCard,
+  DisplayName,
+} from '../../Components';
 import {COLORS} from '../../../constants';
 import {accountTabData} from '../../../constants/data';
 
@@ -14,7 +19,7 @@ const Account = () => {
         <View style={styles.profile_picture_frame}>
           <ProfilePicture width={100} height={100} style={styles.picture} />
         </View>
-        <Text style={styles.text}>Samuel Oluwanbowa</Text>
+        <DisplayName color={COLORS.white} />
       </View>
       <View style={styles.curve}></View>
       <View style={styles.mode_wrapper}>
@@ -48,11 +53,7 @@ const styles = StyleSheet.create({
     gap: 20,
     position: 'relative',
   },
-  text: {
-    color: COLORS.white,
-    fontSize: 20,
-    fontWeight: '500',
-  },
+
   profile_picture_frame: {
     backgroundColor: COLORS.white,
     width: 110,

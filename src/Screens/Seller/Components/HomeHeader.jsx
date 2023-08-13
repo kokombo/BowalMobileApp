@@ -1,6 +1,7 @@
 import {View, StyleSheet, Text} from 'react-native';
 import {assets, COLORS} from '../../../../constants';
-import {Location, Greeting, Analytics} from '../../../Components';
+import {Location, Analytics} from '../../../Components';
+import Greeting from './Greeting';
 
 const HomeHeader = () => {
   return (

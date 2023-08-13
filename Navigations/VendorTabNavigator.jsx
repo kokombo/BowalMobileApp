@@ -6,7 +6,7 @@ import {AddProductIcon, Bell} from '../src/Screens/Seller/Components';
 import {ProfilePicture} from '../src/Components';
 
 const Tab = createBottomTabNavigator();
-const TabNavigator = () => {
+const VendorTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -106,4 +106,4 @@ const TabNavigator = () => {
   );
 };
 
-export default TabNavigator;
+export default VendorTabNavigator;

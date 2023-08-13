@@ -4,10 +4,10 @@ import OnboardingCTA from '../Components/OnboardingCTA';
 import OnboardingHeading from '../Components/OnboardingHeading';
 import CustomButton from '../../../Components/Buttons';
 import {Input, Loader, PasswordInput} from '../../../Components';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
-import {updateUserProfile} from '../../../utilities/updateUserProfile';
+import {updateUserProfile, saveToStorage} from '../../../utilities';
 
 const FormA = () => {
   const [fullname, setFullname] = useState('');
@@ -15,29 +15,32 @@ const FormA = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [pageError, setPageError] = useState('');
-  const [pageErrorVisible, setPageErrorVisible] = useState(false);
+  const [pageError, setPageError] = useState(''); //This handles email format error
   const [authError, setAuthError] = useState('');
   const navigation = useNavigation();
 
-  //A user (vendor) must provide fullname, email, and password before signup. Button is disabled until the three conditions are met.
+  /*A user (vendor) must provide fullname, email, and password before signup. Button is disabled until the three conditions are met.*/
   const canSignUp = Boolean(fullname && email && password && phone);
 
-  //This is the onPress function that handles user signup. If the email address entered does not contain "@" and ".com", an error will pop up. Firebase auth error is used to handle credential validation and network errors.
+  /*This is the onPress function that handles user signup. If the email address entered does not contain "@" and ".com", an error will pop up. Firebase auth error is used to handle credential validation and network errors.
+  
+  Once a vendor signup with email, password, fullname, and password, firebase handles the email and password while the updateUserProfile function (available in the utilities folder) updates the user profile, receveing the displayName as fullname and phoneNumber as phone. The saveToStorage (also in the utilities folder) function is then called to store the users credentials to firebase storage.
+  */
+
   const handleSignUp = async () => {
-    if (!email.includes('@' && '.com')) {
-      setPageErrorVisible(true);
-      setPageError("That doesn't look like an email address");
+    if (!email.includes('@') || !email.includes('.com')) {
+      setPageError('Please enter a valid email address');
     } else {
       setLoading(true);
       await auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
+          setPassword(' ');
           updateUserProfile({
             displayName: fullname,
             phoneNumber: phone,
-            accountType: 'seller',
           });
+          saveToStorage({name: fullname, accountType: 'vendor'});
           navigation.navigate('FormB');
           Alert.alert('Welcome!', 'You have successfully created your account');
         })
@@ -58,8 +61,8 @@ const FormA = () => {
           }
           if (error.code === 'auth/network-request-failed') {
             Alert.alert(
-              'Oops!',
-              'A network error has occured, please check your connectivity and try again.',
+              'Network error!',
+              'Please check your internet connection and try again.',
             );
             setAuthError(
               'A network error has occured, please check your connectivity and try again.',
@@ -72,24 +75,15 @@ const FormA = () => {
     }
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      setPageErrorVisible(false);
-    }, 2000);
-  }, []);
-
-  if (loading) {
-    return <Loader />;
-  }
-
   return (
     <View style={styles.body}>
-      <View>
-        <OnboardingHeading
-          heading={'Welcome'}
-          subheading={'Sign up to continue!'}
-        />
-      </View>
+      {loading && <Loader />}
+
+      <OnboardingHeading
+        heading={'Welcome'}
+        subheading={'Sign up to continue!'}
+      />
+
       <View style={styles.form}>
         <View style={styles.inputs}>
           <Input
@@ -107,8 +101,8 @@ const FormA = () => {
             />
 
             <View>
-              {pageErrorVisible && (
-                <Text style={styles.email_error}>{pageError}</Text>
+              {pageError && (
+                <Text style={styles.email_error}>{pageError}</Text> //This displays the email format error when there is one
               )}
             </View>
           </View>
@@ -159,7 +153,7 @@ const styles = StyleSheet.create({
   },
   form: {
     gap: 50,
-    marginBottom: 150,
+    marginBottom: 100,
   },
   login: {
     alignItems: 'center',

@@ -9,28 +9,28 @@ import {
 import ProfilePicture from './ProfilePicture';
 import {COLORS, assets} from '../../constants';
 import {sidebarData} from '../../constants/data';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
-import {useSelector, useDispatch} from 'react-redux';
-import {signout} from '../Redux/Slices/currentUserSlice';
+import DisplayName from './DisplayName';
+import {useSelector} from 'react-redux';
 
 const Aside = () => {
   const [aside] = useState(sidebarData);
   const navigation = useNavigation();
-  const dispatch = useDispatch();
 
   const {user} = useSelector(store => store.currentUser);
 
   const logOut = () => {
-    try {
-      auth().signOut;
-      dispatch(signout());
-      navigation.navigate('Signin');
-    } catch (error) {
-      return error.message;
-    }
+    auth().signOut;
+    navigation.navigate('Signin');
   };
+
+  useEffect(() => {
+    if (user === null) {
+      logOut();
+    }
+  }, []);
 
   return (
     <SafeAreaView>
@@ -38,7 +38,7 @@ const Aside = () => {
         <View style={styles.picture_container}>
           <ProfilePicture width={73} height={73} />
         </View>
-        <Text style={styles.user_name}>{user.displayName}</Text>
+        <DisplayName color={COLORS.white} />
       </View>
 
       <View style={styles.aside_body}>
@@ -88,11 +88,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 15,
   },
-  user_name: {
-    fontSize: 20,
-    color: COLORS.white,
-    fontWeight: '600',
-  },
+
   icon: {
     width: 24,
     height: 24,
