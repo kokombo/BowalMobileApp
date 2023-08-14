@@ -14,7 +14,10 @@ const VendorStack = () => {
   const navigation = useNavigation();
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShadowVisible: false,
+      }}>
       <Stack.Screen
         name="VendorHome"
         component={VendorTabNavigator}
@@ -25,6 +28,7 @@ const VendorStack = () => {
         component={AddProduct}
         options={{
           headerBackgroundContainerStyle: {backgroundColor: COLORS.white},
+          headerBackTitleVisible: false,
           headerBackImage: () => (
             <TouchableOpacity
               onPress={() => {

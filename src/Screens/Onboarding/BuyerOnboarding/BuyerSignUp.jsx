@@ -7,11 +7,9 @@ import {QuickSignIn} from '../../Authorization';
 import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
-import {updateUserProfile} from '../../../utilities';
-import {useEffect} from 'react';
-import {login, signout} from '../../../Redux/Slices/currentUserSlice';
-import {useDispatch, useSelector} from 'react-redux';
 import database from '@react-native-firebase/database';
+import {useDispatch} from 'react-redux';
+import {login} from '../../../Redux/Slices/currentUserSlice';
 
 const BuyerSignUp = () => {
   const [fullname, setFullName] = useState('');
@@ -21,37 +19,12 @@ const BuyerSignUp = () => {
   const [pageError, setPageError] = useState(''); // This is used to monitor email format error
   const [passwordError, setPasswordError] = useState(''); //This is used to monitor password format error
   const [authError, setAuthError] = useState('');
+
   const navigation = useNavigation();
-
   const dispatch = useDispatch();
-
-  const {user} = useSelector(store => store.currentUser);
-
-  useEffect(() => {
-    const listener = auth().onAuthStateChanged(activeUser => {
-      if (activeUser) {
-        dispatch(
-          login({
-            displayName: activeUser.displayName,
-            email: activeUser.email,
-            uid: activeUser.uid,
-          }),
-        );
-      } else {
-        dispatch(signout());
-      }
-    });
-    listener();
-  }, []);
 
   /*A user(seller) must provide fullname, email, and password before signup. Button is disabled until the three conditions are met. */
   const canSignUp = Boolean(fullname && email && password);
-
-  const saveToStorage = async () => {
-    await database()
-      .ref(`users/buyers/${user.uid}`)
-      .set({name: fullname, accountType: 'buyer'});
-  };
 
   /*This is the onPress function that handles user signup. If the email address entered does not contain "@" and ".com", an error will pop up. Firebase auth error is used to handle credential validation and network errors.
   
@@ -67,16 +40,31 @@ const BuyerSignUp = () => {
       setLoading(true);
       await auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(() => {
+        .then(res => {
           setPassword('');
-          updateUserProfile({displayName: fullname});
-          saveToStorage();
+          res.user
+            .updateProfile({displayName: fullname, isAnonymous: false})
+            .then(
+              dispatch(
+                login({
+                  email: res.user.email,
+                  displayName: fullname,
+                  uid: res.user.uid,
+                  isAnonymous: true,
+                  accountType: 'buyer',
+                }),
+              ),
+            );
+          database()
+            .ref(`users/buyers/${res.user.uid}`)
+            .set({name: fullname, accountType: 'buyer'});
           navigation.navigate('BuyerStack');
           Alert.alert(
             'Account created',
             'you have successfully created your account',
           );
         })
+
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
             Alert.alert('Email already in use');

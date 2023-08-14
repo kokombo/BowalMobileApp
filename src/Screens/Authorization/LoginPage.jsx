@@ -7,20 +7,23 @@ import CustomButton from '../../Components/Buttons';
 import QuickSignIn from './QuickSignIn';
 import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {login} from '../../Redux/Slices/currentUserSlice';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [pageError, setPageError] = useState(''); //This is used to monitor email format error
   const [loading, setLoading] = useState(false);
+
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   /* We check if the user has inputed email and password. The login button remains disabled at default until the user inputs their credentials. */
   const canLogin = Boolean(email && password);
 
   /* 
   We check if the email address inputted by user is valid by inspecting if it includes (@) && '.com'. If the inputted does not include either of the two, an error message will show up when the user fires the login button.
-
   if user provides correct credential format, the authentication process begins. Every possible authentication error has been handled. 
   */
 
@@ -31,9 +34,23 @@ const LoginPage = () => {
       setLoading(true);
       await auth()
         .signInWithEmailAndPassword(email, password)
-        .then(() => {
+        .then(res => {
+          console.log(res);
           setPassword('');
-          navigation.navigate('BuyerStack');
+          dispatch(
+            login({
+              email: res.user.email,
+              displayName: res.user.displayName,
+              isAnonymous: res.user.isAnonymous,
+              uid: res.user.uid,
+            }),
+          );
+          if (res.user.isAnonymous === true) {
+            navigation.navigate('BuyerStack');
+          }
+          if (res.user.isAnonymous === false) {
+            navigation.navigate('VendorStack');
+          }
         })
         .catch(error => {
           if (error.code === 'auth/invalid-email') {

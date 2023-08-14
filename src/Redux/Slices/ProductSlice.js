@@ -11,14 +11,16 @@ const initialState = {
 
 export const addProduct = createAsyncThunk(
   'product/addProduct',
-  async productInfo => {
-    const userId = store.getState().currentUser.user.uid;
+  async (productDetails, {getState}) => {
+    const state = getState();
+    const id = state.currentUser.user.uid;
+    console.log(id);
     try {
       await firestore()
-        .collection('products')
-        .doc(`${userId}`)
+        .collection('users')
+        .doc(`${id}`)
         .set({
-          ...productInfo,
+          ...productDetails,
         });
     } catch (error) {
       return error.message;

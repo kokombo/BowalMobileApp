@@ -10,6 +10,10 @@ import {useNavigation} from '@react-navigation/native';
 import {LoginPage} from '../src/Screens/Authorization';
 import {GoBack} from '../src/Components';
 import {Splash} from '../src/Screens/General';
+import {useDispatch} from 'react-redux';
+import {useEffect} from 'react';
+import {login, signout} from '../src/Redux/Slices/currentUserSlice';
+import auth from '@react-native-firebase/auth';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +24,24 @@ av.addListener(() => {
 
 const RootStackNavigator = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const listener = auth().onAuthStateChanged(user => {
+      if (user) {
+        dispatch(
+          login({
+            displayName: user.displayName,
+            email: user.email,
+            uid: user.uid,
+            isAnonymous: user.isAnonymous,
+          }),
+        );
+      } else {
+        dispatch(signout());
+      }
+    });
+    listener();
+  }, []);
 
   return (
     <Stack.Navigator

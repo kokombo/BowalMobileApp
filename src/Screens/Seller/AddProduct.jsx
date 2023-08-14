@@ -13,6 +13,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {addProduct} from '../../Redux/Slices/ProductSlice';
 import {CustomAlert, AddProductImage} from '../../Components';
 import {clearImages} from '../../Redux/Slices/ImageSelectorSlice';
+import {BusinessCategory} from '../../Components';
 
 const AddProduct = ({navigation}) => {
   const [productName, setProductName] = useState('');
@@ -23,6 +24,8 @@ const AddProduct = ({navigation}) => {
 
   const dispatch = useDispatch();
   const {status} = useSelector(store => store.product);
+  const {user} = useSelector(store => store.currentUser);
+  console.log(user);
   const {selectedImages} = useSelector(store => store.imageSelector);
 
   //To further ensure exactly 3 images are uploaded to the backend for each product.
@@ -73,11 +76,15 @@ const AddProduct = ({navigation}) => {
         </View>
         <View style={styles.input_wrapper}>
           <Text style={styles.label}>Category</Text>
-          <TextInput
+          <BusinessCategory
+            category={productCategory}
+            setCategory={setProductCategory}
+          />
+          {/* <TextInput
             style={styles.input}
             onChangeText={value => setProductCategory(value)}
             autoCorrect={false}
-          />
+          /> */}
         </View>
         <View style={styles.input_wrapper}>
           <Text style={styles.label}>Price</Text>
