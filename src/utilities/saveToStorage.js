@@ -1,11 +1,10 @@
 import database from '@react-native-firebase/database';
 import {useSelector} from 'react-redux';
 
-export const saveToStorage = details => {
+export const saveToStorage = async details => {
   const {user} = useSelector(store => store.currentUser);
-  database()
-    .ref('users/' + user.uid)
-    .set({...details}, error => {
-      if (error) return error.message;
-    });
+
+  await database()
+    .ref(`users/${user.uid}`)
+    .set({...details});
 };

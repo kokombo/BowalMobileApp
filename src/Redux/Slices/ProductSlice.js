@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import firestore from '@react-native-firebase/firestore';
+import {store} from '../Store';
 
 const initialState = {
   productArray: [],
@@ -11,10 +12,12 @@ const initialState = {
 export const addProduct = createAsyncThunk(
   'product/addProduct',
   async productInfo => {
+    const userId = store.getState().currentUser.user.uid;
     try {
       await firestore()
         .collection('products')
-        .add({
+        .doc(`${userId}`)
+        .set({
           ...productInfo,
         });
     } catch (error) {

@@ -21,8 +21,8 @@ const Aside = () => {
 
   const {user} = useSelector(store => store.currentUser);
 
-  const logOut = () => {
-    auth().signOut;
+  const logOut = async () => {
+    await auth().signOut();
     navigation.navigate('Signin');
   };
 

@@ -32,8 +32,8 @@ const LoginPage = () => {
       await auth()
         .signInWithEmailAndPassword(email, password)
         .then(() => {
+          setPassword('');
           navigation.navigate('BuyerStack');
-          setPassword(' ');
         })
         .catch(error => {
           if (error.code === 'auth/invalid-email') {

@@ -5,7 +5,8 @@ import {Input, BusinessCategory, Loader} from '../../../Components';
 import CustomButton from '../../../Components/Buttons';
 import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {saveToStorage} from '../../../utilities';
+import {useSelector} from 'react-redux';
+import database from '@react-native-firebase/database';
 
 const FormB = () => {
   const [category, setCategory] = useState('');
@@ -17,10 +18,18 @@ const FormB = () => {
 
   const canSubmit = Boolean(category && businessName && businessDescription);
 
+  const {user} = useSelector(store => store.currentUser);
+
+  const saveToStorage = async () => {
+    await database()
+      .ref(`users/vendors/${user.uid}`)
+      .update({category, businessName, businessDescription});
+  };
+
   const handleSubmit = () => {
     if (canSubmit) {
       setLoading(true);
-      saveToStorage({category, businessName, businessDescription});
+      saveToStorage();
       navigation.navigate('Verify');
       setLoading(false);
     }

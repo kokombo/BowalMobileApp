@@ -7,10 +7,11 @@ import {QuickSignIn} from '../../Authorization';
 import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
-import {updateUserProfile, saveToStorage} from '../../../utilities';
+import {updateUserProfile} from '../../../utilities';
 import {useEffect} from 'react';
 import {login, signout} from '../../../Redux/Slices/currentUserSlice';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import database from '@react-native-firebase/database';
 
 const BuyerSignUp = () => {
   const [fullname, setFullName] = useState('');
@@ -23,6 +24,8 @@ const BuyerSignUp = () => {
   const navigation = useNavigation();
 
   const dispatch = useDispatch();
+
+  const {user} = useSelector(store => store.currentUser);
 
   useEffect(() => {
     const listener = auth().onAuthStateChanged(activeUser => {
@@ -44,6 +47,12 @@ const BuyerSignUp = () => {
   /*A user(seller) must provide fullname, email, and password before signup. Button is disabled until the three conditions are met. */
   const canSignUp = Boolean(fullname && email && password);
 
+  const saveToStorage = async () => {
+    await database()
+      .ref(`users/buyers/${user.uid}`)
+      .set({name: fullname, accountType: 'buyer'});
+  };
+
   /*This is the onPress function that handles user signup. If the email address entered does not contain "@" and ".com", an error will pop up. Firebase auth error is used to handle credential validation and network errors.
   
   Once a buyer signup with email and password, the inputted fullname would be updated in firebase as displayName. The updateUserProfile function is written in the utilities folder. Also, the saveToStorage function (also in utilities folder) will be called to store the information in firebase database storage. 
@@ -59,9 +68,9 @@ const BuyerSignUp = () => {
       await auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
-          setPassword(' ');
+          setPassword('');
           updateUserProfile({displayName: fullname});
-          saveToStorage({name: fullname, accountType: 'buyer'});
+          saveToStorage();
           navigation.navigate('BuyerStack');
           Alert.alert(
             'Account created',
@@ -127,8 +136,8 @@ const BuyerSignUp = () => {
               </View>
             </View>
             <View>
+              <PasswordInput value={password} onChangeText={setPassword} />
               <View>
-                <PasswordInput value={password} onChangeText={setPassword} />
                 {passwordError && (
                   <Text style={styles.email_error}>{passwordError}</Text> //This displays the email format error when there is one.
                 )}

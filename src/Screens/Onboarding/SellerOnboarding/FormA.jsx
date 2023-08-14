@@ -4,10 +4,14 @@ import OnboardingCTA from '../Components/OnboardingCTA';
 import OnboardingHeading from '../Components/OnboardingHeading';
 import CustomButton from '../../../Components/Buttons';
 import {Input, Loader, PasswordInput} from '../../../Components';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
-import {updateUserProfile, saveToStorage} from '../../../utilities';
+import {updateUserProfile} from '../../../utilities';
+import {useSelector} from 'react-redux';
+import database from '@react-native-firebase/database';
+import {useDispatch} from 'react-redux';
+import {login, signout} from '../../../Redux/Slices/currentUserSlice';
 
 const FormA = () => {
   const [fullname, setFullname] = useState('');
@@ -17,30 +21,60 @@ const FormA = () => {
   const [loading, setLoading] = useState(false);
   const [pageError, setPageError] = useState(''); //This handles email format error
   const [authError, setAuthError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const {user} = useSelector(store => store.currentUser);
+  console.log(user);
+
+  // useEffect(() => {
+  //   const listener = auth().onAuthStateChanged(activeUser => {
+  //     if (activeUser) {
+  //       dispatch(
+  //         login({
+  //           displayName: activeUser.displayName,
+  //           email: activeUser.email,
+  //           uid: activeUser.uid,
+  //         }),
+  //       );
+  //     } else {
+  //       dispatch(signout());
+  //     }
+  //   });
+  //   listener();
+  // }, []);
 
   /*A user (vendor) must provide fullname, email, and password before signup. Button is disabled until the three conditions are met.*/
   const canSignUp = Boolean(fullname && email && password && phone);
 
+  const saveToStorage = async () => {
+    await database()
+      .ref(`users/vendors/${user.uid}`)
+      .set({name: fullname, accountType: 'vendor', phoneNumber: phone});
+  };
+
   /*This is the onPress function that handles user signup. If the email address entered does not contain "@" and ".com", an error will pop up. Firebase auth error is used to handle credential validation and network errors.
-  
   Once a vendor signup with email, password, fullname, and password, firebase handles the email and password while the updateUserProfile function (available in the utilities folder) updates the user profile, receveing the displayName as fullname and phoneNumber as phone. The saveToStorage (also in the utilities folder) function is then called to store the users credentials to firebase storage.
   */
 
   const handleSignUp = async () => {
     if (!email.includes('@') || !email.includes('.com')) {
       setPageError('Please enter a valid email address');
+    } else if (password.length < 6) {
+      setPasswordError('Password should be at least 6 characters');
     } else {
       setLoading(true);
       await auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
-          setPassword(' ');
+          setPassword('');
           updateUserProfile({
             displayName: fullname,
             phoneNumber: phone,
           });
-          saveToStorage({name: fullname, accountType: 'vendor'});
+          saveToStorage();
           navigation.navigate('FormB');
           Alert.alert('Welcome!', 'You have successfully created your account');
         })
@@ -122,7 +156,12 @@ const FormA = () => {
               />
             </View>
           </View>
-          <PasswordInput value={password} onChangeText={setPassword} />
+          <View>
+            <PasswordInput value={password} onChangeText={setPassword} />
+            {passwordError && (
+              <Text style={styles.email_error}>{passwordError}</Text> //This displays the email format error when there is one.
+            )}
+          </View>
         </View>
         <CustomButton
           title={'Create My Account'}

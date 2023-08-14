@@ -1,7 +1,13 @@
 import {COLORS} from '../../constants';
-import {TouchableOpacity, View, FlatList, Text, StyleSheet} from 'react-native';
+import {
+  TouchableOpacity,
+  View,
+  FlatList,
+  Text,
+  StyleSheet,
+  TextInput,
+} from 'react-native';
 import {Modal} from 'react-native';
-import Input from './Input';
 import {useState} from 'react';
 import {cagtegoriesData} from '../../constants/data';
 
@@ -33,11 +39,14 @@ const BusinessCategory = ({category, setCategory}) => {
   return (
     <View>
       <View>
-        {labelVisible && <Text style={styles.label}>Business Category</Text>}
-        <Input
+        {labelVisible && (
+          <Text style={styles.label}>Select your business category</Text>
+        )}
+        <TextInput
           placeholder={'Select your business category'}
           onPressIn={onPressIn}
           value={category}
+          style={styles.input}
         />
       </View>
       <Modal
@@ -87,6 +96,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     top: -20,
+    color: COLORS.grey,
+  },
+  input: {
+    height: 32,
+    borderColor: COLORS.gray,
+    borderBottomWidth: 1,
+    fontSize: 18,
     color: COLORS.grey,
   },
 });
