@@ -56,7 +56,12 @@ const FormB = () => {
             value={businessName}
             onChangeText={setBusinessName}
           />
-          <BusinessCategory category={category} setCategory={setCategory} />
+          <BusinessCategory
+            category={category}
+            setCategory={setCategory}
+            placeholder={'Select your business category'}
+            height={32}
+          />
           <TextInput
             placeholder={'Write a brief description of your business...'}
             multiline={true}

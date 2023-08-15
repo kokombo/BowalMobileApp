@@ -7,23 +7,24 @@ import {
 } from 'react-native';
 import {ProductCard, RefreshController} from '../../Components';
 import {fetchProducts} from '../../Redux/Slices/ProductSlice';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {COLORS} from '../../../constants';
 
 const ProductsContainer = ({ListHeaderComponent}) => {
   const dispatch = useDispatch();
-  const {status, productArray} = useSelector(store => store.product);
-
-  const renderItem = ({item}) => {
-    return <ProductCard data={item} />;
-  };
+  const {status, productsArray} = useSelector(store => store.product);
+  const {user} = useSelector(store => store.currentUser);
 
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchProducts());
     }
-  }, [productArray, status]);
+  }, [productsArray, status]);
+
+  const renderItem = ({item}) => {
+    return <ProductCard data={item} />;
+  };
 
   const Content = () => {
     if (status === 'loading') {
@@ -38,7 +39,7 @@ const ProductsContainer = ({ListHeaderComponent}) => {
       return (
         <FlatList
           numColumns={2}
-          data={productArray}
+          data={productsArray}
           renderItem={renderItem}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}

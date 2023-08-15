@@ -1,42 +1,50 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import firestore from '@react-native-firebase/firestore';
+import {store} from '../Store';
 
 const initialState = {
-  productArray: [],
+  productsArray: [],
   storage: [],
   status: 'idle',
   error: null,
 };
 
-export const addProduct = createAsyncThunk(
-  'product/addProduct',
-  async (productDetails, {getState}) => {
+export const fetchProducts = createAsyncThunk(
+  'product/fetchProducts',
+  async (_, {getState}) => {
     const state = getState();
-    const id = state.currentUser.user.uid;
-    console.log(id);
+    const uid = state.currentUser.user.uid;
     try {
-      await firestore()
+      const query = await firestore()
+        .collection('users')
+        .doc(`${uid}`)
         .collection('products')
-        .doc(`${id}`)
-        .set({
-          ...productDetails,
-        });
+        .get();
+      const data = query.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      console.log(data);
+      return data;
     } catch (error) {
       return error.message;
     }
   },
 );
 
-export const fetchProducts = createAsyncThunk(
-  'product/fetchProducts',
-  async () => {
+export const addProduct = createAsyncThunk(
+  'product/addProduct',
+  async (productDetails, {getState}) => {
+    const state = getState();
+    const id = state.currentUser.user.uid;
     try {
-      const query = await firestore().collection('products').get();
-      const data = query.docs.map(doc => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      return data;
+      await firestore()
+        .collection('users')
+        .doc(`${id}`)
+        .collection('products')
+        .add({
+          ...productDetails,
+        });
     } catch (error) {
       return error.message;
     }
@@ -64,7 +72,7 @@ const productSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.productArray = action.payload;
+        state.productsArray = action.payload;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'failed';

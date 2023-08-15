@@ -32,7 +32,7 @@ const VendorStack = () => {
           headerBackImage: () => (
             <TouchableOpacity
               onPress={() => {
-                navigation.goBack();
+                navigation.navigate('VendorHome');
                 dispatch(clearImages());
               }}>
               <Image

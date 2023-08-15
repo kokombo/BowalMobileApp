@@ -28,23 +28,24 @@ const AddProduct = ({navigation}) => {
   console.log(user);
   const {selectedImages} = useSelector(store => store.imageSelector);
 
-  //To further ensure exactly 3 images are uploaded to the backend for each product.
-
+  //To further ensure exactly 3 images are uploaded to firestore for each product.
   const productImages = selectedImages.slice(0, 3);
 
-  // const submit handles product storage to firestore database using set method (this is inside the productSlice in redux). If a user fail to provide every necessary product detail, an error prompt will pop up saying user can not add product.
-
-  const submit = () => {
+  // Function that handles product upload.
+  const handleSubmit = () => {
+    // canNotSave check's if a user has not inputed all product details before trying to upload.
     const canNotSave =
       selectedImages.length === 0 ||
       !productName ||
       !productCategory ||
       !productPrice ||
       !productDescription;
+
     if (canNotSave) {
       Alert.alert('Oops!', 'Please provide all product details before adding.');
       // return <CustomAlert text = {"Can't add product"} />
     } else {
+      //If a user can upload the product, addProduct(available in ProductSlice) will be dispatched
       dispatch(
         addProduct({
           productName,
@@ -54,6 +55,8 @@ const AddProduct = ({navigation}) => {
           productImages,
         }),
       );
+
+      //After striking the add button, we will
       dispatch(clearImages());
 
       Alert.alert('Product Added', 'you have successfully added a new product');
@@ -79,6 +82,10 @@ const AddProduct = ({navigation}) => {
           <BusinessCategory
             category={productCategory}
             setCategory={setProductCategory}
+            placeholder={''}
+            borderWidth={1}
+            borderRadius={10}
+            height={50}
           />
           {/* <TextInput
             style={styles.input}
@@ -105,7 +112,7 @@ const AddProduct = ({navigation}) => {
         </View>
 
         <View style={styles.button_container}>
-          <CustomButton title={'add'} onPress={submit} />
+          <CustomButton title={'add'} onPress={handleSubmit} />
         </View>
       </View>
     </ScrollView>

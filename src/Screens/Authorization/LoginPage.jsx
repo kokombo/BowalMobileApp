@@ -27,19 +27,17 @@ const LoginPage = () => {
     /*
      If statement to check the format of the inputed email.
     */
-
     if (!email.includes('@') || !email.includes('.com')) {
       setPageError('Please enter a valid email address');
     } else {
-      // Initiate loading state, log users in with firebase method and dispatch login.
-
+      // Initiate loading
       setLoading(true);
       //Sign a user with firebase method
       await auth()
         .signInWithEmailAndPassword(email, password)
         .then(res => {
-          setPassword('');
           // dispatch login after credentials authorization
+          setPassword('');
           dispatch(
             login({
               email: res.user.email,
@@ -48,11 +46,9 @@ const LoginPage = () => {
               uid: res.user.uid,
             }),
           );
-
           /* 
          isAnonymous is used to check if a user has a buyer or a vendor account. If isAnonymous is true, the user is a buyer and if false the user is a vendor.
         */
-
           if (res.user.isAnonymous === true) {
             navigation.navigate('BuyerStack');
           }

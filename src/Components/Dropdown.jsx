@@ -11,7 +11,14 @@ import {Modal} from 'react-native';
 import {useState} from 'react';
 import {cagtegoriesData} from '../../constants/data';
 
-const BusinessCategory = ({category, setCategory}) => {
+const BusinessCategory = ({
+  category,
+  setCategory,
+  placeholder,
+  borderWidth,
+  borderRadius,
+  height,
+}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [labelVisible, setLabelVisible] = useState(false);
 
@@ -39,14 +46,23 @@ const BusinessCategory = ({category, setCategory}) => {
   return (
     <View>
       <View>
-        {labelVisible && (
-          <Text style={styles.label}>Select your business category</Text>
-        )}
+        {labelVisible && <Text style={styles.label}>{placeholder}</Text>}
         <TextInput
-          placeholder={'Select your business category'}
+          placeholder={placeholder}
           onPressIn={onPressIn}
           value={category}
-          style={styles.input}
+          //inline style is required to make some styles prop so that the category inputfield reusable throught the app with unique styles.
+          style={{
+            borderColor: COLORS.gray,
+            borderBottomWidth: 1,
+            fontSize: 18,
+            height: height,
+            color: COLORS.grey,
+            borderTopWidth: borderWidth,
+            borderRightWidth: borderWidth,
+            borderLeftWidth: borderWidth,
+            borderRadius: borderRadius,
+          }}
         />
       </View>
       <Modal
@@ -75,7 +91,6 @@ const BusinessCategory = ({category, setCategory}) => {
 const styles = StyleSheet.create({
   modal_view: {
     flex: 1,
-
     backgroundColor: COLORS.snow,
     paddingVertical: 20,
     borderTopRightRadius: 40,
@@ -96,13 +111,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     top: -20,
-    color: COLORS.grey,
-  },
-  input: {
-    height: 32,
-    borderColor: COLORS.gray,
-    borderBottomWidth: 1,
-    fontSize: 18,
     color: COLORS.grey,
   },
 });

@@ -49,7 +49,7 @@ const AddProductImage = () => {
         </Text>
       </TouchableOpacity>
 
-      <Text style={styles.info}>select up to 3 product images</Text>
+      <Text style={styles.info}>upload up to 3 product images</Text>
 
       <ImagePreview />
       {/* <PreviewImages /> */}

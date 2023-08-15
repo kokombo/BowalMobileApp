@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import {store} from './src/Redux/Store';
 import {fetchProducts} from './src/Redux/Slices/ProductSlice';
 
-store.dispatch(fetchProducts());
+// store.dispatch(fetchProducts());
 
 const App = () => {
   return (
