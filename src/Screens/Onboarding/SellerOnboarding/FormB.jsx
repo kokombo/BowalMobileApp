@@ -8,6 +8,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import database from '@react-native-firebase/database';
 
+//Component that handles vendor's product into after signup.
 const FormB = () => {
   const [category, setCategory] = useState('');
   const [businessName, setBusinessName] = useState('');
@@ -16,16 +17,20 @@ const FormB = () => {
 
   const navigation = useNavigation();
 
+  //canSubmit check if the user has filled every necessary field.
   const canSubmit = Boolean(category && businessName && businessDescription);
 
+  //getting the current user (vendor) from currentUserSlice
   const {user} = useSelector(store => store.currentUser);
 
+  //Saves vendor's business info to firebase database.
   const saveToStorage = async () => {
     await database()
       .ref(`users/vendors/${user.uid}`)
       .update({category, businessName, businessDescription});
   };
 
+  //handles user's business info submission
   const handleSubmit = () => {
     if (canSubmit) {
       setLoading(true);

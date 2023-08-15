@@ -7,12 +7,12 @@ import {Input, Loader, PasswordInput} from '../../../Components';
 import {useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
-import {updateUserProfile} from '../../../utilities';
 import {useDispatch} from 'react-redux';
 
 import database from '@react-native-firebase/database';
 import {login} from '../../../Redux/Slices/currentUserSlice';
 
+//Component for vendor signup first screen.
 const FormA = () => {
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
@@ -21,32 +21,41 @@ const FormA = () => {
   const [loading, setLoading] = useState(false);
   const [pageError, setPageError] = useState(''); //This handles email format error
   const [authError, setAuthError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [passwordError, setPasswordError] = useState(''); //This is used to monitor password format error
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  /*A user (vendor) must provide fullname, email, and password before signup. Button is disabled until the three conditions are met.*/
+  //canSignup checks if a user has inputed signup credentials to enable login button.
   const canSignUp = Boolean(fullname && email && password && phone);
 
+  //Function to sign up a user for a vendor account
   const handleSignUp = async () => {
+    /*
+     If statement to check the format of the inputed email.
+     Followed by an else if statement to inspect the length of the inputed password
+    */
     if (!email.includes('@') || !email.includes('.com')) {
       setPageError('Please enter a valid email address');
     } else if (password.length < 6) {
       setPasswordError('Password should be at least 6 characters');
     } else {
+      // Initiate loading
       setLoading(true);
+      // create a new user vendor account
       await auth()
         .createUserWithEmailAndPassword(email, password)
         .then(res => {
           setPassword('');
+          //update user account to store user's name, phonenumber and specify vendor account (using isAnonymous: false)
           res.user
             .updateProfile({
               displayName: fullname,
               phoneNumber: phone,
-              isAnonymous: true,
+              isAnonymous: false,
             })
             .then(
+              //dispatch user login and save login credentials to user state in currentUserSlice in Redux
               dispatch(
                 login({
                   displayName: fullname,
@@ -57,13 +66,16 @@ const FormA = () => {
                 }),
               ),
             );
+          //store user's info to firebase firestore
           database()
             .ref(`users/vendors/${res.user.uid}`)
             .set({name: fullname, accountType: 'vendor', phoneNumber: phone});
+          //After signup, navigates to formB (a component that handles vendor's business info)
           navigation.navigate('FormB');
           Alert.alert('Welcome!', 'You have successfully created your account');
         })
         .catch(() => {
+          // catch possible signup errors
           if (error.code === 'auth/email-already-in-use') {
             Alert.alert('Error!', 'Email address already in use');
             setAuthError('Email already in use');

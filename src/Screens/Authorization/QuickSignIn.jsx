@@ -1,6 +1,7 @@
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {COLORS, assets} from '../../../constants';
 
+// Component to sign in with Google auth.
 const QuickSignIn = ({heading, cta, link, onPressLink}) => {
   return (
     <View style={styles.container}>

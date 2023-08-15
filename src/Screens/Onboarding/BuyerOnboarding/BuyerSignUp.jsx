@@ -23,28 +23,33 @@ const BuyerSignUp = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  /*A user(seller) must provide fullname, email, and password before signup. Button is disabled until the three conditions are met. */
+  //canSignup checks if a user has inputed signup credentials to enable login button.
   const canSignUp = Boolean(fullname && email && password);
 
-  /*This is the onPress function that handles user signup. If the email address entered does not contain "@" and ".com", an error will pop up. Firebase auth error is used to handle credential validation and network errors.
-  
-  Once a buyer signup with email and password, the inputted fullname would be updated in firebase as displayName. The updateUserProfile function is written in the utilities folder. Also, the saveToStorage function (also in utilities folder) will be called to store the information in firebase database storage. 
-  */
-
+  //Function to sign up a user for a buyer account
   const handleSignUp = async () => {
+    /*
+     If statement to check the format of the inputed email.
+     Followed by an else if statement to inspect the length of the inputed password
+    */
+
     if (!email.includes('@') || !email.includes('.com')) {
       setPageError('Please enter a valid email address');
     } else if (password.length < 6) {
       setPasswordError('Password should be at least 6 characters');
     } else {
+      // Initiate loading
       setLoading(true);
+      //Create a new user buyer account with firebase method
       await auth()
         .createUserWithEmailAndPassword(email, password)
         .then(res => {
           setPassword('');
+          //update user account to store user's name and accountType status. "isAnonymous: true" is used to denote a buyer account.
           res.user
-            .updateProfile({displayName: fullname, isAnonymous: false})
+            .updateProfile({displayName: fullname, isAnonymous: true})
             .then(
+              //dispatch login as a buyer and save credentials to user state in currentUserSlice
               dispatch(
                 login({
                   email: res.user.email,
@@ -55,16 +60,18 @@ const BuyerSignUp = () => {
                 }),
               ),
             );
+          //store user data to firebase firestore
           database()
             .ref(`users/buyers/${res.user.uid}`)
             .set({name: fullname, accountType: 'buyer'});
+          //navigate user to buyer stack
           navigation.navigate('BuyerStack');
           Alert.alert(
             'Account created',
             'you have successfully created your account',
           );
         })
-
+        //handles possible signup error
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
             Alert.alert('Email already in use');

@@ -3,6 +3,7 @@ import {COLORS, assets} from '../../../constants';
 import OnboardingCTA from './Components/OnboardingCTA';
 import OnboardingHeading from './Components/OnboardingHeading';
 
+//Component that displays the account type screen. A new user can navigate to sign up as a buyer or a vendor
 const AccountType = ({navigation}) => {
   return (
     <View style={styles.container}>
