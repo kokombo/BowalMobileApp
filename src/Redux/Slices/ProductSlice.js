@@ -1,10 +1,9 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import firestore from '@react-native-firebase/firestore';
-import {store} from '../Store';
 
 const initialState = {
   productsArray: [],
-  storage: [],
+  singleProduct: {},
   status: 'idle',
   error: null,
 };

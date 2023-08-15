@@ -18,6 +18,7 @@ const BusinessCategory = ({
   borderWidth,
   borderRadius,
   height,
+  padding,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [labelVisible, setLabelVisible] = useState(false);
@@ -62,6 +63,7 @@ const BusinessCategory = ({
             borderRightWidth: borderWidth,
             borderLeftWidth: borderWidth,
             borderRadius: borderRadius,
+            padding: padding,
           }}
         />
       </View>

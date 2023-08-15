@@ -86,6 +86,7 @@ const AddProduct = ({navigation}) => {
             borderWidth={1}
             borderRadius={10}
             height={50}
+            padding={10}
           />
           {/* <TextInput
             style={styles.input}
@@ -133,6 +134,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: COLORS.gray,
     padding: 10,
+    fontSize: 18,
+    color: COLORS.grey,
   },
   label: {
     fontSize: 18,

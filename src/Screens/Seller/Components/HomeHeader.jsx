@@ -2,8 +2,14 @@ import {View, StyleSheet, Text} from 'react-native';
 import {assets, COLORS} from '../../../../constants';
 import {Location, Analytics} from '../../../Components';
 import Greeting from './Greeting';
+import {useSelector} from 'react-redux';
 
 const HomeHeader = () => {
+  const {productsArray} = useSelector(store => store.product);
+
+  //The total number of product in a vendor's store
+  const productsNumber = productsArray.length;
+
   return (
     <View style={styles.body}>
       <View style={styles.welcome}>
@@ -15,7 +21,7 @@ const HomeHeader = () => {
         <Analytics
           title={'Total Products'}
           icon={assets.totalproducts}
-          value={'1234'}
+          value={productsNumber}
         />
         <Analytics
           title={'Total Visitors'}
