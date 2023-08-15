@@ -74,7 +74,7 @@ const FormA = () => {
           navigation.navigate('FormB');
           Alert.alert('Welcome!', 'You have successfully created your account');
         })
-        .catch(() => {
+        .catch(error => {
           // catch possible signup errors
           if (error.code === 'auth/email-already-in-use') {
             Alert.alert('Error!', 'Email address already in use');

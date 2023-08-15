@@ -1,4 +1,4 @@
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {View, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 import {COLORS} from '../../../constants';
 import {HomeHeader} from './Components';
 
@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>
-        <ProductsContainer ListHeaderComponent={<HomeHeader />} />
+        <ProductsContainer ListHeaderComponent={HomeHeader} />
       </View>
     </SafeAreaView>
   );

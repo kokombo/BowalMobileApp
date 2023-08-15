@@ -1,5 +1,5 @@
 import {View, StyleSheet, Text, Alert} from 'react-native';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {COLORS} from '../../../constants';
 import OnboardingHeading from '../Onboarding/Components/OnboardingHeading';
 import {Input, Loader, PasswordInput} from '../../Components';
@@ -9,6 +9,7 @@ import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {login} from '../../Redux/Slices/currentUserSlice';
+import {fetchProducts} from '../../Redux/Slices/ProductSlice';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -18,6 +19,11 @@ const LoginPage = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
+  //useEffect to already fetch product before a vendor logs in.
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
 
   //canLogin checks if a user has inputed login credentials to enable login button.
   const canLogin = Boolean(email && password);

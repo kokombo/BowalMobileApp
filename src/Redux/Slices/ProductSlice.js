@@ -17,7 +17,7 @@ export const fetchProducts = createAsyncThunk(
       const query = await firestore()
         .collection('users')
         .doc(`${uid}`)
-        .collection('products')
+        .collection('products') //orderBy('timeStamp', 'desc')
         .get();
       const data = query.docs.map(doc => ({
         ...doc.data(),

@@ -10,6 +10,7 @@ import {fetchProducts} from '../../Redux/Slices/ProductSlice';
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {COLORS} from '../../../constants';
+import {NoProduct} from './Components';
 
 //Component that holds each vendor's products
 const ProductsContainer = ({ListHeaderComponent}) => {
@@ -27,6 +28,10 @@ const ProductsContainer = ({ListHeaderComponent}) => {
   };
 
   const Content = () => {
+    // if (productsArray.length === 0) {
+    //   return <NoProduct />;
+    // }
+
     if (status === 'loading') {
       return (
         <View style={styles.activity_container}>

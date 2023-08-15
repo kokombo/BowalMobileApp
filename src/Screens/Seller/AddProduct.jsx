@@ -14,6 +14,7 @@ import {addProduct} from '../../Redux/Slices/ProductSlice';
 import {CustomAlert, AddProductImage} from '../../Components';
 import {clearImages} from '../../Redux/Slices/ImageSelectorSlice';
 import {BusinessCategory} from '../../Components';
+import firestore from '@react-native-firebase/firestore';
 
 const AddProduct = ({navigation}) => {
   const [productName, setProductName] = useState('');
@@ -53,6 +54,8 @@ const AddProduct = ({navigation}) => {
           productPrice,
           productDescription,
           productImages,
+          timeStamp: firestore.FieldValue.serverTimestamp(),
+          date: new Date().toDateString(),
         }),
       );
 
