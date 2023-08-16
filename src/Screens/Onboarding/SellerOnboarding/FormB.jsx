@@ -26,7 +26,7 @@ const FormB = () => {
   //Saves vendor's business info to firebase database.
   const saveToStorage = async () => {
     await database()
-      .ref(`users/vendors/${user.uid}`)
+      .ref(`users/${user.uid}`)
       .update({category, businessName, businessDescription});
   };
 

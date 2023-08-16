@@ -3,7 +3,6 @@ import {useSelector} from 'react-redux';
 
 const DisplayName = ({color}) => {
   const {user} = useSelector(store => store.currentUser);
-  console.log(user);
 
   let name;
   if (user) {

@@ -45,24 +45,21 @@ const BuyerSignUp = () => {
         .createUserWithEmailAndPassword(email, password)
         .then(res => {
           setPassword('');
-          //update user account to store user's name and accountType status. "isAnonymous: true" is used to denote a buyer account.
-          res.user
-            .updateProfile({displayName: fullname, isAnonymous: true})
-            .then(
-              //dispatch login as a buyer and save credentials to user state in currentUserSlice
-              dispatch(
-                login({
-                  email: res.user.email,
-                  displayName: fullname,
-                  uid: res.user.uid,
-                  isAnonymous: true,
-                  accountType: 'buyer',
-                }),
-              ),
-            );
+          //update user account to store user's name.
+          res.user.updateProfile({displayName: fullname}).then(
+            //dispatch login as a buyer and save credentials to user state in currentUserSlice
+            dispatch(
+              login({
+                email: res.user.email,
+                displayName: fullname,
+                uid: res.user.uid,
+                accountType: 'buyer',
+              }),
+            ),
+          );
           //store user data to firebase firestore
           database()
-            .ref(`users/buyers/${res.user.uid}`)
+            .ref(`users/${res.user.uid}`)
             .set({name: fullname, accountType: 'buyer'});
           //navigate user to buyer stack
           navigation.navigate('BuyerStack');

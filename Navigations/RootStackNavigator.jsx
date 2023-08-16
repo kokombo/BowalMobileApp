@@ -88,9 +88,8 @@ const RootStackNavigator = () => {
         name="Signin"
         component={LoginPage}
         options={{
-          headerLeft: () => {
-            return <GoBack />;
-          },
+          gestureEnabled: false,
+          headerLeftContainerStyle: {display: 'none'},
           headerStyle: {backgroundColor: COLORS.blue},
           title: '',
         }}

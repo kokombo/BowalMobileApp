@@ -21,9 +21,6 @@ const OnboardingStack = () => {
         name="FormA"
         component={FormA}
         options={{
-          headerLeft: () => {
-            return <GoBack />;
-          },
           headerStyle: {backgroundColor: COLORS.blue},
           title: '',
         }}
@@ -34,17 +31,20 @@ const OnboardingStack = () => {
         options={{
           headerStyle: {backgroundColor: COLORS.blue},
           title: '',
+          headerBackTitleVisible: false,
+          gestureEnabled: false,
+          headerLeftContainerStyle: {display: 'none'},
         }}
       />
       <Stack.Screen
         name="Verify"
         component={Verify}
         options={{
-          headerLeft: () => {
-            return <GoBack />;
-          },
           headerStyle: {backgroundColor: COLORS.blue},
           title: '',
+          headerBackTitleVisible: false,
+          gestureEnabled: false,
+          headerLeftContainerStyle: {display: 'none'},
         }}
       />
       <Stack.Screen

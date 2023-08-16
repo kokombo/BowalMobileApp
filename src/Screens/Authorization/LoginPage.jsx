@@ -9,6 +9,7 @@ import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {login} from '../../Redux/Slices/currentUserSlice';
+import database from '@react-native-firebase/database';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -36,26 +37,31 @@ const LoginPage = () => {
       await auth()
         .signInWithEmailAndPassword(email, password)
         .then(res => {
-          // empty password input in login page
-          setPassword('');
           // dispatch login after credentials authorization
           dispatch(
             login({
               email: res.user.email,
               displayName: res.user.displayName,
-              isAnonymous: res.user.isAnonymous,
               uid: res.user.uid,
             }),
           );
-          /* 
-         isAnonymous is used to check if a user has a buyer or a vendor account. If isAnonymous is true, the user is a buyer and if false the user is a vendor.
-        */
-          if (res.user.isAnonymous === true) {
-            navigation.navigate('BuyerStack');
-          }
-          if (res.user.isAnonymous === false) {
-            navigation.navigate('VendorStack');
-          }
+
+          //referencing databse storage to pullout a user's account type while logging in. This is necessary to navigate to the appropriate screen.
+
+          const ref = database().ref(`users/${res.user.uid}`);
+          ref.on('value', snapshot => {
+            const accountType = snapshot.child('accountType').val();
+
+            if (accountType === 'buyer') {
+              navigation.navigate('BuyerStack');
+            }
+            if (accountType === 'vendor') {
+              navigation.navigate('VendorStack');
+            }
+          });
+
+          // empty password input in login page
+          setPassword('');
         })
         .catch(error => {
           /*

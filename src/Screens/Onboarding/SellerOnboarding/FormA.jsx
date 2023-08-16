@@ -52,7 +52,6 @@ const FormA = () => {
             .updateProfile({
               displayName: fullname,
               phoneNumber: phone,
-              isAnonymous: false,
             })
             .then(
               //dispatch user login and save login credentials to user state in currentUserSlice in Redux
@@ -61,14 +60,13 @@ const FormA = () => {
                   displayName: fullname,
                   email: res.user.email,
                   uid: res.user.uid,
-                  isAnonymous: false,
                   accountType: 'vendor',
                 }),
               ),
             );
           //store user's info to firebase firestore
           database()
-            .ref(`users/vendors/${res.user.uid}`)
+            .ref(`users/${res.user.uid}`)
             .set({name: fullname, accountType: 'vendor', phoneNumber: phone});
           //After signup, navigates to formB (a component that handles vendor's business info)
           navigation.navigate('FormB');
