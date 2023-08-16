@@ -1,10 +1,17 @@
-import {TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet, Image, View} from 'react-native';
 import {COLORS} from '../../../../constants';
+import {useNavigation} from '@react-navigation/native';
 
 const CategoryCard = ({item}) => {
+  const navigation = useNavigation();
+
+  const onPress = () => {
+    navigation.navigate('Vendors');
+  };
+
   return (
-    <TouchableOpacity style={styles.card_container}>
-      <TouchableOpacity
+    <TouchableOpacity style={styles.card_container} onPress={onPress}>
+      <View
         style={{
           height: 97,
           width: 97,
@@ -14,7 +21,7 @@ const CategoryCard = ({item}) => {
           backgroundColor: `${item.backgroundColor}`,
         }}>
         <Image source={item.image} style={styles.image} resizeMode="contain" />
-      </TouchableOpacity>
+      </View>
       <Text style={styles.text}>{item.name} </Text>
     </TouchableOpacity>
   );

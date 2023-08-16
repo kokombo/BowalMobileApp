@@ -7,6 +7,7 @@ import {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import database from '@react-native-firebase/database';
+import firestore from '@react-native-firebase/firestore';
 
 //Component that handles vendor's product into after signup.
 const FormB = () => {
@@ -25,9 +26,15 @@ const FormB = () => {
 
   //Saves vendor's business info to firebase database.
   const saveToStorage = async () => {
+    //Saves user info to realtime database
     await database()
       .ref(`users/${user.uid}`)
       .update({category, businessName, businessDescription});
+    //Saves user info to firestore database
+    await firestore()
+      .collection('users')
+      .doc(`${user.uid}`)
+      .set({category, businessName, businessDescription});
   };
 
   //handles user's business info submission

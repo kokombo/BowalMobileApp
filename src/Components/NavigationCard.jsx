@@ -1,4 +1,11 @@
-import {Image, TouchableOpacity, View, StyleSheet, Text} from 'react-native';
+import {
+  Image,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  Text,
+  Alert,
+} from 'react-native';
 import {COLORS, assets} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
@@ -14,11 +21,19 @@ const NavigationCard = ({data}) => {
   // Getting the current logged in user from user state in redux
   const {user} = useSelector(store => store.currentUser);
 
-  //Function handling signout
+  //Function handling signout // This is temporary here for development
   const logOut = async () => {
-    await auth().signOut();
-    dispatch(signout());
-    navigation.navigate('Signin');
+    await auth()
+      .signOut()
+      .then(() => {
+        dispatch(signout());
+        navigation.navigate('Signin');
+      })
+      .catch(error => {
+        if (error === 'auth/no-current-user') {
+          Alert.alert('No current user');
+        }
+      });
   };
 
   //useEffect checking if a user is null to call the logout function

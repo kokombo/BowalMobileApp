@@ -2,10 +2,26 @@ import {View, StyleSheet, FlatList} from 'react-native';
 import {cagtegoriesData} from '../../../constants/data';
 import {COLORS} from '../../../constants';
 import {CategoryCard} from './Components';
+import {getAllVendors} from '../../Redux/Slices/getVendorSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {useEffect} from 'react';
+
 const Categories = () => {
+  const dispatch = useDispatch();
+
+  const {status, vendors} = useSelector(store => store.vendors);
+  console.log(vendors);
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(getAllVendors());
+    }
+  }, []);
+
   const renderItem = ({item}) => {
     return <CategoryCard item={item} />;
   };
+
   return (
     <View style={styles.body}>
       <FlatList

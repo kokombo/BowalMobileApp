@@ -23,6 +23,9 @@ const OnboardingStack = () => {
         options={{
           headerStyle: {backgroundColor: COLORS.blue},
           title: '',
+          headerLeft: () => {
+            return <GoBack />;
+          },
         }}
       />
       <Stack.Screen

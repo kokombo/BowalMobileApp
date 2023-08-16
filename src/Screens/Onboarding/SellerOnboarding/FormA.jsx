@@ -8,7 +8,6 @@ import {useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
-
 import database from '@react-native-firebase/database';
 import {login} from '../../../Redux/Slices/currentUserSlice';
 
@@ -64,6 +63,7 @@ const FormA = () => {
                 }),
               ),
             );
+
           //store user's info to firebase firestore
           database()
             .ref(`users/${res.user.uid}`)
