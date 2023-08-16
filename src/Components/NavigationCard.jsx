@@ -2,12 +2,14 @@ import {Image, TouchableOpacity, View, StyleSheet, Text} from 'react-native';
 import {COLORS, assets} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {useEffect} from 'react';
+import {signout} from '../Redux/Slices/currentUserSlice';
 
 //Component that renders as the child of the flatlist on the Vendor "Account" tab
 const NavigationCard = ({data}) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   // Getting the current logged in user from user state in redux
   const {user} = useSelector(store => store.currentUser);
@@ -15,6 +17,7 @@ const NavigationCard = ({data}) => {
   //Function handling signout
   const logOut = async () => {
     await auth().signOut();
+    dispatch(signout());
     navigation.navigate('Signin');
   };
 

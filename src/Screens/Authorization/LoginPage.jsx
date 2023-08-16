@@ -1,5 +1,5 @@
 import {View, StyleSheet, Text, Alert} from 'react-native';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {COLORS} from '../../../constants';
 import OnboardingHeading from '../Onboarding/Components/OnboardingHeading';
 import {Input, Loader, PasswordInput} from '../../Components';
@@ -9,21 +9,15 @@ import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {login} from '../../Redux/Slices/currentUserSlice';
-import {fetchProducts} from '../../Redux/Slices/ProductSlice';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [pageError, setPageError] = useState(''); //This is used to monitor email format error
+  const [pageError, setPageError] = useState(''); //Monitors email format error
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
-
-  //useEffect to already fetch product before a vendor logs in.
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
 
   //canLogin checks if a user has inputed login credentials to enable login button.
   const canLogin = Boolean(email && password);
@@ -42,8 +36,9 @@ const LoginPage = () => {
       await auth()
         .signInWithEmailAndPassword(email, password)
         .then(res => {
-          // dispatch login after credentials authorization
+          // empty password input in login page
           setPassword('');
+          // dispatch login after credentials authorization
           dispatch(
             login({
               email: res.user.email,

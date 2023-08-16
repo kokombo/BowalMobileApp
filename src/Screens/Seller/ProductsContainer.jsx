@@ -16,12 +16,13 @@ import {NoProduct} from './Components';
 const ProductsContainer = ({ListHeaderComponent}) => {
   const dispatch = useDispatch();
   const {status, productsArray} = useSelector(store => store.product);
+  const {user} = useSelector(store => store.currentUser);
 
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchProducts());
     }
-  }, [dispatch, status]);
+  }, [status, user]);
 
   const renderItem = ({item}) => {
     return <ProductCard data={item} />;

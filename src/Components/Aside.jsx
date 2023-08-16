@@ -13,16 +13,19 @@ import {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import DisplayName from './DisplayName';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {signout} from '../Redux/Slices/currentUserSlice';
 
 const Aside = () => {
   const [aside] = useState(sidebarData);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const {user} = useSelector(store => store.currentUser);
 
   const logOut = async () => {
     await auth().signOut();
+    dispatch(signout());
     navigation.navigate('Signin');
   };
 
