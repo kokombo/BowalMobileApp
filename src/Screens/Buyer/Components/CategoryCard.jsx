@@ -2,11 +2,16 @@ import {TouchableOpacity, Text, StyleSheet, Image, View} from 'react-native';
 import {COLORS} from '../../../../constants';
 import {useNavigation} from '@react-navigation/native';
 
-const CategoryCard = ({item}) => {
+const CategoryCard = ({item, vendors}) => {
   const navigation = useNavigation();
 
+  //Filtering through vendors to display vendors with matching business category.
+  const filteredVendors = vendors?.filter(
+    vendor => vendor.category === item.name,
+  );
+
   const onPress = () => {
-    navigation.navigate('Vendors');
+    navigation.navigate('Vendors', {filteredVendors});
   };
 
   return (

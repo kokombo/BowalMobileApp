@@ -4,6 +4,7 @@ import DrawerNavigator from './DrawerNavigator';
 import {useNavigation} from '@react-navigation/native';
 import {SavedBusinesses, VendorsList} from '../src/Screens/Buyer';
 import {assets} from '../constants';
+import {cagtegoriesData} from '../constants/data';
 
 const Stack = createStackNavigator();
 
@@ -39,8 +40,8 @@ const BuyerStack = () => {
       <Stack.Screen
         name="Vendors"
         component={VendorsList}
-        options={{
-          title: 'Vendors',
+        options={({route}) => ({
+          title: route.params.name,
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {
@@ -52,7 +53,7 @@ const BuyerStack = () => {
               />
             </TouchableOpacity>
           ),
-        }}
+        })}
       />
     </Stack.Navigator>
   );

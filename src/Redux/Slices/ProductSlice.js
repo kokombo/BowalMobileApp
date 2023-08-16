@@ -3,7 +3,6 @@ import firestore from '@react-native-firebase/firestore';
 
 const initialState = {
   productsArray: [],
-  singleProduct: {},
   status: 'idle',
   error: null,
 };

@@ -4,6 +4,7 @@ import {launchImageLibrary} from 'react-native-image-picker';
 
 const initialState = {
   selectedImages: [],
+  error: null,
 };
 
 export const selectImage = createAsyncThunk(
@@ -36,9 +37,13 @@ const imageSelectorSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(selectImage.fulfilled, (state, action) => {
-      state.selectedImages.push(action.payload);
-    });
+    builder
+      .addCase(selectImage.fulfilled, (state, action) => {
+        state.selectedImages.push(action.payload);
+      })
+      .addCase(selectImage.rejected, (state, action) => {
+        state.error = action.error.message;
+      });
   },
 });
 export const {clearImages} = imageSelectorSlice.actions;

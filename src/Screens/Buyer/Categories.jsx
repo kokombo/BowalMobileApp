@@ -10,16 +10,15 @@ const Categories = () => {
   const dispatch = useDispatch();
 
   const {status, vendors} = useSelector(store => store.vendors);
-  console.log(vendors);
 
   useEffect(() => {
     if (status === 'idle') {
       dispatch(getAllVendors());
     }
-  }, []);
+  }, [status]);
 
   const renderItem = ({item}) => {
-    return <CategoryCard item={item} />;
+    return <CategoryCard item={item} vendors={vendors} />;
   };
 
   return (
