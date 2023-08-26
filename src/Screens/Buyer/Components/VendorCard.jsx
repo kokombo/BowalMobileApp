@@ -1,8 +1,12 @@
 import {View, Text, Pressable, StyleSheet, Image} from 'react-native';
 import {COLORS, FONT, assets} from '../../../../constants';
+import {useNavigation} from '@react-navigation/native';
 
 const VendorCard = ({vendor}) => {
-  const onPress = () => {};
+  const navigation = useNavigation();
+  const onPress = () => {
+    navigation.navigate('VendorShopHome', {vendor});
+  };
 
   return (
     <Pressable

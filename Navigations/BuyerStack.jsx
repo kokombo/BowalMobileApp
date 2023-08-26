@@ -4,6 +4,7 @@ import DrawerNavigator from './DrawerNavigator';
 import {useNavigation} from '@react-navigation/native';
 import {SavedBusinesses, VendorsList} from '../src/Screens/Buyer';
 import {assets} from '../constants';
+import {Home} from '../src/Screens/Buyer/VendorShop';
 
 const Stack = createStackNavigator();
 
@@ -56,6 +57,16 @@ const BuyerStack = () => {
             </TouchableOpacity>
           ),
         })}
+      />
+
+      <Stack.Screen
+        name="VendorShopHome"
+        component={Home}
+        options={{
+          headerShadowVisible: false,
+          title: '',
+          headerBackTitleVisible: false,
+        }}
       />
     </Stack.Navigator>
   );
