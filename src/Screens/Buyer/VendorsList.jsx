@@ -5,9 +5,6 @@ import {RefreshController} from '../../Components';
 
 const VendorsList = ({route}) => {
   const {filteredVendors} = route.params;
-  console.log(
-    route.params.filteredVendors.slice(0, 1).map(item => item.category),
-  );
 
   const category = filteredVendors?.map(item => item.category);
 

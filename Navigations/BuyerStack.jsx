@@ -41,7 +41,7 @@ const BuyerStack = () => {
         component={VendorsList}
         options={({route}) => ({
           title: route.params.filteredVendors
-            .slice(0, 1)
+            ?.slice(0, 1)
             .map(item => item.category),
           headerShadowVisible: false,
           headerLeft: () => (

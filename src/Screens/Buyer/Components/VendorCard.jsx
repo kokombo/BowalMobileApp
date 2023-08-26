@@ -2,8 +2,12 @@ import {View, Text, Pressable, StyleSheet, Image} from 'react-native';
 import {COLORS, FONT, assets} from '../../../../constants';
 
 const VendorCard = ({vendor}) => {
+  const onPress = () => {};
+
   return (
-    <Pressable style={[styles.card_container, styles.shadowProp]}>
+    <Pressable
+      style={[styles.card_container, styles.shadowProp]}
+      onPress={onPress}>
       <View style={styles.image_wrapper}>
         <Image source={assets.seller} resizeMode="cover" style={styles.image} />
       </View>

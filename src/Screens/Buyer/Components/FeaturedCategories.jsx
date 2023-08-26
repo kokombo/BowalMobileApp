@@ -3,12 +3,15 @@ import {COLORS} from '../../../../constants';
 import {useNavigation} from '@react-navigation/native';
 import {cagtegoriesData} from '../../../../constants/data';
 import CategoryCard from './CategoryCard';
+import {useSelector} from 'react-redux';
 
 const FeaturedCategories = () => {
+  const {vendors} = useSelector(store => store.vendors);
+
   const navigation = useNavigation();
 
   const renderItem = ({item}) => {
-    return <CategoryCard item={item} />;
+    return <CategoryCard item={item} vendors={vendors} />;
   };
   return (
     <View>

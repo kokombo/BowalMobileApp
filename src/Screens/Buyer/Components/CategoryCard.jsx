@@ -10,6 +10,7 @@ const CategoryCard = ({item, vendors}) => {
     vendor => vendor.category === item.name,
   );
 
+  //category card onpress function to navigate to the vendor list page while passing the filtered vendors down to the route.
   const onPress = () => {
     navigation.navigate('Vendors', {filteredVendors});
   };
