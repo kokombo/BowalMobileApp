@@ -3,6 +3,7 @@ import {useCallback, useState} from 'react';
 import {fetchProducts} from '../Redux/Slices/ProductSlice';
 import {useDispatch} from 'react-redux';
 import {COLORS} from '../../constants';
+import {getAllVendors} from '../Redux/Slices/getVendorSlice';
 
 export const RefreshController = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -11,6 +12,7 @@ export const RefreshController = () => {
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     dispatch(fetchProducts());
+    dispatch(getAllVendors());
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);

@@ -47,11 +47,9 @@ const LoginPage = () => {
           );
 
           //referencing databse storage to pullout a user's account type while logging in. This is necessary to navigate to the appropriate screen.
-
           const ref = database().ref(`users/${res.user.uid}`);
           ref.on('value', snapshot => {
             const accountType = snapshot.child('accountType').val();
-
             if (accountType === 'buyer') {
               navigation.navigate('BuyerStack');
             }
@@ -59,9 +57,6 @@ const LoginPage = () => {
               navigation.navigate('VendorStack');
             }
           });
-
-          // empty password input in login page
-          setPassword('');
         })
         .catch(error => {
           /*
@@ -91,6 +86,8 @@ const LoginPage = () => {
           }
         })
         .finally(() => {
+          // empty password input in login page
+          // setPassword('');
           setLoading(false);
         });
     }

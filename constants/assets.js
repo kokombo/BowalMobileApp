@@ -78,6 +78,7 @@ import gaming from '../assets/images/gaming.png';
 import baggage from '../assets/images/baggage.png';
 import baking from '../assets/images/baking.png';
 import decor from '../assets/images/decor.png';
+import star from '../assets/icons/star.png';
 
 export default {
   bell,
@@ -161,4 +162,5 @@ export default {
   baggage,
   baking,
   decor,
+  star,
 };

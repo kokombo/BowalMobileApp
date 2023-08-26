@@ -4,7 +4,6 @@ import DrawerNavigator from './DrawerNavigator';
 import {useNavigation} from '@react-navigation/native';
 import {SavedBusinesses, VendorsList} from '../src/Screens/Buyer';
 import {assets} from '../constants';
-import {cagtegoriesData} from '../constants/data';
 
 const Stack = createStackNavigator();
 
@@ -41,7 +40,10 @@ const BuyerStack = () => {
         name="Vendors"
         component={VendorsList}
         options={({route}) => ({
-          title: route.params.name,
+          title: route.params.filteredVendors
+            .slice(0, 1)
+            .map(item => item.category),
+          headerShadowVisible: false,
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {

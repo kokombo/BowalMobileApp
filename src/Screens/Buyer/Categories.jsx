@@ -5,6 +5,7 @@ import {CategoryCard} from './Components';
 import {getAllVendors} from '../../Redux/Slices/getVendorSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect} from 'react';
+import {RefreshController} from '../../Components';
 
 const Categories = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const Categories = () => {
           // paddingVertical: 15,
         }}
         contentContainerStyle={{gap: 10, paddingTop: 15}}
+        refreshControl={<RefreshController />}
       />
     </View>
   );

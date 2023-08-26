@@ -9,4 +9,12 @@ export const COLORS = {
   cloud: '#F4F4F4',
   chalk: '#F0F0F0',
   lightyellow: '#FEFBF4',
+  dirty: '#888888',
+};
+
+export const FONT = {
+  lg: 18,
+  base: 16,
+  xl: 20,
+  small: 12,
 };
