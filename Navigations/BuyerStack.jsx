@@ -1,16 +1,13 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import {TouchableOpacity, Image} from 'react-native';
 import DrawerNavigator from './DrawerNavigator';
-import {useNavigation} from '@react-navigation/native';
 import {SavedBusinesses, VendorsList} from '../src/Screens/Buyer';
-import {assets} from '../constants';
+import {COLORS, assets} from '../constants';
 import {Home} from '../src/Screens/Buyer/VendorShop';
 
 const Stack = createStackNavigator();
 
 const BuyerStack = () => {
-  const navigation = useNavigation();
-
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -23,16 +20,12 @@ const BuyerStack = () => {
         component={SavedBusinesses}
         options={{
           title: 'Saved Businesses',
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('BuyerHome');
-              }}>
-              <Image
-                source={assets.arrowbackblue}
-                style={{width: 20, height: 17, marginLeft: 10}}
-              />
-            </TouchableOpacity>
+          headerBackTitleVisible: false,
+          headerBackImage: () => (
+            <Image
+              source={assets.arrowbackblue}
+              style={{width: 20, height: 17, marginLeft: 10}}
+            />
           ),
         }}
       />
@@ -45,16 +38,12 @@ const BuyerStack = () => {
             ?.slice(0, 1)
             .map(item => item.category),
           headerShadowVisible: false,
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('BuyerHome');
-              }}>
-              <Image
-                source={assets.arrowbackblue}
-                style={{width: 20, height: 17, marginLeft: 10}}
-              />
-            </TouchableOpacity>
+          headerBackTitleVisible: false,
+          headerBackImage: () => (
+            <Image
+              source={assets.arrowbackblue}
+              style={{width: 20, height: 17, marginLeft: 10}}
+            />
           ),
         })}
       />
@@ -66,6 +55,13 @@ const BuyerStack = () => {
           headerShadowVisible: false,
           title: '',
           headerBackTitleVisible: false,
+          headerStyle: {backgroundColor: COLORS.blue},
+          headerBackImage: () => (
+            <Image
+              source={assets.arrowback}
+              style={{width: 20, height: 17, marginLeft: 10}}
+            />
+          ),
         }}
       />
     </Stack.Navigator>

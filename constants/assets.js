@@ -79,6 +79,7 @@ import baggage from '../assets/images/baggage.png';
 import baking from '../assets/images/baking.png';
 import decor from '../assets/images/decor.png';
 import star from '../assets/icons/star.png';
+import dummyshop from '../assets/images/dummyshop.png';
 
 export default {
   bell,
@@ -163,4 +164,5 @@ export default {
   baking,
   decor,
   star,
+  dummyshop,
 };

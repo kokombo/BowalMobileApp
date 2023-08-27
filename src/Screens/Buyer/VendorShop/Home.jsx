@@ -1,8 +1,45 @@
-import {View} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
+import {Rating, VendorInfo} from '../Components';
+import {COLORS, assets} from '../../../../constants';
 
 //Component that renders vendor's shop home view. This is what a buyer will see once they click on a vendor card.
 const Home = () => {
-  return <View></View>;
+  return (
+    <View style={styles.body}>
+      <View style={styles.shop_image_container}>
+        <Image
+          source={assets.dummyshop}
+          resizeMode="cover"
+          style={styles.shop_image}
+        />
+      </View>
+      <View style={styles.vendorinfo_container}>
+        <VendorInfo />
+        <Rating />
+      </View>
+    </View>
+  );
 };
+
+const styles = StyleSheet.create({
+  body: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+  },
+  vendorinfo_container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 15,
+  },
+  shop_image_container: {
+    height: 300,
+    width: '100%',
+  },
+  shop_image: {
+    height: '100%',
+    width: '100%',
+  },
+});
 
 export default Home;

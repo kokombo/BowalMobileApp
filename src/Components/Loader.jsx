@@ -6,7 +6,7 @@ const Loader = () => {
     <Modal transparent={true} animationType="none">
       <View style={styles.container}>
         <View style={styles.card}>
-          <ActivityIndicator size={'large'} color={COLORS.white} />
+          <ActivityIndicator size={'large'} color={COLORS.blue} />
         </View>
       </View>
     </Modal>
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     borderRadius: 10,
-    backgroundColor: COLORS.blue,
+    backgroundColor: COLORS.white,
     alignItems: 'center',
     justifyContent: 'center',
   },
