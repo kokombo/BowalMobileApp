@@ -5,21 +5,52 @@ initialState = {
   status: 'idle',
   vendors: [],
   error: null,
+  products: [],
 };
 
 export const getAllVendors = createAsyncThunk(
   'vendors/getAllVendors',
   async () => {
-    const query = await firestore().collection('users').get();
-    const data = query.docs.map(doc => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    return data;
+    try {
+      const query = await firestore().collection('users').get();
+
+      const data = query.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  },
+);
+// .doc('users/0HrfINe79rfry8fUbc3YtqynXEf2')
+
+export const getVendorProducts = createAsyncThunk(
+  'vendors/getVendorProducts',
+  async id => {
+    try {
+      const query = await firestore()
+        .collection('users')
+        .doc(`${id}`)
+        .collection('products')
+        .get();
+
+      const data = query.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+
+      return data;
+    } catch (error) {
+      return error.message;
+    }
   },
 );
 
-const getVendorSlice = createSlice({
+// const collectionRef = firebase.firestore().doc('users/alovelace').collection('orders');
+
+export const getVendorSlice = createSlice({
   name: 'vendors',
   initialState,
   reducers: {},
@@ -34,6 +65,17 @@ const getVendorSlice = createSlice({
       })
       .addCase(getAllVendors.rejected, (state, action) => {
         state.status = 'falied';
+        state.error = action.error.message;
+      })
+      .addCase(getVendorProducts.pending, (state, action) => {
+        state.status = 'loading';
+      })
+      .addCase(getVendorProducts.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.products = action.payload;
+      })
+      .addCase(getVendorProducts.rejected, (state, action) => {
+        state.status = 'failed';
         state.error = action.error.message;
       });
   },

@@ -2,7 +2,7 @@ import {View, Text, Image, StyleSheet} from 'react-native';
 import VendorLocation from './VendorLocation';
 import {FONT, assets} from '../../../../constants';
 
-const VendorInfo = () => {
+const VendorInfo = ({vendor}) => {
   return (
     <View style={styles.container}>
       <View style={styles.profile_image_container}>
@@ -10,7 +10,7 @@ const VendorInfo = () => {
       </View>
 
       <View style={styles.location_container}>
-        <Text style={styles.vendor_name}>Samuel Sam</Text>
+        <Text style={styles.vendor_name}>{vendor.businessName}</Text>
         <VendorLocation />
       </View>
     </View>
