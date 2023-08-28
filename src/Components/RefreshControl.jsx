@@ -13,6 +13,7 @@ export const RefreshController = () => {
     setRefreshing(true);
     dispatch(fetchProducts());
     dispatch(getAllVendors());
+
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);

@@ -1,15 +1,77 @@
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {Shop, Info, Reviews} from '../src/Screens/Buyer/VendorShop';
+import {Info, Reviews, Home, Shop} from '../src/Screens/Buyer/VendorShop';
+import {ScrollView, View, RefreshControl} from 'react-native';
+import {COLORS} from '../constants';
+import {getVendorProducts} from '../src/Redux/Slices/getVendorSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {useEffect, useState, useCallback} from 'react';
 
 const Tab = createMaterialTopTabNavigator();
 
-const ShopTopTab = () => {
+const ShopTopTab = ({route}) => {
+  const [refreshing, setRefreshing] = useState(false);
+  const {vendor} = route.params;
+  const dispatch = useDispatch();
+
+  const {status, products} = useSelector(store => store.vendors);
+  const id = vendor?.id;
+
+  //useEffect that dispatches fetching the product of each vendor.
+  useEffect(() => {
+    dispatch(getVendorProducts(id));
+  }, []);
+
+  //Onrefresh to reload vendor shop page in case of a slow internet connectivity or any other network error.
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    dispatch(getVendorProducts(id));
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
+
   return (
-    <Tab.Navigator screenOptions={{}}>
-      <Tab.Screen name="Shop" component={Shop} />
-      <Tab.Screen name="Info" component={Info} />
-      <Tab.Screen name="Reviews" component={Reviews} />
-    </Tab.Navigator>
+    <ScrollView
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          tintColor={COLORS.blue}
+        />
+      }
+      showsVerticalScrollIndicator={false}
+      style={{flex: 1, backgroundColor: COLORS.white}}>
+      <View style={{height: 375}}>
+        <Home vendor={vendor} />
+      </View>
+      <View style={{flex: 1, minHeight: 500}}>
+        <Tab.Navigator
+          screenOptions={{
+            tabBarIndicatorStyle: {
+              backgroundColor: COLORS.blue,
+              height: 5,
+              width: 115,
+              marginLeft: 15,
+            },
+            tabBarIndicatorContainerStyle: {
+              borderBottomWidth: 1,
+              borderBottomColor: COLORS.gray,
+            },
+            tabBarActiveTintColor: COLORS.blue,
+            tabBarInactiveTintColor: COLORS.gray,
+          }}>
+          <Tab.Screen name="Shop">
+            {props => <Shop {...props} products={products} />}
+          </Tab.Screen>
+          <Tab.Screen name="Info">
+            {props => <Info {...props} vendor={vendor} />}
+          </Tab.Screen>
+          <Tab.Screen name="Reviews">
+            {props => <Reviews {...props} vendor={vendor} />}
+          </Tab.Screen>
+        </Tab.Navigator>
+      </View>
+    </ScrollView>
   );
 };
 

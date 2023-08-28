@@ -1,11 +1,10 @@
 import {View, Text, Pressable, StyleSheet, Image} from 'react-native';
 import {COLORS, FONT, assets} from '../../../../constants';
 import {useNavigation} from '@react-navigation/native';
-import {useSelector, useDispatch} from 'react-redux';
-import {useEffect} from 'react';
 
 const VendorCard = ({vendor}) => {
   const navigation = useNavigation();
+
   // console.log(vendor);
 
   const onPress = () => {

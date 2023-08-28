@@ -10,7 +10,7 @@ const VendorInfo = ({vendor}) => {
       </View>
 
       <View style={styles.location_container}>
-        <Text style={styles.vendor_name}>{vendor.businessName}</Text>
+        <Text style={styles.vendor_name}>{vendor?.businessName}</Text>
         <VendorLocation />
       </View>
     </View>
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     gap: 4,
     alignItems: 'flex-start',
+    maxWidth: 230,
   },
   vendor_name: {
     fontSize: FONT.xl,

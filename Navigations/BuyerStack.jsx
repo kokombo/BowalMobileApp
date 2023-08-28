@@ -1,9 +1,10 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import {TouchableOpacity, Image} from 'react-native';
+import {Image} from 'react-native';
 import DrawerNavigator from './DrawerNavigator';
 import {SavedBusinesses, VendorsList} from '../src/Screens/Buyer';
 import {COLORS, assets} from '../constants';
 import {Home} from '../src/Screens/Buyer/VendorShop';
+import ShopTopTab from './ShopTopTab';
 
 const Stack = createStackNavigator();
 
@@ -50,7 +51,7 @@ const BuyerStack = () => {
 
       <Stack.Screen
         name="VendorShopHome"
-        component={Home}
+        component={ShopTopTab}
         options={{
           headerShadowVisible: false,
           title: '',

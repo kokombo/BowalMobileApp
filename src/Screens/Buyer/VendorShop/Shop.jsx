@@ -1,10 +1,27 @@
-import {View, Text} from 'react-native';
+import React from 'react';
+import {View, Text, FlatList, StyleSheet} from 'react-native';
+import {ProductCard} from '../../../Components';
+import {COLORS} from '../../../../constants';
 
-const Shop = () => {
+const Shop = ({products}) => {
   return (
-    <View>
-      <Text>Info</Text>
+    <View style={styles.body}>
+      {products.map(product => {
+        return <ProductCard key={product.id} data={product} />;
+      })}
     </View>
   );
 };
-export default Shop;
+
+const styles = StyleSheet.create({
+  body: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+    padding: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  },
+});
+export default React.memo(Shop);
