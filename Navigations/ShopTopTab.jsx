@@ -16,10 +16,10 @@ const ShopTopTab = ({route}) => {
   const {status, products} = useSelector(store => store.vendors);
   const id = vendor?.id;
 
-  //useEffect that dispatches fetching the product of each vendor.
-  useEffect(() => {
-    dispatch(getVendorProducts(id));
-  }, []);
+  //   //useEffect that dispatches fetching the product of each vendor.
+  //   useEffect(() => {
+  //     dispatch(getVendorProducts(id));
+  //   }, []);
 
   //Onrefresh to reload vendor shop page in case of a slow internet connectivity or any other network error.
   const onRefresh = useCallback(() => {
@@ -61,7 +61,7 @@ const ShopTopTab = ({route}) => {
             tabBarInactiveTintColor: COLORS.gray,
           }}>
           <Tab.Screen name="Shop">
-            {props => <Shop {...props} products={products} />}
+            {props => <Shop {...props} vendor={vendor} />}
           </Tab.Screen>
           <Tab.Screen name="Info">
             {props => <Info {...props} vendor={vendor} />}
