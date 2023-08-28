@@ -3,8 +3,8 @@ import {Info, Reviews, Home, Shop} from '../src/Screens/Buyer/VendorShop';
 import {ScrollView, View, RefreshControl} from 'react-native';
 import {COLORS} from '../constants';
 import {getVendorProducts} from '../src/Redux/Slices/getVendorSlice';
-import {useDispatch, useSelector} from 'react-redux';
-import {useEffect, useState, useCallback} from 'react';
+import {useDispatch} from 'react-redux';
+import {useState, useCallback} from 'react';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -13,13 +13,7 @@ const ShopTopTab = ({route}) => {
   const {vendor} = route.params;
   const dispatch = useDispatch();
 
-  const {status, products} = useSelector(store => store.vendors);
   const id = vendor?.id;
-
-  //   //useEffect that dispatches fetching the product of each vendor.
-  //   useEffect(() => {
-  //     dispatch(getVendorProducts(id));
-  //   }, []);
 
   //Onrefresh to reload vendor shop page in case of a slow internet connectivity or any other network error.
   const onRefresh = useCallback(() => {
@@ -41,7 +35,7 @@ const ShopTopTab = ({route}) => {
       }
       showsVerticalScrollIndicator={false}
       style={{flex: 1, backgroundColor: COLORS.white}}>
-      <View style={{height: 375}}>
+      <View>
         <Home vendor={vendor} />
       </View>
       <View style={{flex: 1, minHeight: 500}}>

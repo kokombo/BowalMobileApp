@@ -9,7 +9,6 @@ const Shop = ({vendor}) => {
   const dispatch = useDispatch();
 
   const {status, products} = useSelector(store => store.vendors);
-
   const id = vendor?.id;
 
   //useEffect that dispatches fetching the product of each vendor.
@@ -20,7 +19,9 @@ const Shop = ({vendor}) => {
   let content;
   if (status === 'loading') {
     content = <ActivityIndicator size="large" color={COLORS.blue} />;
-  } else if (status === 'succeeded') {
+  } else if (status === 'failed') {
+    content = <Text>Something went wrong, please try again</Text>;
+  } else {
     content = (
       <View style={styles.product_container}>
         {products.map(product => {
@@ -28,8 +29,6 @@ const Shop = ({vendor}) => {
         })}
       </View>
     );
-  } else {
-    content = <Text>Something went wrong, please try again</Text>;
   }
 
   return <View style={styles.body}>{content}</View>;
@@ -48,4 +47,5 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
 });
-export default Shop;
+//React.memo is used to export this component because render callback was to display it in tab navigation.  React.memo helps to avoid performance issues as render callback lacks the default optimization that comes with React Navigation.
+export default React.memo(Shop);
