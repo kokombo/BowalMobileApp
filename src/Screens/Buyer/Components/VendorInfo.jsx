@@ -1,6 +1,6 @@
 import {View, Text, Image, StyleSheet} from 'react-native';
 import VendorLocation from './VendorLocation';
-import {FONT, assets} from '../../../../constants';
+import {FONT, assets, COLORS} from '../../../../constants';
 
 const VendorInfo = ({vendor}) => {
   return (
@@ -11,7 +11,7 @@ const VendorInfo = ({vendor}) => {
 
       <View style={styles.location_container}>
         <Text style={styles.vendor_name}>{vendor?.businessName}</Text>
-        <VendorLocation />
+        <VendorLocation color={COLORS.gray} />
       </View>
     </View>
   );

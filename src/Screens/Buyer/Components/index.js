@@ -6,6 +6,7 @@ import VendorCard from './VendorCard';
 import Rating from './Rating';
 import VendorInfo from './VendorInfo';
 import VendorLocation from './VendorLocation';
+import SaveVendor from './SaveVendor';
 
 export {
   Banner,
@@ -16,4 +17,5 @@ export {
   Rating,
   VendorInfo,
   VendorLocation,
+  SaveVendor,
 };

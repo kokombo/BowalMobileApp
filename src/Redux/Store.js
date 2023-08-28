@@ -5,6 +5,7 @@ import customAlertReducer from './Slices/customAlertSlice';
 import createUserSliceReducer from './Slices/createUserSlice';
 import currentUserSliceReducer from './Slices/currentUserSlice';
 import getVendorSliceReducer from './Slices/getVendorSlice';
+import savedVendorSliceReducer from './Slices/savedVendorSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     user: createUserSliceReducer,
     currentUser: currentUserSliceReducer,
     vendors: getVendorSliceReducer,
+    savedVendors: savedVendorSliceReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

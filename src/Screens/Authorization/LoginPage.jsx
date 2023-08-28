@@ -45,7 +45,6 @@ const LoginPage = () => {
               uid: res.user.uid,
             }),
           );
-
           //referencing databse storage to pullout a user's account type while logging in. This is necessary to navigate to the appropriate screen.
           const ref = database().ref(`users/${res.user.uid}`);
           ref.on('value', snapshot => {

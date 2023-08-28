@@ -13,7 +13,6 @@ export const getAllVendors = createAsyncThunk(
   async () => {
     try {
       const query = await firestore().collection('users').get();
-
       const data = query.docs.map(doc => ({
         ...doc.data(),
         id: doc.id,
@@ -34,6 +33,7 @@ export const getVendorProducts = createAsyncThunk(
         .collection('users')
         .doc(`${id}`)
         .collection('products')
+        .orderBy('timeStamp', 'desc')
         .get();
 
       const data = query.docs.map(doc => ({

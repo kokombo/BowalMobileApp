@@ -18,11 +18,11 @@ const ProductsContainer = ({ListHeaderComponent}) => {
   const {status, productsArray} = useSelector(store => store.product);
   const {user} = useSelector(store => store.currentUser);
 
-  useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchProducts());
-    }
-  }, [status, user]);
+  // useEffect(() => {
+  //   if (status === 'idle') {
+  //     dispatch(fetchProducts());
+  //   }
+  // }, [status, user]);
 
   const renderItem = ({item}) => {
     return <ProductCard data={item} />;

@@ -1,10 +1,23 @@
-import {View, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
+import {View, StyleSheet, SafeAreaView} from 'react-native';
 import {COLORS} from '../../../constants';
 import {HomeHeader} from './Components';
+import {useDispatch, useSelector} from 'react-redux';
+import {useEffect} from 'react';
+import {fetchProducts} from '../../Redux/Slices/ProductSlice';
 
 import ProductsContainer from './ProductsContainer';
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const {status} = useSelector(store => store.product);
+  const {user} = useSelector(store => store.currentUser);
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchProducts());
+    }
+  }, [status, user]);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.body}>

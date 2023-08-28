@@ -12,8 +12,6 @@ const Categories = () => {
 
   const {status, vendors} = useSelector(store => store.vendors);
 
-  // console.log(vendors);
-
   useEffect(() => {
     if (status === 'idle') {
       dispatch(getAllVendors());
