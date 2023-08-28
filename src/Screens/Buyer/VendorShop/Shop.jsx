@@ -20,8 +20,7 @@ const Shop = ({vendor}) => {
   let content;
   if (status === 'loading') {
     content = <ActivityIndicator size="large" color={COLORS.blue} />;
-  }
-  if (status === 'succeeded') {
+  } else if (status === 'succeeded') {
     content = (
       <View style={styles.product_container}>
         {products.map(product => {
@@ -29,6 +28,8 @@ const Shop = ({vendor}) => {
         })}
       </View>
     );
+  } else {
+    content = <Text>Something went wrong, please try again</Text>;
   }
 
   return <View style={styles.body}>{content}</View>;
