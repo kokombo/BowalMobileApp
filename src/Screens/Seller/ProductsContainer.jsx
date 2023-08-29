@@ -6,8 +6,6 @@ import {
   Alert,
 } from 'react-native';
 import {ProductCard, RefreshController} from '../../Components';
-import {fetchProducts} from '../../Redux/Slices/ProductSlice';
-import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {COLORS} from '../../../constants';
 import {NoProduct} from './Components';
@@ -17,12 +15,6 @@ const ProductsContainer = ({ListHeaderComponent}) => {
   const dispatch = useDispatch();
   const {status, productsArray} = useSelector(store => store.product);
   const {user} = useSelector(store => store.currentUser);
-
-  // useEffect(() => {
-  //   if (status === 'idle') {
-  //     dispatch(fetchProducts());
-  //   }
-  // }, [status, user]);
 
   const renderItem = ({item}) => {
     return <ProductCard data={item} />;

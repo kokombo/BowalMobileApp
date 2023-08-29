@@ -24,9 +24,17 @@ const Aside = () => {
   const {user} = useSelector(store => store.currentUser);
 
   const logOut = async () => {
-    await auth().signOut();
-    dispatch(signout());
-    navigation.navigate('Signin');
+    await auth()
+      .signOut()
+      .then(() => {
+        dispatch(signout());
+        navigation.navigate('Signin');
+      })
+      .catch(error => {
+        if (error === 'auth/no-current-user') {
+          Alert.alert('No active user');
+        }
+      });
   };
 
   useEffect(() => {

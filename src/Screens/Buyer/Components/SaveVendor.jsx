@@ -1,9 +1,12 @@
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {assets, COLORS} from '../../../../constants';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import firestore from '@react-native-firebase/firestore';
+import {getSavedVendors} from '../../../Redux/Slices/savedVendorSlice';
 
 const SaveVendor = ({vendor}) => {
+  const dispatch = useDispatch();
+
   //Getting the id of the vendor who owns the current shop
   const vendorId = vendor.id;
 
@@ -12,7 +15,7 @@ const SaveVendor = ({vendor}) => {
   const userId = user?.uid;
 
   //Getting the saved vendors for a particular user
-  const {savedVendors} = useSelector(store => store.savedVendors);
+  const {vendors} = useSelector(store => store.savedVendors);
 
   //Function that handles saving vendor to the backend
   const handleSaveAVendor = async () => {
@@ -29,6 +32,7 @@ const SaveVendor = ({vendor}) => {
     } catch (error) {
       return error.message;
     }
+    dispatch(getSavedVendors());
   };
 
   //Function that handles removing vendor from the backend
@@ -43,13 +47,23 @@ const SaveVendor = ({vendor}) => {
     } catch (error) {
       return error.message;
     }
+    dispatch(getSavedVendors());
   };
+
+  //Checking if the vendor has already been saved by the user
+  const existingIds = vendors.map(vendor => vendor.id);
 
   return (
     <View style={styles.wrapper}>
-      <TouchableOpacity onPress={handleSaveAVendor}>
-        <Image source={assets.love} style={styles.icon} />
-      </TouchableOpacity>
+      {existingIds.includes(vendorId) ? (
+        <TouchableOpacity onPress={handleRemoveAVendor}>
+          <Image source={assets.love} style={styles.icon} />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity onPress={handleSaveAVendor}>
+          <Image source={assets.bell} style={styles.icon} />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

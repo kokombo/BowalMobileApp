@@ -3,7 +3,7 @@ import firestore from '@react-native-firebase/firestore';
 
 const initialState = {
   status: 'idle',
-  savedVendors: [],
+  vendors: [],
   error: null,
 };
 
@@ -20,12 +20,10 @@ export const getSavedVendors = createAsyncThunk(
         .collection('savedVendors')
         .orderBy('timeStamp', 'desc')
         .get();
-      console.log(query);
       const data = query.docs.map(doc => ({
         ...doc.data(),
         id: doc.id,
       }));
-
       return data;
     } catch (error) {
       return error.message;
@@ -44,7 +42,7 @@ const savedVendorSlice = createSlice({
       })
       .addCase(getSavedVendors.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.savedVendors = action.payload;
+        state.vendors = action.payload;
       })
       .addCase(getSavedVendors.rejected, (state, action) => {
         state.status = 'failed';
