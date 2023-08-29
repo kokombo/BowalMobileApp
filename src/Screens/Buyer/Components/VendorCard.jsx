@@ -5,8 +5,6 @@ import {useNavigation} from '@react-navigation/native';
 const VendorCard = ({vendor}) => {
   const navigation = useNavigation();
 
-  // console.log(vendor);
-
   const onPress = () => {
     navigation.navigate('VendorShopHome', {vendor});
   };

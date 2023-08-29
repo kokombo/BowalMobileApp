@@ -13,7 +13,7 @@ import {VendorCard} from './Components';
 
 const SavedBusinesses = () => {
   const dispatch = useDispatch();
-  const {vendors, status} = useSelector(store => store.savedVendors);
+  const {vendors, status, error} = useSelector(store => store.savedVendors);
 
   useEffect(() => {
     if (status === 'idle') {
@@ -29,11 +29,7 @@ const SavedBusinesses = () => {
   if (status === 'loading') {
     content = <ActivityIndicator size={'large'} color={COLORS.blue} />;
   } else if (status === 'failed') {
-    content = (
-      <View>
-        <Text>Something went wrong, please try again</Text>
-      </View>
-    );
+    content = <Text>{error} </Text>;
   } else {
     if (vendors.length === 0) {
       content = (

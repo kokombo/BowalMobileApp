@@ -7,6 +7,7 @@ const initialState = {
   error: null,
 };
 
+//Function to fetch vendor products with vendor uid
 export const fetchProducts = createAsyncThunk(
   'product/fetchProducts',
   async (_, {getState}) => {
@@ -31,6 +32,7 @@ export const fetchProducts = createAsyncThunk(
   },
 );
 
+//Function to addProduct to the backend
 export const addProduct = createAsyncThunk(
   'product/addProduct',
   async (productDetails, {getState}) => {

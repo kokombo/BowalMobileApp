@@ -8,6 +8,7 @@ initialState = {
   products: [],
 };
 
+//Function to return all the vendors in the database
 export const getAllVendors = createAsyncThunk(
   'vendors/getAllVendors',
   async () => {
@@ -23,8 +24,8 @@ export const getAllVendors = createAsyncThunk(
     }
   },
 );
-// .doc('users/0HrfINe79rfry8fUbc3YtqynXEf2')
 
+//Function to get the products of each vendor in the database
 export const getVendorProducts = createAsyncThunk(
   'vendors/getVendorProducts',
   async id => {
@@ -47,8 +48,6 @@ export const getVendorProducts = createAsyncThunk(
     }
   },
 );
-
-// const collectionRef = firebase.firestore().doc('users/alovelace').collection('orders');
 
 export const getVendorSlice = createSlice({
   name: 'vendors',

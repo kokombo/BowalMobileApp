@@ -1,12 +1,10 @@
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList} from 'react-native';
 import {VendorCard} from './Components';
 import {COLORS, FONT} from '../../../constants';
 import {RefreshController} from '../../Components';
 
 const VendorsList = ({route}) => {
   const {filteredVendors} = route.params;
-
-  const category = filteredVendors?.map(item => item.category);
 
   const renderVendor = ({item}) => {
     return <VendorCard vendor={item} />;

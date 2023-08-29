@@ -4,7 +4,7 @@ import {COLORS} from '../../../../constants';
 const Reviews = () => {
   return (
     <View style={styles.body}>
-      <Text>Info</Text>
+      <Text>Reviews</Text>
     </View>
   );
 };

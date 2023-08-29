@@ -8,7 +8,7 @@ import {getVendorProducts} from '../../../Redux/Slices/getVendorSlice';
 const Shop = ({vendor}) => {
   const dispatch = useDispatch();
 
-  const {status, products} = useSelector(store => store.vendors);
+  const {status, products, error} = useSelector(store => store.vendors);
   const id = vendor?.id;
 
   //useEffect that dispatches fetching the product of each vendor.
@@ -20,7 +20,7 @@ const Shop = ({vendor}) => {
   if (status === 'loading') {
     content = <ActivityIndicator size="large" color={COLORS.blue} />;
   } else if (status === 'failed') {
-    content = <Text>Something went wrong, please try again</Text>;
+    content = <Text>{error} </Text>;
   } else {
     content = (
       <View style={styles.product_container}>
