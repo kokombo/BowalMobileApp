@@ -50,7 +50,7 @@ const SaveVendor = ({vendor}) => {
     dispatch(getSavedVendors());
   };
 
-  //Checking if the vendor has already been saved by the user
+  //Getting ids of vendors already saved by the user. If the user has saved the current vendor, user will be able to remove and versa
   const existingIds = vendors.map(vendor => vendor.id);
 
   return (

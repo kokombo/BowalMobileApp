@@ -5,7 +5,7 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import {COLORS} from '../../../constants';
+import {COLORS, FONT} from '../../../constants';
 import {useSelector, useDispatch} from 'react-redux';
 import {getSavedVendors} from '../../Redux/Slices/savedVendorSlice';
 import {useEffect} from 'react';
@@ -14,7 +14,6 @@ import {VendorCard} from './Components';
 const SavedBusinesses = () => {
   const dispatch = useDispatch();
   const {vendors, status} = useSelector(store => store.savedVendors);
-  const {user} = useSelector(store => store.currentUser);
 
   useEffect(() => {
     if (status === 'idle') {
@@ -32,18 +31,29 @@ const SavedBusinesses = () => {
   } else if (status === 'failed') {
     content = (
       <View>
-        <Text>Something went wrong, please try again</Text>{' '}
+        <Text>Something went wrong, please try again</Text>
       </View>
     );
   } else {
-    content = (
-      <FlatList
-        data={vendors}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        contentContainerStyle={{gap: 30}}
-      />
-    );
+    if (vendors.length === 0) {
+      content = (
+        <View style={styles.empty_list_container}>
+          <Text style={styles.empty_list_text}>Your list is empty!</Text>
+          <Text style={styles.empty_list_text}>
+            You haven't save any business yet
+          </Text>
+        </View>
+      );
+    } else {
+      content = (
+        <FlatList
+          data={vendors}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          contentContainerStyle={{gap: 30}}
+        />
+      );
+    }
   }
 
   return <View style={styles.body}>{content}</View>;
@@ -54,6 +64,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
     padding: 15,
+  },
+  empty_list_container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 100,
+  },
+  empty_list_text: {
+    fontSize: FONT.lg,
+    color: COLORS.grey,
   },
 });
 export default SavedBusinesses;

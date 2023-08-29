@@ -6,35 +6,32 @@ import {
   Alert,
 } from 'react-native';
 import {ProductCard, RefreshController} from '../../Components';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {COLORS} from '../../../constants';
 import {NoProduct} from './Components';
 
 //Component that holds each vendor's products
 const ProductsContainer = ({ListHeaderComponent}) => {
-  const dispatch = useDispatch();
   const {status, productsArray} = useSelector(store => store.product);
-  const {user} = useSelector(store => store.currentUser);
 
   const renderItem = ({item}) => {
     return <ProductCard data={item} />;
   };
 
-  const Content = () => {
-    // if (productsArray.length === 0) {
-    //   return <NoProduct />;
-    // }
-
-    if (status === 'loading') {
-      return (
-        <View style={styles.activity_container}>
-          <ActivityIndicator size={'large'} color={COLORS.blue} />
-        </View>
-      );
-    } else if (status === 'failed') {
-      return Alert.alert('Error!', 'something went wrong, please try again');
+  let content;
+  if (status === 'loading') {
+    content = (
+      <View style={styles.activity_container}>
+        <ActivityIndicator size={'large'} color={COLORS.blue} />
+      </View>
+    );
+  } else if (status === 'failed') {
+    content = Alert.alert('Error!', 'something went wrong, please try again');
+  } else {
+    if (productsArray.length === 0) {
+      content = <NoProduct />;
     } else {
-      return (
+      content = (
         <FlatList
           numColumns={2}
           data={productsArray}
@@ -51,12 +48,8 @@ const ProductsContainer = ({ListHeaderComponent}) => {
         />
       );
     }
-  };
-  return (
-    <View style={styles.products_container}>
-      <Content />
-    </View>
-  );
+  }
+  return <View style={styles.products_container}>{content}</View>;
 };
 const styles = StyleSheet.create({
   products_container: {
