@@ -15,6 +15,7 @@ import {CustomAlert, AddProductImage} from '../../Components';
 import {clearImages} from '../../Redux/Slices/ImageSelectorSlice';
 import {BusinessCategory} from '../../Components';
 import firestore from '@react-native-firebase/firestore';
+import {fetchProducts} from '../../Redux/Slices/ProductSlice';
 
 const AddProduct = ({navigation}) => {
   const [productName, setProductName] = useState('');
@@ -55,11 +56,10 @@ const AddProduct = ({navigation}) => {
           date: new Date().toDateString(),
         }),
       );
-
-      //After striking the add button, we will
+      //After striking the add button
       dispatch(clearImages());
-
       Alert.alert('Product Added', 'you have successfully added a new product');
+      dispatch(fetchProducts());
       navigation.navigate('Products');
     }
   };

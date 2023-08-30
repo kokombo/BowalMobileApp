@@ -10,6 +10,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {getSavedVendors} from '../../Redux/Slices/savedVendorSlice';
 import {useEffect} from 'react';
 import {VendorCard} from './Components';
+import {Error} from '../../Components';
 
 const SavedBusinesses = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const SavedBusinesses = () => {
   if (status === 'loading') {
     content = <ActivityIndicator size={'large'} color={COLORS.blue} />;
   } else if (status === 'failed') {
-    content = <Text>{error} </Text>;
+    content = <Error error={error} />;
   } else {
     if (vendors.length === 0) {
       content = (

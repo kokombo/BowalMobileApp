@@ -17,6 +17,7 @@ import Aside from './Aside';
 import Loader from './Loader';
 import GoBack from './GoBack';
 import DisplayName from './DisplayName';
+import Error from './Error';
 
 export {
   Input,
@@ -38,4 +39,5 @@ export {
   Loader,
   GoBack,
   DisplayName,
+  Error,
 };

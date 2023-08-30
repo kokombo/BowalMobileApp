@@ -1,18 +1,14 @@
-import {
-  View,
-  StyleSheet,
-  ActivityIndicator,
-  FlatList,
-  Alert,
-} from 'react-native';
-import {ProductCard, RefreshController} from '../../Components';
+import {View, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
+import {ProductCard, RefreshController, Error} from '../../Components';
 import {COLORS} from '../../../constants';
 import {NoProduct} from './Components';
 import {useSelector} from 'react-redux';
+import {fetchProducts} from '../../Redux/Slices/ProductSlice';
+import {useEffect} from 'react';
 
 //Component that holds each vendor's products
 const ProductsContainer = ({ListHeaderComponent}) => {
-  const {status, productsArray} = useSelector(store => store.product);
+  const {status, productsArray, error} = useSelector(store => store.product);
 
   const renderItem = ({item}) => {
     return <ProductCard data={item} />;
@@ -26,7 +22,7 @@ const ProductsContainer = ({ListHeaderComponent}) => {
       </View>
     );
   } else if (status === 'failed') {
-    content = Alert.alert('Error!', 'something went wrong, please try again');
+    content = <Error error={error} />;
   } else {
     if (productsArray.length === 0) {
       content = <NoProduct />;
