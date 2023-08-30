@@ -1,6 +1,6 @@
-import {View, StyleSheet, TextInput} from 'react-native';
+import {View, StyleSheet, TextInput, Text} from 'react-native';
 import OnboardingHeading from '../Components/OnboardingHeading';
-import {COLORS} from '../../../../constants';
+import {COLORS, FONT} from '../../../../constants';
 import {Input, BusinessCategory, Loader} from '../../../Components';
 import CustomButton from '../../../Components/Buttons';
 import {useState} from 'react';
@@ -57,25 +57,38 @@ const FormB = () => {
 
       <View style={styles.form}>
         <View style={styles.inputs}>
-          <Input
-            placeholder={'Enter your business name'}
-            textContentType={'organizationName'}
-            value={businessName}
-            onChangeText={setBusinessName}
-          />
+          <View>
+            <Input
+              placeholder={'Enter your business name'}
+              textContentType={'organizationName'}
+              value={businessName}
+              onChangeText={setBusinessName}
+              maxLength={25}
+            />
+            {businessName.length > 0 && (
+              <Text style={styles.count}>{businessName.length}/25</Text>
+            )}
+          </View>
+
           <BusinessCategory
             category={category}
             setCategory={setCategory}
             placeholder={'Select your business category'}
             height={32}
           />
-          <TextInput
-            placeholder={'Write a brief description of your business...'}
-            multiline={true}
-            style={styles.business_description_input}
-            value={businessDescription}
-            onChangeText={setBusinessDescription}
-          />
+          <View>
+            <TextInput
+              placeholder={'Write a brief description of your business...'}
+              multiline={true}
+              style={styles.business_description_input}
+              value={businessDescription}
+              onChangeText={setBusinessDescription}
+              maxLength={60}
+            />
+            {businessDescription.length > 0 && (
+              <Text style={styles.count}>{businessDescription.length}/60</Text>
+            )}
+          </View>
         </View>
         <CustomButton
           title="continue"
@@ -110,6 +123,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     fontSize: 18,
     color: COLORS.grey,
+  },
+  count: {
+    fontSize: FONT.small,
+    alignSelf: 'flex-end',
   },
 });
 

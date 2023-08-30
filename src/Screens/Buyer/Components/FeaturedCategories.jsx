@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     fontWeight: '300',
   },
   category_container: {
-    paddingVertical: 20,
+    paddingTop: 20,
   },
 });
 

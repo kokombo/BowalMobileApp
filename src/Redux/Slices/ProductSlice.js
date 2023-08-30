@@ -24,7 +24,6 @@ export const fetchProducts = createAsyncThunk(
         ...doc.data(),
         id: doc.id,
       }));
-
       return data;
     } catch (error) {
       return error.message;

@@ -8,7 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import CustomButton from '../../Components/Buttons';
-import {COLORS} from '../../../constants';
+import {COLORS, FONT} from '../../../constants';
 import {useSelector, useDispatch} from 'react-redux';
 import {addProduct} from '../../Redux/Slices/ProductSlice';
 import {CustomAlert, AddProductImage} from '../../Components';
@@ -21,12 +21,9 @@ const AddProduct = ({navigation}) => {
   const [productCategory, setProductCategory] = useState('');
   const [productPrice, setProductPrice] = useState('');
   const [productDescription, setProductDescription] = useState('');
-  const [error, setError] = useState('');
 
   const dispatch = useDispatch();
   const {status} = useSelector(store => store.product);
-  const {user} = useSelector(store => store.currentUser);
-  console.log(user);
   const {selectedImages} = useSelector(store => store.imageSelector);
 
   //To further ensure exactly 3 images are uploaded to firestore for each product.
@@ -73,11 +70,18 @@ const AddProduct = ({navigation}) => {
 
       <View style={styles.product_info_container}>
         <View style={styles.input_wrapper}>
-          <Text style={styles.label}>Product Name</Text>
+          <View style={styles.label_container}>
+            <Text style={styles.label}>Product Name</Text>
+            {productName.length > 0 && (
+              <Text style={styles.count}>{productName.length}/15</Text>
+            )}
+          </View>
+
           <TextInput
             style={styles.input}
             onChangeText={value => setProductName(value)}
             autoCorrect={false}
+            maxLength={15}
           />
         </View>
         <View style={styles.input_wrapper}>
@@ -91,11 +95,6 @@ const AddProduct = ({navigation}) => {
             height={50}
             padding={10}
           />
-          {/* <TextInput
-            style={styles.input}
-            onChangeText={value => setProductCategory(value)}
-            autoCorrect={false}
-          /> */}
         </View>
         <View style={styles.input_wrapper}>
           <Text style={styles.label}>Price</Text>
@@ -137,11 +136,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: COLORS.gray,
     padding: 10,
-    fontSize: 18,
+    fontSize: FONT.lg,
     color: COLORS.grey,
   },
   label: {
-    fontSize: 18,
+    fontSize: FONT.lg,
     color: COLORS.grey,
     fontWeight: '500',
   },
@@ -157,6 +156,15 @@ const styles = StyleSheet.create({
   },
   button_container: {
     marginVertical: 50,
+  },
+  count: {
+    fontSize: FONT.small,
+    alignSelf: 'flex-end',
+  },
+  label_container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
   },
 });
 export default AddProduct;

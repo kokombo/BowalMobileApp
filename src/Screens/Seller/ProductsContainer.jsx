@@ -6,13 +6,23 @@ import {
   Alert,
 } from 'react-native';
 import {ProductCard, RefreshController} from '../../Components';
-import {useSelector} from 'react-redux';
 import {COLORS} from '../../../constants';
 import {NoProduct} from './Components';
+import {useDispatch, useSelector} from 'react-redux';
+import {useEffect} from 'react';
+import {fetchProducts} from '../../Redux/Slices/ProductSlice';
 
 //Component that holds each vendor's products
 const ProductsContainer = ({ListHeaderComponent}) => {
+  const dispatch = useDispatch();
   const {status, productsArray} = useSelector(store => store.product);
+  const {user} = useSelector(store => store.currentUser);
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchProducts());
+    }
+  }, [user, status]);
 
   const renderItem = ({item}) => {
     return <ProductCard data={item} />;

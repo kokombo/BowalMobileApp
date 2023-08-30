@@ -9,6 +9,7 @@ const Input = ({
   keyboardType,
   textContentType,
   onPressOut,
+  maxLength,
 }) => {
   const [labelVisible, setLabelVisible] = useState(false);
 
@@ -30,6 +31,7 @@ const Input = ({
         textContentType={textContentType}
         onPressOut={onPressOut}
         onPressIn={onPressIn}
+        maxLength={maxLength}
       />
     </View>
   );

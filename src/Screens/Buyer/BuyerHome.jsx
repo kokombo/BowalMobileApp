@@ -1,33 +1,31 @@
-import {View, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {COLORS} from '../../../constants';
-import {Location, Search} from '../../Components';
-import {Banner, Greeting, FeaturedCategories} from './Components';
+import {useSelector} from 'react-redux';
+import {VendorCard} from './Components';
+import HomeHeader from './Components/HomeHeader';
 
 const BuyerHome = () => {
+  const {vendors} = useSelector(store => store.vendors);
+  const renderItem = ({item}) => {
+    return <VendorCard vendor={item} />;
+  };
+
   return (
     <View style={styles.body}>
-      <View style={styles.head}>
-        <Greeting />
-        {/* <Location /> */}
-      </View>
-      <Search placeholder={'What would you like to buy?'} />
-      <Banner />
-      <FeaturedCategories />
+      <FlatList
+        data={vendors.slice(0, 20)}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        ListHeaderComponent={HomeHeader}
+        contentContainerStyle={{gap: 30, padding: 15}}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 };
 const styles = StyleSheet.create({
   body: {
-    flex: 1,
     backgroundColor: COLORS.white,
-    padding: 15,
-    flexDirection: 'column',
-    gap: 25,
-  },
-  head: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
   },
 });
 export default BuyerHome;

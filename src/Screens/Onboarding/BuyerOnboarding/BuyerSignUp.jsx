@@ -91,6 +91,9 @@ const BuyerSignUp = () => {
               'A network error has occured, please check your connectivity and try again.',
             );
           }
+          if (error.code === 'auth/permission-denied') {
+            Alert.alert('permission denied');
+          }
         })
         .finally(() => {
           setLoading(false);

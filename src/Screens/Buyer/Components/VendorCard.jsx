@@ -96,9 +96,9 @@ const styles = StyleSheet.create({
   },
   shadowProp: {
     shadowColor: COLORS.gray,
-    shadowOffset: {width: -2, height: 4},
+    shadowOffset: {width: 1, height: 3},
     shadowOpacity: 0.3,
-    shadowRadius: 3,
+    shadowRadius: 9,
   },
 });
 export default VendorCard;

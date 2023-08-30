@@ -4,7 +4,7 @@ import OnboardingCTA from '../Components/OnboardingCTA';
 import OnboardingHeading from '../Components/OnboardingHeading';
 import CustomButton from '../../../Components/Buttons';
 import {Input, Loader, PasswordInput} from '../../../Components';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
@@ -18,8 +18,15 @@ const FormA = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [pageError, setPageError] = useState(''); //This handles email format error
+
   const [authError, setAuthError] = useState('');
+  const [error, setError] = useState({
+    auth: ' ',
+    password: ' ',
+    phone: '',
+    page: ' ',
+    err: false,
+  });
   const [passwordError, setPasswordError] = useState(''); //This is used to monitor password format error
 
   const navigation = useNavigation();
@@ -35,9 +42,14 @@ const FormA = () => {
      Followed by an else if statement to inspect the length of the inputed password
     */
     if (!email.includes('@') || !email.includes('.com')) {
-      setPageError('Please enter a valid email address');
+      setError({err: true, page: 'Please enter a valid email address'});
+    } else if (phone.length !== 11) {
+      setError({err: true, phone: 'Phone number should be 11 characters'});
     } else if (password.length < 6) {
-      setPasswordError('Password should be at least 6 characters');
+      setError({
+        err: true,
+        password: 'Password should be at least 6 characters',
+      });
     } else {
       // Initiate loading
       setLoading(true);
@@ -76,26 +88,31 @@ const FormA = () => {
           // catch possible signup errors
           if (error.code === 'auth/email-already-in-use') {
             Alert.alert('Error!', 'Email address already in use');
-            setAuthError('Email already in use');
+            setError({err: true, auth: 'Email already in use'});
           }
           if (error.code === 'auth/invalid-email') {
             Alert.alert('Oops!', 'Invalid email address');
-            setAuthError('Invalid email address');
+            setError({err: true, auth: 'Invalid email address'});
           }
           if (error.code === 'auth/weak-password') {
             Alert.alert('Weak Password!', 'Please choose a stronger password');
-            setAuthError(
-              'Password not strong enough, please choose a stronger password',
-            );
+            setError({
+              err: true,
+              auth: 'Password not strong enough, please choose a stronger password',
+            });
           }
           if (error.code === 'auth/network-request-failed') {
             Alert.alert(
               'Network error!',
               'Please check your internet connection and try again.',
             );
-            setAuthError(
-              'A network error has occured, please check your connectivity and try again.',
-            );
+            setError({
+              err: true,
+              auth: 'A network error has occured, please check your connectivity and try again.',
+            });
+          }
+          if (error.code === 'auth/permission-denied') {
+            Alert.alert('permission denied');
           }
         })
         .finally(() => {
@@ -103,6 +120,14 @@ const FormA = () => {
         });
     }
   };
+
+  //Use effect to set timeout for error state
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setError({err: false});
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [error]);
 
   return (
     <View style={styles.body}>
@@ -130,8 +155,8 @@ const FormA = () => {
             />
 
             <View>
-              {pageError && (
-                <Text style={styles.email_error}>{pageError}</Text> //This displays the email format error when there is one
+              {error.page && (
+                <Text style={styles.email_error}>{error.page}</Text> //This displays the email format error when there is one
               )}
             </View>
           </View>
@@ -149,13 +174,21 @@ const FormA = () => {
                 value={phone}
                 onChangeText={setPhone}
               />
+              <View>
+                {error.phone && (
+                  <Text style={styles.email_error}>{error.phone}</Text>
+                )}
+              </View>
             </View>
           </View>
+
           <View>
             <PasswordInput value={password} onChangeText={setPassword} />
-            {passwordError && (
-              <Text style={styles.email_error}>{passwordError}</Text> //This displays the email format error when there is one.
-            )}
+            <View>
+              {error.password && (
+                <Text style={styles.email_error}>{error.password}</Text> //This displays the email format error when there is one.
+              )}
+            </View>
           </View>
         </View>
         <CustomButton
@@ -213,7 +246,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   email_error: {
-    fontSize: 10,
+    fontSize: 11,
     color: 'red',
     fontWeight: '300',
     position: 'absolute',
