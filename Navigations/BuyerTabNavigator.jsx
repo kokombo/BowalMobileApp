@@ -71,7 +71,10 @@ const BuyerTabNavigator = () => {
         component={BuyerHome}
         options={{
           headerRight: () => (
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Cart');
+              }}>
               <Image source={assets.cart} style={{width: 30, height: 30}} />
             </TouchableOpacity>
           ),

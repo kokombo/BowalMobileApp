@@ -32,7 +32,6 @@ const Categories = () => {
         columnWrapperStyle={{
           alignItems: 'center',
           justifyContent: 'space-around',
-          // paddingVertical: 15,
         }}
         contentContainerStyle={{gap: 10, paddingTop: 15}}
         refreshControl={<RefreshController />}

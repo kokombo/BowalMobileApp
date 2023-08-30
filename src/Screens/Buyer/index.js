@@ -4,6 +4,7 @@ import Categories from './Categories';
 import Logistics from './Logistics';
 import SavedBusinesses from './SavedBusinesses';
 import VendorsList from './VendorsList';
+import Cart from './Cart';
 
 export {
   BuyerAccount,
@@ -12,4 +13,5 @@ export {
   Logistics,
   SavedBusinesses,
   VendorsList,
+  Cart,
 };

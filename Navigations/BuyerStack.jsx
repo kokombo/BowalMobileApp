@@ -1,16 +1,18 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import {Image} from 'react-native';
 import DrawerNavigator from './DrawerNavigator';
-import {SavedBusinesses, VendorsList} from '../src/Screens/Buyer';
+import {SavedBusinesses, VendorsList, Cart} from '../src/Screens/Buyer';
 import {COLORS, assets} from '../constants';
-import {Home} from '../src/Screens/Buyer/VendorShop';
 import ShopTopTab from './ShopTopTab';
 
 const Stack = createStackNavigator();
 
 const BuyerStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerTitleStyle: {color: COLORS.grey, fontSize: 20, fontWeight: '600'},
+      }}>
       <Stack.Screen
         name="BuyerHome"
         component={DrawerNavigator}
@@ -22,6 +24,7 @@ const BuyerStack = () => {
         options={{
           title: 'Saved Businesses',
           headerBackTitleVisible: false,
+          headerShadowVisible: false,
           headerBackImage: () => (
             <Image
               source={assets.arrowbackblue}
@@ -60,6 +63,21 @@ const BuyerStack = () => {
           headerBackImage: () => (
             <Image
               source={assets.arrowback}
+              style={{width: 20, height: 17, marginLeft: 10}}
+            />
+          ),
+        }}
+      />
+
+      <Stack.Screen
+        name="Cart"
+        component={Cart}
+        options={{
+          headerShadowVisible: false,
+          headerBackTitleVisible: false,
+          headerBackImage: () => (
+            <Image
+              source={assets.arrowbackblue}
               style={{width: 20, height: 17, marginLeft: 10}}
             />
           ),

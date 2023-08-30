@@ -3,6 +3,7 @@ import {COLORS} from '../../../constants';
 import {useSelector} from 'react-redux';
 import {VendorCard} from './Components';
 import HomeHeader from './Components/HomeHeader';
+import {RefreshController} from '../../Components';
 
 const BuyerHome = () => {
   const {vendors} = useSelector(store => store.vendors);
@@ -19,6 +20,7 @@ const BuyerHome = () => {
         ListHeaderComponent={HomeHeader}
         contentContainerStyle={{gap: 30, padding: 15}}
         showsVerticalScrollIndicator={false}
+        refreshControl={<RefreshController />}
       />
     </View>
   );

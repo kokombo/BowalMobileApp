@@ -1,4 +1,4 @@
-import {View, StyleSheet, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList, Text} from 'react-native';
 import {VendorCard} from './Components';
 import {COLORS, FONT} from '../../../constants';
 import {RefreshController} from '../../Components';
@@ -10,8 +10,20 @@ const VendorsList = ({route}) => {
     return <VendorCard vendor={item} />;
   };
 
-  return (
-    <View style={styles.body}>
+  let content;
+  if (filteredVendors.length === 0) {
+    content = (
+      <View style={styles.no_vendor_container}>
+        <Text style={styles.no_vendor_text}>
+          There are no vendors yet in this category.
+        </Text>
+        <Text style={styles.no_vendor_text}>
+          Please check other categories.
+        </Text>
+      </View>
+    );
+  } else {
+    content = (
       <FlatList
         data={filteredVendors}
         renderItem={renderVendor}
@@ -19,8 +31,10 @@ const VendorsList = ({route}) => {
         refreshControl={<RefreshController />}
         contentContainerStyle={{gap: 30}}
       />
-    </View>
-  );
+    );
+  }
+
+  return <View style={styles.body}>{content}</View>;
 };
 
 const styles = StyleSheet.create({
