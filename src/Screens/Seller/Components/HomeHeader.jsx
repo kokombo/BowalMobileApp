@@ -12,11 +12,6 @@ const HomeHeader = () => {
 
   return (
     <View style={styles.body}>
-      <View style={styles.welcome}>
-        <Greeting />
-        {/* <Location /> */}
-      </View>
-
       <View style={styles.analytics_container}>
         <Analytics
           title={'Total Products'}
@@ -43,12 +38,7 @@ const styles = StyleSheet.create({
     gap: 20,
     marginTop: 15,
   },
-  welcome: {
-    marginTop: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
+
   product_container_heading: {
     color: COLORS.grey,
     fontSize: 20,

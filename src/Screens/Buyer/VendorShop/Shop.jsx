@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, ActivityIndicator, StyleSheet, Text} from 'react-native';
 import {ProductCard} from '../../../Components';
-import {COLORS} from '../../../../constants';
+import {COLORS, FONT} from '../../../../constants';
 import {useSelector, useDispatch} from 'react-redux';
 import {getVendorProducts} from '../../../Redux/Slices/getVendorSlice';
 
@@ -25,8 +25,10 @@ const Shop = ({vendor}) => {
     if (products.length === 0) {
       content = (
         <View style={styles.no_products}>
-          <Text>There are no yet products in this shop.</Text>
-          <Text>Please check other shops!</Text>
+          <Text style={styles.no_products_text}>
+            There are no yet products in this shop.
+          </Text>
+          <Text style={styles.no_products_text}>Please check other shops!</Text>
         </View>
       );
     } else {
@@ -59,6 +61,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 20,
+  },
+  no_products_text: {
+    fontSize: FONT.base,
+    color: COLORS.blue,
   },
 });
 //React.memo is used to export this component because render callback was to display it in tab navigation.  React.memo helps to avoid performance issues as render callback lacks the default optimization that comes with React Navigation.

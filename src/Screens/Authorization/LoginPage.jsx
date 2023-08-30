@@ -10,6 +10,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {login} from '../../Redux/Slices/currentUserSlice';
 import database from '@react-native-firebase/database';
+import {fetchProducts} from '../../Redux/Slices/ProductSlice';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -53,6 +54,8 @@ const LoginPage = () => {
               navigation.navigate('BuyerStack');
             }
             if (accountType === 'vendor') {
+              //If it is a vendor logging in, fetch products will dispatch  before navigating to the vendor screen.
+              dispatch(fetchProducts());
               navigation.navigate('VendorStack');
             }
           });
