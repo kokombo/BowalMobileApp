@@ -1,19 +1,19 @@
 import {View, Image, Text, StyleSheet} from 'react-native';
 import {COLORS} from '../../../../constants';
+import {SliderBox} from 'react-native-image-slider-box';
 
 const ProductImages = ({images}) => {
-  const image = images[0];
-  console.log(image);
   return (
     <View style={styles.container}>
       <View style={styles.image_background}>
-        <Image
+        {/* <Image
           source={{
             uri: `${image}`,
           }}
           style={styles.image}
           resizeMode="contain"
-        />
+        /> */}
+        <SliderBox images={images} sliderBoxHeight={230} parentWidth={275} />
       </View>
       <View></View>
     </View>
