@@ -18,6 +18,7 @@ import Loader from './Loader';
 import GoBack from './GoBack';
 import DisplayName from './DisplayName';
 import Error from './Error';
+import CartIcon from './CartIcon';
 
 export {
   Input,
@@ -40,4 +41,5 @@ export {
   GoBack,
   DisplayName,
   Error,
+  CartIcon,
 };

@@ -37,7 +37,7 @@ const SavedBusinesses = () => {
         <View style={styles.empty_list_container}>
           <Text style={styles.empty_list_text}>Your list is empty!</Text>
           <Text style={styles.empty_list_text}>
-            You haven't save any business yet
+            You haven't save any business yet!
           </Text>
         </View>
       );

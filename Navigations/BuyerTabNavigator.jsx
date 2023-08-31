@@ -10,6 +10,7 @@ import {Chats} from '../src/Screens/Seller';
 import {COLORS, assets} from '../constants';
 import {SideBarToggle} from '../src/Components';
 import {useNavigation} from '@react-navigation/native';
+import {CartIcon} from '../src/Components';
 
 const BuyerTabNavigator = () => {
   const Tab = createBottomTabNavigator();

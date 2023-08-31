@@ -6,6 +6,8 @@ import {COLORS, assets} from '../constants';
 import {clearImages} from '../src/Redux/Slices/ImageSelectorSlice';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
+import {ProductDetail} from '../src/Screens/Buyer';
+import {CartIcon} from '../src/Components';
 
 const Stack = createStackNavigator();
 
@@ -40,6 +42,22 @@ const VendorStack = () => {
                 style={{width: 20, height: 17, marginLeft: 10}}
               />
             </TouchableOpacity>
+          ),
+        }}
+      />
+
+      <Stack.Screen
+        name="ProductDetail"
+        component={ProductDetail}
+        options={{
+          headerShadowVisible: false,
+          headerBackTitleVisible: false,
+          title: '',
+          headerBackImage: () => (
+            <Image
+              source={assets.arrowbackblue}
+              style={{width: 20, height: 17, marginLeft: 10}}
+            />
           ),
         }}
       />

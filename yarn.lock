@@ -2803,6 +2803,11 @@ colorette@^1.0.7:
   resolved "https://registry.npmjs.org/colorette/-/colorette-1.4.0.tgz"
   integrity sha512-Y2oEozpomLn7Q3HFP7dpww7AtMJplbM9lGZP6RDfHqmbeRjiwRg4n6VM6j4KLmRke85uWEI7JqF17f3pqdRA0g==
 
+comma-number@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/comma-number/-/comma-number-2.1.0.tgz"
+  integrity sha512-fRcu1c+4yFLFp3tgranEkKPPWRlnkWQXr4p0KBL0WW9Kd2wmbKAoQ2R4rluFm4ubXCtXGybEaFB7r6YgPOnahQ==
+
 command-exists@^1.2.8:
   version "1.2.9"
   resolved "https://registry.npmjs.org/command-exists/-/command-exists-1.2.9.tgz"

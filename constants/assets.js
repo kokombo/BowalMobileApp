@@ -80,6 +80,7 @@ import baking from '../assets/images/baking.png';
 import decor from '../assets/images/decor.png';
 import star from '../assets/icons/star.png';
 import dummyshop from '../assets/images/dummyshop.png';
+import arrowdown from '../assets/icons/arrowdown.png';
 
 export default {
   bell,
@@ -165,4 +166,5 @@ export default {
   decor,
   star,
   dummyshop,
+  arrowdown,
 };
