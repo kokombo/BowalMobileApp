@@ -2,9 +2,16 @@
 
 This is a cross-platform mobile application called Bowal, bootstrapped with react-native-community/cli.
 
-Bowal is a multi-vendor e-commerce marketplace that leverages geo-location technology to buying and selling online.
+Bowal is a multi-vendor e-commerce marketplace that leverages geo-location technology to buying and selling online in Africa. 
 
-Firebase is used to perform the backend logics, authenticate users, and store data.
+Firebase is used for the backend and daata storage. 
+
+This mobile app allows a user to sign up as a vendor(merchant) or a seller. 
+
+
+
+
+
 
 # Getting Started
 
