@@ -81,6 +81,7 @@ import decor from '../assets/images/decor.png';
 import star from '../assets/icons/star.png';
 import dummyshop from '../assets/images/dummyshop.png';
 import arrowdown from '../assets/icons/arrowdown.png';
+import lovegrey from '../assets/icons/lovegrey.png';
 
 export default {
   bell,
@@ -167,4 +168,5 @@ export default {
   star,
   dummyshop,
   arrowdown,
+  lovegrey,
 };

@@ -61,7 +61,11 @@ const SaveVendor = ({vendor}) => {
         </TouchableOpacity>
       ) : (
         <TouchableOpacity onPress={handleSaveAVendor}>
-          <Image source={assets.bell} style={styles.icon} />
+          <Image
+            source={assets.lovegrey}
+            style={styles.icon}
+            resizeMode="contain"
+          />
         </TouchableOpacity>
       )}
     </View>
