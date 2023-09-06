@@ -1,23 +1,27 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {COLORS, FONT} from '../../../../constants';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {increase, decrease} from '../../../Redux/Slices/cartSlice';
 
-const ProductIncrement = ({id}) => {
+const ProductIncrement = ({item}) => {
   const dispatch = useDispatch();
-  const {quantity} = useSelector(store => store.cart);
-  console.log(quantity);
 
-  // const increaseCount = dispatch(increase(id));
-  // const decreaseCount = dispatch(decrease(id));
+  const increaseCount = () => dispatch(increase(item.id));
+  const decreaseCount = () => dispatch(decrease(item.id));
+
+  //Disables the decrease button when the count equals 0
+  const disabled = Boolean(item?.quantity === 0);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.icon_wrapper}>
+      <TouchableOpacity style={styles.icon_wrapper} onPress={increaseCount}>
         <Text style={styles.text}>+</Text>
       </TouchableOpacity>
-      <Text style={styles.text}>{quantity}</Text>
-      <TouchableOpacity style={styles.icon_wrapper}>
+      <Text style={styles.text}>{item?.quantity}</Text>
+      <TouchableOpacity
+        style={styles.icon_wrapper}
+        onPress={decreaseCount}
+        disabled={disabled}>
         <Text style={styles.text}>-</Text>
       </TouchableOpacity>
     </View>

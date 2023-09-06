@@ -24,12 +24,12 @@ const cartSlice = createSlice({
         item => item.id !== action.payload,
       );
     },
-    increase: (state, {payload}) => {
-      const cartItem = state.cartItems.find(item => item.id === payload.id);
+    increase: (state, action) => {
+      const cartItem = state.cartItems.find(item => item.id === action.payload);
       cartItem.quantity = cartItem.quantity + 1;
     },
-    decrease: (state, {payload}) => {
-      const cartItem = state.cartItems.find(item => item.id === payload.id);
+    decrease: (state, action) => {
+      const cartItem = state.cartItems.find(item => item.id === action.payload);
       cartItem.quantity = cartItem.quantity - 1;
     },
     calculateTotalPrice: (state, action) => {

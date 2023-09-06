@@ -32,7 +32,7 @@ const ProductDetail = ({route}) => {
 
   //Hence user can add product to cart
   const handleAddToCart = () => {
-    dispatch(addToCart({...data}));
+    dispatch(addToCart({...data, quantity: 0}));
   };
 
   let quantity;

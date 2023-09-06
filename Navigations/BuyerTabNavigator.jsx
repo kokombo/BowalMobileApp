@@ -1,5 +1,5 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Image, TouchableOpacity} from 'react-native';
+import {Image, TouchableOpacity, View, Text} from 'react-native';
 import {
   BuyerHome,
   Categories,
@@ -7,14 +7,17 @@ import {
   BuyerAccount,
 } from '../src/Screens/Buyer';
 import {Chats} from '../src/Screens/Seller';
-import {COLORS, assets} from '../constants';
+import {COLORS, FONT, assets} from '../constants';
 import {SideBarToggle} from '../src/Components';
 import {useNavigation} from '@react-navigation/native';
 import {CartIcon} from '../src/Components';
+import {useSelector} from 'react-redux';
 
 const BuyerTabNavigator = () => {
   const Tab = createBottomTabNavigator();
   const navigation = useNavigation();
+
+  const {cartItems} = useSelector(store => store.cart);
 
   return (
     <Tab.Navigator
@@ -77,6 +80,28 @@ const BuyerTabNavigator = () => {
                 navigation.navigate('Cart');
               }}>
               <Image source={assets.cart} style={{width: 30, height: 30}} />
+              {cartItems.length > 0 && (
+                <View
+                  style={{
+                    height: 28,
+                    width: 28,
+                    borderRadius: 100,
+                    backgroundColor: COLORS.blue,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'absolute',
+                    bottom: 18,
+                    left: 10,
+                  }}>
+                  <Text
+                    style={{
+                      fontSize: FONT.lg,
+                      color: COLORS.white,
+                    }}>
+                    {cartItems?.length}
+                  </Text>
+                </View>
+              )}
             </TouchableOpacity>
           ),
           headerTitle: '',
