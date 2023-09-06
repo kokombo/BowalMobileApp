@@ -2,11 +2,11 @@ import {View, Text, StyleSheet} from 'react-native';
 import {COLORS, FONT} from '../../../../constants';
 import ProductIncrement from './ProductIncrement';
 
-const ProductQuantity = () => {
+const ProductQuantity = ({id}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.description}>Quantity</Text>
-      <ProductIncrement />
+      <ProductIncrement id={id} />
     </View>
   );
 };

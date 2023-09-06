@@ -11,6 +11,7 @@ import ProductImages from './ProductImages';
 import ProductInfo from './ProductInfo';
 import ProductDescription from './ProductDescription';
 import ProductQuantity from './ProductQuantity';
+import CartItem from './CartItem';
 
 export {
   Banner,
@@ -26,4 +27,5 @@ export {
   ProductInfo,
   ProductDescription,
   ProductQuantity,
+  CartItem,
 };

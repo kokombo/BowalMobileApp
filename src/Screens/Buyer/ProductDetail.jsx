@@ -7,16 +7,33 @@ import {
   ProductQuantity,
 } from './Components';
 import database from '@react-native-firebase/database';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {useState} from 'react';
+import {addToCart, removeFromCart} from '../../Redux/Slices/cartSlice';
 
 const ProductDetail = ({route}) => {
+  const dispatch = useDispatch();
   const [accountType, setAccountType] = useState('');
   const {data} = route.params;
   const images = data?.productImages;
   const description = data?.productDescription;
+  const id = data?.id;
 
   const {user} = useSelector(store => store.currentUser);
+  const {cartItems} = useSelector(store => store.cart);
+
+  //Checking if a product already exist in the cart
+  const existingIds = cartItems?.map(item => item.id);
+
+  //If a product exists in cart already, user can remove.
+  const handleRemoveFromCart = () => {
+    dispatch(removeFromCart(id));
+  };
+
+  //Hence user can add product to cart
+  const handleAddToCart = () => {
+    dispatch(addToCart({...data}));
+  };
 
   let quantity;
   let buttonContainer;
@@ -28,16 +45,26 @@ const ProductDetail = ({route}) => {
   });
 
   if (accountType === 'buyer') {
-    quantity = <ProductQuantity />;
+    quantity = <ProductQuantity id={id} />;
     buttonContainer = (
       <View style={styles.buttons_container}>
         <TouchableOpacity style={[styles.chat_button, styles.button]}>
           <Text style={styles.chat_text}>chat</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.cart_button, , styles.button]}>
-          <Text style={styles.cart_text}>Add to cart</Text>
-        </TouchableOpacity>
+        {existingIds.includes(id) ? (
+          <TouchableOpacity
+            onPress={handleRemoveFromCart}
+            style={[styles.cart_button, styles.button, styles.remove_button]}>
+            <Text style={styles.cart_text}>Remove </Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={handleAddToCart}
+            style={[styles.cart_button, styles.button]}>
+            <Text style={styles.cart_text}>Add</Text>
+          </TouchableOpacity>
+        )}
       </View>
     );
   }
@@ -91,6 +118,9 @@ const styles = StyleSheet.create({
     color: COLORS.blue,
     fontSize: FONT.lg,
     fontWeight: '500',
+  },
+  remove_button: {
+    backgroundColor: 'red',
   },
 });
 export default ProductDetail;

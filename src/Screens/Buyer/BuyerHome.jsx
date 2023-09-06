@@ -28,6 +28,7 @@ const BuyerHome = () => {
 const styles = StyleSheet.create({
   body: {
     backgroundColor: COLORS.white,
+    flex: 1,
   },
 });
 export default BuyerHome;

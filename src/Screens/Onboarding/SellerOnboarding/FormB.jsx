@@ -28,7 +28,7 @@ const FormB = () => {
   const saveToStorage = async () => {
     //Saves user info to realtime database
     await database()
-      .ref(`vendors/${user.uid}`)
+      .ref(`users/${user.uid}`)
       .update({category, businessName, businessDescription});
     //Saves user info to firestore database
     await firestore()
