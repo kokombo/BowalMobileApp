@@ -1,24 +1,35 @@
-import {Image, Text, View, StyleSheet} from 'react-native';
+import {Image, Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {COLORS} from '../../../../constants';
 import ProductIncrement from './ProductIncrement';
+import {useDispatch} from 'react-redux';
+import {removeFromCart} from '../../../Redux/Slices/cartSlice';
 
 const CartItem = ({item}) => {
+  const dispatch = useDispatch();
+  const handleRemoveFromCart = () => {
+    dispatch(removeFromCart(item?.id));
+  };
   return (
     <View style={[styles.body, styles.shadowProp]}>
       <View style={styles.container}>
         <View style={styles.image_wrapper}>
           <Image
-            source={item.productImages[0]}
+            source={item?.productImages[0]}
             style={styles.image}
             resizeMode="contain"
           />
         </View>
         <View style={styles.price_container}>
-          <Text style={styles.product_name}>{item.productName} </Text>
-          <Text style={styles.product_price}>&#8358; {item.productPrice} </Text>
+          <Text style={styles.product_name}>{item?.productName} </Text>
+          <Text style={styles.product_price}>&#8358; {item?.productPrice}</Text>
         </View>
       </View>
-      <ProductIncrement item={item} />
+      <View style={styles.increment_container}>
+        <ProductIncrement item={item} />
+        <TouchableOpacity onPress={handleRemoveFromCart}>
+          <Text style={styles.remove_item_text}>Remove Item</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -70,6 +81,14 @@ const styles = StyleSheet.create({
   price_container: {
     flexDirection: 'column',
     gap: 12,
+  },
+  increment_container: {
+    flexDirection: 'column',
+    gap: 16,
+    alignItems: 'center',
+  },
+  remove_item_text: {
+    color: 'red',
   },
 });
 

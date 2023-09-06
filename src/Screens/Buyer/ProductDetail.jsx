@@ -32,10 +32,9 @@ const ProductDetail = ({route}) => {
 
   //Hence user can add product to cart
   const handleAddToCart = () => {
-    dispatch(addToCart({...data, quantity: 0}));
+    dispatch(addToCart({...data, quantity: 1}));
   };
 
-  let quantity;
   let buttonContainer;
   //Referencing the database to check user's account type. If the user is a vendor, seleting number of products to cart and cart button will not show on the product details page. Only a buyer have access to the features.
   const ref = database().ref(`users/${user.uid}`);
@@ -45,7 +44,6 @@ const ProductDetail = ({route}) => {
   });
 
   if (accountType === 'buyer') {
-    quantity = <ProductQuantity id={id} />;
     buttonContainer = (
       <View style={styles.buttons_container}>
         <TouchableOpacity style={[styles.chat_button, styles.button]}>
@@ -73,7 +71,6 @@ const ProductDetail = ({route}) => {
     <View style={styles.body}>
       <ProductImages images={images} />
       <ProductInfo data={data} />
-      {quantity}
       <ProductDescription description={description} />
       {buttonContainer}
     </View>

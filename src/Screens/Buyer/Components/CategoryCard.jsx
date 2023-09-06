@@ -24,11 +24,11 @@ const CategoryCard = ({item, vendors}) => {
           borderRadius: 10,
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: `${item.backgroundColor}`,
+          backgroundColor: `${item?.backgroundColor}`,
         }}>
-        <Image source={item.image} style={styles.image} resizeMode="contain" />
+        <Image source={item?.image} style={styles.image} resizeMode="contain" />
       </View>
-      <Text style={styles.text}>{item.name} </Text>
+      <Text style={styles.text}>{item?.name} </Text>
     </TouchableOpacity>
   );
 };
