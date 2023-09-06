@@ -28,11 +28,11 @@ const FormB = () => {
   const saveToStorage = async () => {
     //Saves user info to realtime database
     await database()
-      .ref(`users/${user.uid}`)
+      .ref(`vendors/${user.uid}`)
       .update({category, businessName, businessDescription});
     //Saves user info to firestore database
     await firestore()
-      .collection('users')
+      .collection('vendors')
       .doc(`${user.uid}`)
       .set({category, businessName, businessDescription});
   };
@@ -83,10 +83,10 @@ const FormB = () => {
               style={styles.business_description_input}
               value={businessDescription}
               onChangeText={setBusinessDescription}
-              maxLength={60}
+              maxLength={65}
             />
             {businessDescription.length > 0 && (
-              <Text style={styles.count}>{businessDescription.length}/60</Text>
+              <Text style={styles.count}>{businessDescription.length}/65</Text>
             )}
           </View>
         </View>

@@ -15,7 +15,7 @@ export const fetchProducts = createAsyncThunk(
     const uid = state.currentUser.user.uid;
     try {
       const query = await firestore()
-        .collection('users')
+        .collection('vendors')
         .doc(`${uid}`)
         .collection('products')
         .orderBy('timeStamp', 'desc')
@@ -39,7 +39,7 @@ export const addProduct = createAsyncThunk(
     const id = state.currentUser.user.uid;
     try {
       await firestore()
-        .collection('users')
+        .collection('vendors')
         .doc(`${id}`)
         .collection('products')
         .add({

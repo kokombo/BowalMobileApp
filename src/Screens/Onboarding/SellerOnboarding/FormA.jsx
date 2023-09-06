@@ -78,7 +78,7 @@ const FormA = () => {
 
           //store user's info to firebase firestore
           database()
-            .ref(`users/${res.user.uid}`)
+            .ref(`vendors/${res.user.uid}`)
             .set({name: fullname, accountType: 'vendor', phoneNumber: phone});
           //After signup, navigates to formB (a component that handles vendor's business info)
           navigation.navigate('FormB');

@@ -73,7 +73,7 @@ const AddProduct = ({navigation}) => {
           <View style={styles.label_container}>
             <Text style={styles.label}>Product Name</Text>
             {productName.length > 0 && (
-              <Text style={styles.count}>{productName.length}/15</Text>
+              <Text style={styles.count}>{productName.length}/20</Text>
             )}
           </View>
 
@@ -81,7 +81,7 @@ const AddProduct = ({navigation}) => {
             style={styles.input}
             onChangeText={value => setProductName(value)}
             autoCorrect={false}
-            maxLength={15}
+            maxLength={20}
           />
         </View>
         <View style={styles.input_wrapper}>

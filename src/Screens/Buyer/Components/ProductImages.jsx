@@ -13,7 +13,12 @@ const ProductImages = ({images}) => {
           style={styles.image}
           resizeMode="contain"
         /> */}
-        <SliderBox images={images} sliderBoxHeight={230} parentWidth={275} />
+        <SliderBox
+          images={images}
+          sliderBoxHeight={230}
+          parentWidth={275}
+          dotColor={COLORS.blue}
+        />
       </View>
       <View></View>
     </View>
@@ -33,6 +38,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
+    paddingTop: 20,
   },
   image: {
     width: 275,

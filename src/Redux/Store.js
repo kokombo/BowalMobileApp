@@ -6,6 +6,7 @@ import createUserSliceReducer from './Slices/createUserSlice';
 import currentUserSliceReducer from './Slices/currentUserSlice';
 import getVendorSliceReducer from './Slices/getVendorSlice';
 import savedVendorSliceReducer from './Slices/savedVendorSlice';
+import cartSliceReducer from './Slices/cartSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     currentUser: currentUserSliceReducer,
     vendors: getVendorSliceReducer,
     savedVendors: savedVendorSliceReducer,
+    cart: cartSliceReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
