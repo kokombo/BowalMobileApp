@@ -1,15 +1,14 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {COLORS, FONT} from '../../../constants';
-import {
-  ProductImages,
-  ProductInfo,
-  ProductDescription,
-  ProductQuantity,
-} from './Components';
+import {ProductImages, ProductInfo, ProductDescription} from './Components';
 import database from '@react-native-firebase/database';
 import {useSelector, useDispatch} from 'react-redux';
 import {useState} from 'react';
-import {addToCart, removeFromCart} from '../../Redux/Slices/cartSlice';
+import {
+  addToCart,
+  removeFromCart,
+  calculateTotalPrice,
+} from '../../Redux/Slices/cartSlice';
 
 const ProductDetail = ({route}) => {
   const dispatch = useDispatch();
@@ -28,11 +27,13 @@ const ProductDetail = ({route}) => {
   //If a product exists in cart already, user can remove.
   const handleRemoveFromCart = () => {
     dispatch(removeFromCart(id));
+    dispatch(calculateTotalPrice());
   };
 
   //Hence user can add product to cart
   const handleAddToCart = () => {
     dispatch(addToCart({...data, quantity: 1}));
+    dispatch(calculateTotalPrice());
   };
 
   let buttonContainer;
@@ -54,7 +55,7 @@ const ProductDetail = ({route}) => {
           <TouchableOpacity
             onPress={handleRemoveFromCart}
             style={[styles.cart_button, styles.button, styles.remove_button]}>
-            <Text style={styles.cart_text}>Remove </Text>
+            <Text style={styles.cart_text}>Remove</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity

@@ -2,9 +2,10 @@ import {View, StyleSheet, Text, FlatList} from 'react-native';
 import {COLORS} from '../../../constants';
 import {useSelector} from 'react-redux';
 import {CartItem} from './Components';
+import commaNumber from 'comma-number';
 
 const Cart = () => {
-  const {cartItems} = useSelector(store => store.cart);
+  const {cartItems, total} = useSelector(store => store.cart);
 
   const renderItem = ({item}) => {
     return <CartItem item={item} />;
@@ -28,7 +29,16 @@ const Cart = () => {
     );
   }
 
-  return <View style={styles.body}>{content}</View>;
+  return (
+    <View style={styles.body}>
+      {content}
+      {total > 0 && (
+        <View style={styles.total}>
+          <Text>&#8358; {commaNumber(total)}</Text>
+        </View>
+      )}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -39,6 +49,14 @@ const styles = StyleSheet.create({
   },
   empty_cart: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  total: {
+    position: 'absolute',
+    bottom: 20,
+    backgroundColor: COLORS.snow,
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },

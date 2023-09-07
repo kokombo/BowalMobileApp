@@ -2,13 +2,19 @@ import {Image, Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {COLORS} from '../../../../constants';
 import ProductIncrement from './ProductIncrement';
 import {useDispatch} from 'react-redux';
-import {removeFromCart} from '../../../Redux/Slices/cartSlice';
+import {
+  removeFromCart,
+  calculateTotalPrice,
+} from '../../../Redux/Slices/cartSlice';
+import commaNumber from 'comma-number';
 
 const CartItem = ({item}) => {
   const dispatch = useDispatch();
   const handleRemoveFromCart = () => {
     dispatch(removeFromCart(item?.id));
+    dispatch(calculateTotalPrice());
   };
+
   return (
     <View style={[styles.body, styles.shadowProp]}>
       <View style={styles.container}>
@@ -21,7 +27,9 @@ const CartItem = ({item}) => {
         </View>
         <View style={styles.price_container}>
           <Text style={styles.product_name}>{item?.productName} </Text>
-          <Text style={styles.product_price}>&#8358; {item?.productPrice}</Text>
+          <Text style={styles.product_price}>
+            &#8358; {commaNumber(item?.productPrice)}
+          </Text>
         </View>
       </View>
       <View style={styles.increment_container}>
