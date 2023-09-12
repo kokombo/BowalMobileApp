@@ -2,9 +2,13 @@ import {View, Text, Pressable, StyleSheet} from 'react-native';
 import {COLORS} from '../../constants';
 
 const Error = ({error}) => {
+  const handleReset = () => {
+    reset();
+  };
+
   <View style={styles.wrapper}>
     <Text>{error} </Text>
-    <Pressable style={styles.button}>
+    <Pressable style={styles.button} onPress={handleReset}>
       <Text>Try again</Text>
     </Pressable>
   </View>;

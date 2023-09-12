@@ -28,7 +28,7 @@ const CartItem = ({item}) => {
         <View style={styles.price_container}>
           <Text style={styles.product_name}>{item?.productName} </Text>
           <Text style={styles.product_price}>
-            &#8358; {commaNumber(item?.productPrice)}
+            &#8358;{commaNumber(item?.productPrice)}
           </Text>
         </View>
       </View>

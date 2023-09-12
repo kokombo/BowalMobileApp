@@ -15,6 +15,7 @@ import auth from '@react-native-firebase/auth';
 import DisplayName from './DisplayName';
 import {useSelector, useDispatch} from 'react-redux';
 import {signout} from '../Redux/Slices/currentUserSlice';
+import {DrawerActions} from '@react-navigation/native';
 
 const Aside = () => {
   const [aside] = useState(sidebarData);
@@ -62,6 +63,7 @@ const Aside = () => {
                 style={styles.card}
                 onPress={() => {
                   navigation.navigate(`${item.text}`);
+                  navigation.dispatch(DrawerActions.closeDrawer());
                 }}>
                 <View style={styles.icon_wrapper}>
                   <Image source={item.icon} style={styles.icon} />

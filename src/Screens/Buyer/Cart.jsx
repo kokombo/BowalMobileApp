@@ -34,7 +34,7 @@ const Cart = () => {
       {content}
       {total > 0 && (
         <View style={styles.total}>
-          <Text>&#8358; {commaNumber(total)}</Text>
+          <Text>&#8358;{commaNumber(total.toFixed(2))}</Text>
         </View>
       )}
     </View>
@@ -59,6 +59,8 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    alignSelf: 'center',
+    paddingVertical: 10,
   },
 });
 export default Cart;
