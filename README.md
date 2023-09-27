@@ -1,17 +1,10 @@
 # About The Project
 
-This is a cross-platform mobile application called Bowal, bootstrapped with react-native-community/cli.
+Bowal is a cross-platform mobile application bootstrapped with react-native-community/cli and powered with Firebase for backend operations.
 
-Bowal is a multi-vendor e-commerce marketplace that leverages geo-location technology to buying and selling online in Africa. 
+The app is a multi-vendor e-commerce marketplace that leverages geo-location technology to buying and selling online in Africa. A user can signup as either a buyer or a vendor.
 
-Firebase is used for the backend and daata storage. 
-
-This mobile app allows a user to sign up as a vendor(merchant) or a seller. 
-
-
-
-
-
+visit https://samuelibrahim.com/projects/bowal-mobile-app to see the mobile app screens.
 
 # Getting Started
 
