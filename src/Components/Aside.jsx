@@ -11,32 +11,17 @@ import {COLORS, assets} from '../../constants';
 import {sidebarData} from '../../constants/data';
 import {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import auth from '@react-native-firebase/auth';
 import DisplayName from './DisplayName';
-import {useSelector, useDispatch} from 'react-redux';
-import {signout} from '../Redux/Slices/currentUserSlice';
+import {useSelector} from 'react-redux';
 import {DrawerActions} from '@react-navigation/native';
+import useSignOut from '../utilities/useSignOut';
 
 const Aside = () => {
   const [aside] = useState(sidebarData);
   const navigation = useNavigation();
-  const dispatch = useDispatch();
+  const {logOut} = useSignOut();
 
   const {user} = useSelector(store => store.currentUser);
-
-  const logOut = async () => {
-    await auth()
-      .signOut()
-      .then(() => {
-        dispatch(signout());
-        navigation.navigate('Signin');
-      })
-      .catch(error => {
-        if (error === 'auth/no-current-user') {
-          Alert.alert('No active user');
-        }
-      });
-  };
 
   useEffect(() => {
     if (user === null) {

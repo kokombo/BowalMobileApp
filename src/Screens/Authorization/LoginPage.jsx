@@ -44,6 +44,7 @@ const LoginPage = () => {
               email: res.user.email,
               displayName: res.user.displayName,
               uid: res.user.uid,
+              picture: res.user.photoURL,
             }),
           );
           //referencing databse storage to pullout a user's account type while logging in. This is necessary to navigate to the appropriate screen.
@@ -88,7 +89,6 @@ const LoginPage = () => {
           }
         })
         .finally(() => {
-          // empty password input in login page
           // setPassword('');
           setLoading(false);
         });

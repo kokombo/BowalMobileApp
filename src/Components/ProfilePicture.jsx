@@ -1,11 +1,13 @@
 import {View, StyleSheet, Image} from 'react-native';
-import {assets} from '../../constants';
+import {useSelector} from 'react-redux';
 
 const ProfilePicture = ({width, height}) => {
+  const {user} = useSelector(store => store.currentUser);
+
   return (
     <View style={{width: width, height: height}}>
       <Image
-        source={assets.profilepicture}
+        source={{uri: user?.picture}}
         style={styles.image}
         resizeMode="contain"
       />

@@ -1,8 +1,40 @@
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {COLORS, assets} from '../../../constants';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+import {login} from '../../Redux/Slices/currentUserSlice';
+import {useDispatch} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
+GoogleSignin.configure();
 // Component to sign in with Google auth.
 const QuickSignIn = ({heading, cta, link, onPressLink}) => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+
+  const handleGoogleSignin = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const res = await GoogleSignin.signIn();
+      if (res) {
+        dispatch(
+          login({
+            email: res.user.email,
+            displayName: res.user.name,
+            uid: res.user.id,
+            picture: res.user.photo,
+          }),
+        );
+        navigation.navigate('BuyerStack');
+      }
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+      }
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View>
@@ -10,7 +42,9 @@ const QuickSignIn = ({heading, cta, link, onPressLink}) => {
       </View>
 
       <View style={styles.social_auth_container}>
-        <TouchableOpacity style={styles.google_wrapper}>
+        <TouchableOpacity
+          style={styles.google_wrapper}
+          onPress={handleGoogleSignin}>
           <Image source={assets.google} style={styles.icon} />
         </TouchableOpacity>
       </View>
