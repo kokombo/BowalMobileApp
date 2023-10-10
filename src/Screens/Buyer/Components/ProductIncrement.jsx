@@ -34,7 +34,10 @@ const ProductIncrement = ({item}) => {
       <TouchableOpacity style={styles.icon_wrapper} onPress={increaseCount}>
         <Text style={styles.text}>+</Text>
       </TouchableOpacity>
-      <Text style={styles.text}>{item?.quantity}</Text>
+      <View style={styles.count_container}>
+        <Text style={[styles.text, styles.count]}>{item?.quantity}</Text>
+      </View>
+
       <TouchableOpacity style={styles.icon_wrapper} onPress={decreaseCount}>
         <Text style={styles.text}>-</Text>
       </TouchableOpacity>
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: 15,
   },
   icon_wrapper: {
     width: 30,
@@ -58,6 +61,13 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: FONT.lg,
+  },
+  count: {
+    position: 'absolute',
+  },
+  count_container: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 export default ProductIncrement;

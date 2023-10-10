@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   body: {
     height: 132,
     padding: 15,
-    width: '100%',
+    maxWidth: '100%',
     borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center',
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   image_wrapper: {
-    width: '40%',
+    width: 100,
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
