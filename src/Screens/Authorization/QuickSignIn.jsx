@@ -1,4 +1,11 @@
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Alert,
+} from 'react-native';
 import {COLORS, assets} from '../../../constants';
 import {
   GoogleSignin,
@@ -17,7 +24,9 @@ const QuickSignIn = ({heading, cta, link, onPressLink}) => {
   const handleGoogleSignin = async () => {
     try {
       await GoogleSignin.hasPlayServices();
+
       const res = await GoogleSignin.signIn();
+
       if (res) {
         dispatch(
           login({
@@ -27,10 +36,12 @@ const QuickSignIn = ({heading, cta, link, onPressLink}) => {
             picture: res.user.photo,
           }),
         );
+
         navigation.navigate('BuyerStack');
       }
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        Alert.alert('Cancelled!');
       }
     }
   };

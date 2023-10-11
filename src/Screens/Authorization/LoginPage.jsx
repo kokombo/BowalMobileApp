@@ -26,19 +26,15 @@ const LoginPage = () => {
 
   //Function to log users into the application
   const Login = async () => {
-    /*
-     If statement to check the format of the inputed email.
-    */
     if (!email.includes('@') || !email.includes('.com')) {
       setPageError('Please enter a valid email address');
     } else {
-      // Initiate loading
       setLoading(true);
+
       //Sign a user with firebase method
       await auth()
         .signInWithEmailAndPassword(email, password)
         .then(res => {
-          // dispatch login after credentials authorization
           dispatch(
             login({
               email: res.user.email,
@@ -47,40 +43,43 @@ const LoginPage = () => {
               picture: res.user.photoURL,
             }),
           );
+
           //referencing databse storage to pullout a user's account type while logging in. This is necessary to navigate to the appropriate screen.
+
           const ref = database().ref(`users/${res.user.uid}`);
           ref.on('value', snapshot => {
             const accountType = snapshot.child('accountType').val();
+
             if (accountType === 'buyer') {
               navigation.navigate('BuyerStack');
             }
+
             if (accountType === 'vendor') {
-              //If it is a vendor logging in, fetch products will dispatch  before navigating to the vendor screen.
               dispatch(fetchProducts());
               navigation.navigate('VendorStack');
             }
           });
         })
         .catch(error => {
-          /*
-          Handling possible login errors
-          */
-
           if (error.code === 'auth/invalid-email') {
             Alert.alert('Invalid email address!');
           }
+
           if (error.code === 'auth/user-disabled') {
             Alert.alert('Error!', 'Your account has been disabled');
           }
+
           if (error.code === 'auth/user-not-found') {
             Alert.alert(
               'User not found!',
               'Please check your credentials and try again',
             );
           }
+
           if (error.code === 'auth/wrong-password') {
             Alert.alert('Wrong password!');
           }
+
           if (error.code === 'auth/network-request-failed') {
             Alert.alert(
               'Network error!',
@@ -89,7 +88,7 @@ const LoginPage = () => {
           }
         })
         .finally(() => {
-          // setPassword('');
+          setPassword('');
           setLoading(false);
         });
     }
