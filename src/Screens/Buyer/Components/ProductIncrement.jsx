@@ -5,7 +5,6 @@ import {
   increase,
   decrease,
   removeFromCart,
-  calculateTotalPrice,
 } from '../../../Redux/Slices/cartSlice';
 
 const ProductIncrement = ({item}) => {
@@ -14,7 +13,6 @@ const ProductIncrement = ({item}) => {
   //Function to increase the count of each product in cart.
   const increaseCount = () => {
     dispatch(increase(item?.id));
-    dispatch(calculateTotalPrice());
   };
 
   //Function to decrease the count of each product in cart
@@ -22,10 +20,8 @@ const ProductIncrement = ({item}) => {
     //If the quanity of the item picked by a user is one when the decreased button is clicked, the item will be removed from cart since the next number afer 1 is zero (when decreasing).
     if (item?.quantity === 1) {
       dispatch(removeFromCart(item?.id));
-      dispatch(calculateTotalPrice());
     } else {
       dispatch(decrease(item?.id));
-      dispatch(calculateTotalPrice());
     }
   };
 

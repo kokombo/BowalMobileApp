@@ -2,17 +2,13 @@ import {Image, Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {COLORS} from '../../../../constants';
 import ProductIncrement from './ProductIncrement';
 import {useDispatch} from 'react-redux';
-import {
-  removeFromCart,
-  calculateTotalPrice,
-} from '../../../Redux/Slices/cartSlice';
+import {removeFromCart} from '../../../Redux/Slices/cartSlice';
 import commaNumber from 'comma-number';
 
 const CartItem = ({item}) => {
   const dispatch = useDispatch();
   const handleRemoveFromCart = () => {
     dispatch(removeFromCart(item?.id));
-    dispatch(calculateTotalPrice());
   };
 
   return (

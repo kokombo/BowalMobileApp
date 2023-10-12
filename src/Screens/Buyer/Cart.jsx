@@ -1,11 +1,19 @@
 import {View, StyleSheet, Text, FlatList} from 'react-native';
 import {COLORS} from '../../../constants';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {CartItem} from './Components';
 import commaNumber from 'comma-number';
+import {useEffect} from 'react';
+import {calculateTotalPrice} from '../../Redux/Slices/cartSlice';
 
 const Cart = () => {
-  const {cartItems, total} = useSelector(store => store.cart);
+  const {cartItems, total, quantity} = useSelector(store => store.cart);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(calculateTotalPrice());
+  }, [cartItems, quantity]);
 
   const renderItem = ({item}) => {
     return <CartItem item={item} />;

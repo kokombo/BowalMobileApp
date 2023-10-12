@@ -3,7 +3,7 @@ import {COLORS, FONT} from '../../../constants';
 import {ProductImages, ProductInfo, ProductDescription} from './Components';
 import database from '@react-native-firebase/database';
 import {useSelector, useDispatch} from 'react-redux';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {
   addToCart,
   removeFromCart,
@@ -27,13 +27,11 @@ const ProductDetail = ({route}) => {
   //If a product exists in cart already, user can remove.
   const handleRemoveFromCart = () => {
     dispatch(removeFromCart(id));
-    dispatch(calculateTotalPrice());
   };
 
   //Hence user can add product to cart
   const handleAddToCart = () => {
     dispatch(addToCart({...data, quantity: 1}));
-    dispatch(calculateTotalPrice());
   };
 
   let buttonContainer;
