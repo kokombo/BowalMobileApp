@@ -3,12 +3,8 @@ import {COLORS, FONT} from '../../../constants';
 import {ProductImages, ProductInfo, ProductDescription} from './Components';
 import database from '@react-native-firebase/database';
 import {useSelector, useDispatch} from 'react-redux';
-import {useState, useEffect} from 'react';
-import {
-  addToCart,
-  removeFromCart,
-  calculateTotalPrice,
-} from '../../Redux/Slices/cartSlice';
+import {useState} from 'react';
+import {addToCart, removeFromCart} from '../../Redux/Slices/cartSlice';
 
 const ProductDetail = ({route}) => {
   const dispatch = useDispatch();
