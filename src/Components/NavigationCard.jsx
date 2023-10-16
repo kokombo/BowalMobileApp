@@ -18,7 +18,6 @@ const NavigationCard = ({data}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  // Getting the current logged in user from user state in redux
   const {user} = useSelector(store => store.currentUser);
 
   //Function handling signout // This is temporary here for development

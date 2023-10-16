@@ -17,8 +17,10 @@ import {DrawerActions} from '@react-navigation/native';
 import useSignOut from '../utilities/useSignOut';
 
 const Aside = () => {
-  const [aside] = useState(sidebarData);
+  const [data, setData] = useState(sidebarData);
+
   const navigation = useNavigation();
+
   const {logOut} = useSignOut();
 
   const {user} = useSelector(store => store.currentUser);
@@ -27,7 +29,7 @@ const Aside = () => {
     if (user === null) {
       logOut();
     }
-  }, []);
+  }, [user]);
 
   return (
     <SafeAreaView>
@@ -41,7 +43,7 @@ const Aside = () => {
       <View style={styles.aside_body}>
         <Text style={styles.menu}>Menu</Text>
         <View style={styles.navigations_container}>
-          {aside.map(item => {
+          {data.map(item => {
             return (
               <TouchableOpacity
                 key={item.id}

@@ -12,8 +12,8 @@ import {useDispatch, useSelector} from 'react-redux';
 
 const AddProductImage = () => {
   const dispatch = useDispatch();
+
   const {selectedImages} = useSelector(store => store.imageSelector);
-  console.log(selectedImages.length);
 
   if (selectedImages.length > 3) {
     Alert.alert('Warning!', 'You can only select up to three images');

@@ -1,12 +1,12 @@
 import {Modal, View, Text, StyleSheet, StatusBar, Platform} from 'react-native';
 import {COLORS} from '../../constants';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {closeAlert} from '../Redux/Slices/customAlertSlice';
 import {useDispatch, useSelector} from 'react-redux';
 
 const CustomAlert = ({text, color}) => {
   const {alertShown} = useSelector(store => store.alert);
-  console.log(alertShown);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

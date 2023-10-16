@@ -24,10 +24,10 @@ const Location = () => {
         setPermissionStatus('Location permission granted');
       }
     } catch (error) {
-      // console.log('error', error);
       Alert.alert(error.message);
     }
   };
+
   useEffect(() => {
     requestLocalPermision();
   }, []);
@@ -43,7 +43,6 @@ const Location = () => {
           });
         },
         error => {
-          // console.log(error.code, error.message);
           Alert.alert(error.code, error.message);
         },
         {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
@@ -59,12 +58,12 @@ const Location = () => {
   setTimeout(() => {
     Geocoder.from(userPosition.latitude, userPosition.longitude).then(json => {
       let formatted_address = json?.results[0].formatted_address;
+
       let city_address = json?.results[5].formatted_address;
+
       setUserLocation({address: formatted_address, city: city_address});
     });
   }, 150);
-
-  // console.log(userLocation);
 
   return (
     <View

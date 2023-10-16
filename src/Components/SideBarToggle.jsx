@@ -4,6 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 
 const SideBarToggle = () => {
   const navigation = useNavigation();
+
   return (
     <TouchableOpacity
       onPress={() => {
