@@ -6,7 +6,7 @@ const ProductDescription = ({description}) => {
   const [showDescription, setShowDescription] = useState(false);
 
   const toggleShow = () => {
-    setShowDescription(!showDescription);
+    setShowDescription(prev => !prev);
   };
 
   return (

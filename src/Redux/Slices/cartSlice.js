@@ -16,22 +16,27 @@ const cartSlice = createSlice({
     addToCart: (state, action) => {
       state.cartItems.push(action.payload);
     },
+
     clearCart: (state, action) => {
       state.cartItems = [];
     },
+
     removeFromCart: (state, action) => {
       state.cartItems = state.cartItems.filter(
         item => item.id !== action.payload,
       );
     },
+
     increase: (state, action) => {
       const cartItem = state.cartItems.find(item => item.id === action.payload);
       cartItem.quantity = cartItem.quantity + 1;
     },
+
     decrease: (state, action) => {
       const cartItem = state.cartItems.find(item => item.id === action.payload);
       cartItem.quantity = cartItem.quantity - 1;
     },
+
     calculateTotalPrice: (state, action) => {
       let eachProductQuantity = 0;
       let eachProductTotal = 0;

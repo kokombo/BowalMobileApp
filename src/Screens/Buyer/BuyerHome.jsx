@@ -7,6 +7,7 @@ import {RefreshController} from '../../Components';
 
 const BuyerHome = () => {
   const {vendors} = useSelector(store => store.vendors);
+  
   const renderItem = ({item}) => {
     return <VendorCard vendor={item} />;
   };

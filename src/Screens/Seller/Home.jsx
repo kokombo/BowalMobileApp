@@ -2,7 +2,6 @@ import {View, StyleSheet, SafeAreaView} from 'react-native';
 import {COLORS} from '../../../constants';
 import {HomeHeader} from './Components';
 import Greeting from './Components/Greeting';
-import {Location} from '../../Components';
 
 import ProductsContainer from './ProductsContainer';
 

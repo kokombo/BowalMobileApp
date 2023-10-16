@@ -30,6 +30,7 @@ const FormB = () => {
     await database()
       .ref(`users/${user.uid}`)
       .update({category, businessName, businessDescription});
+
     //Saves user info to firestore database
     await firestore()
       .collection('vendors')

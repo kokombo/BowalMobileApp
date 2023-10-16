@@ -20,6 +20,7 @@ const Cart = () => {
   };
 
   let content;
+
   if (cartItems.length === 0) {
     content = (
       <View style={styles.empty_cart}>

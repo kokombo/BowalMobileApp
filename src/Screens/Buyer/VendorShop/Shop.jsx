@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {View, ActivityIndicator, StyleSheet, Text} from 'react-native';
-import {ProductCard} from '../../../Components';
+import {ProductCard, Error} from '../../../Components';
 import {COLORS, FONT} from '../../../../constants';
 import {useSelector, useDispatch} from 'react-redux';
 import {getVendorProducts} from '../../../Redux/Slices/getVendorSlice';
@@ -9,18 +9,20 @@ const Shop = ({vendor}) => {
   const dispatch = useDispatch();
 
   const {status, products, error} = useSelector(store => store.vendors);
+
   const id = vendor?.id;
 
-  //useEffect that dispatches fetching the product of each vendor.
+  //useEffect to dispatch the fetching of each vendor's products
   useEffect(() => {
     dispatch(getVendorProducts(id));
   }, []);
 
   let content;
+
   if (status === 'loading') {
     content = <ActivityIndicator size="large" color={COLORS.blue} />;
   } else if (status === 'failed') {
-    content = <Text>{error} </Text>;
+    content = <Error error={'Something went wrong, please try again'} />;
   } else {
     if (products.length === 0) {
       content = (

@@ -7,6 +7,7 @@ import commaNumber from 'comma-number';
 
 const CartItem = ({item}) => {
   const dispatch = useDispatch();
+
   const handleRemoveFromCart = () => {
     dispatch(removeFromCart(item?.id));
   };

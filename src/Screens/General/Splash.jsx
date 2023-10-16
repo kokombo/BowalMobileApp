@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux';
 
 const Splash = ({navigation}) => {
   const {user} = useSelector(store => store.currentUser);
+
   useEffect(() => {
     setTimeout(() => {
       if (user) {

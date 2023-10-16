@@ -18,8 +18,6 @@ const FormA = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-
-  const [authError, setAuthError] = useState('');
   const [error, setError] = useState({
     auth: ' ',
     password: ' ',
@@ -27,7 +25,6 @@ const FormA = () => {
     page: ' ',
     err: false,
   });
-  const [passwordError, setPasswordError] = useState(''); //This is used to monitor password format error
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -37,10 +34,6 @@ const FormA = () => {
 
   //Function to sign up a user for a vendor account
   const handleSignUp = async () => {
-    /*
-     If statement to check the format of the inputed email.
-     Followed by an else if statement to inspect the length of the inputed password
-    */
     if (!email.includes('@') || !email.includes('.com')) {
       setError({err: true, page: 'Please enter a valid email address'});
     } else if (phone.length !== 11) {
@@ -51,13 +44,14 @@ const FormA = () => {
         password: 'Password should be at least 6 characters',
       });
     } else {
-      // Initiate loading
       setLoading(true);
+
       // create a new user vendor account
       await auth()
         .createUserWithEmailAndPassword(email, password)
         .then(res => {
           setPassword('');
+
           //update user account to store user's name, phonenumber and specify vendor account (using isAnonymous: false)
           res.user
             .updateProfile({
@@ -80,12 +74,13 @@ const FormA = () => {
           database()
             .ref(`users/${res.user.uid}`)
             .set({name: fullname, accountType: 'vendor', phoneNumber: phone});
+
           //After signup, navigates to formB (a component that handles vendor's business info)
           navigation.navigate('FormB');
+
           Alert.alert('Welcome!', 'You have successfully created your account');
         })
         .catch(error => {
-          // catch possible signup errors
           if (error.code === 'auth/email-already-in-use') {
             Alert.alert('Error!', 'Email address already in use');
             setError({err: true, auth: 'Email already in use'});
@@ -121,7 +116,7 @@ const FormA = () => {
     }
   };
 
-  //Use effect to set timeout for error state
+  //useEffect to set timeout for error state
   useEffect(() => {
     const timer = setTimeout(() => {
       setError({err: false});

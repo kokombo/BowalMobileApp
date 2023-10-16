@@ -8,13 +8,19 @@ import {addToCart, removeFromCart} from '../../Redux/Slices/cartSlice';
 
 const ProductDetail = ({route}) => {
   const dispatch = useDispatch();
+
   const [accountType, setAccountType] = useState('');
+
   const {data} = route.params;
+
   const images = data?.productImages;
+
   const description = data?.productDescription;
+
   const id = data?.id;
 
   const {user} = useSelector(store => store.currentUser);
+
   const {cartItems} = useSelector(store => store.cart);
 
   //Checking if a product already exist in the cart
@@ -31,6 +37,7 @@ const ProductDetail = ({route}) => {
   };
 
   let buttonContainer;
+
   //Referencing the database to check user's account type. If the user is a vendor, seleting number of products to cart and cart button will not show on the product details page. Only a buyer have access to the features.
   const ref = database().ref(`users/${user.uid}`);
   ref.on('value', snapshot => {

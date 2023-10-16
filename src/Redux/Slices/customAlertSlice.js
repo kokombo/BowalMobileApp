@@ -18,4 +18,5 @@ const customAlertSlice = createSlice({
 });
 
 export const {showAlert, closeAlert} = customAlertSlice.actions;
+
 export default customAlertSlice.reducer;

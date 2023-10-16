@@ -11,6 +11,7 @@ const VendorsList = ({route}) => {
   };
 
   let content;
+
   if (filteredVendors.length === 0) {
     content = (
       <View style={styles.no_vendor_container}>

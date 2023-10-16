@@ -14,6 +14,7 @@ import {Error} from '../../Components';
 
 const SavedBusinesses = () => {
   const dispatch = useDispatch();
+
   const {vendors, status, error} = useSelector(store => store.savedVendors);
 
   useEffect(() => {
@@ -27,6 +28,7 @@ const SavedBusinesses = () => {
   };
 
   let content;
+
   if (status === 'loading') {
     content = <ActivityIndicator size={'large'} color={COLORS.blue} />;
   } else if (status === 'failed') {

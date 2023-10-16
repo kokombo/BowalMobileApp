@@ -12,6 +12,7 @@ const SaveVendor = ({vendor}) => {
 
   //Selecting the current user(buyer) who is trying to save a vendor.
   const {user} = useSelector(store => store.currentUser);
+
   const userId = user?.uid;
 
   //Getting the saved vendors for a particular user

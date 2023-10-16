@@ -3,18 +3,17 @@ import {ProductCard, RefreshController, Error} from '../../Components';
 import {COLORS} from '../../../constants';
 import {NoProduct} from './Components';
 import {useSelector} from 'react-redux';
-import {fetchProducts} from '../../Redux/Slices/ProductSlice';
-import {useEffect} from 'react';
 
 //Component that holds each vendor's products
 const ProductsContainer = ({ListHeaderComponent}) => {
-  const {status, productsArray, error} = useSelector(store => store.product);
+  const {status, productsArray} = useSelector(store => store.product);
 
   const renderItem = ({item}) => {
     return <ProductCard data={item} />;
   };
 
   let content;
+
   if (status === 'loading') {
     content = (
       <View style={styles.activity_container}>
@@ -22,7 +21,7 @@ const ProductsContainer = ({ListHeaderComponent}) => {
       </View>
     );
   } else if (status === 'failed') {
-    content = <Error error={error} />;
+    content = <Error error={'Something went wrong, please try again'} />;
   } else {
     if (productsArray.length === 0) {
       content = <NoProduct />;

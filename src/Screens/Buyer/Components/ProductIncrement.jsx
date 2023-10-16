@@ -10,12 +10,10 @@ import {
 const ProductIncrement = ({item}) => {
   const dispatch = useDispatch();
 
-  //Function to increase the count of each product in cart.
   const increaseCount = () => {
     dispatch(increase(item?.id));
   };
 
-  //Function to decrease the count of each product in cart
   const decreaseCount = () => {
     //If the quanity of the item picked by a user is one when the decreased button is clicked, the item will be removed from cart since the next number afer 1 is zero (when decreasing).
     if (item?.quantity === 1) {

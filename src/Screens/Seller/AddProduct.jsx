@@ -24,10 +24,11 @@ const AddProduct = ({navigation}) => {
   const [productDescription, setProductDescription] = useState('');
 
   const dispatch = useDispatch();
+
   const {status} = useSelector(store => store.product);
+
   const {selectedImages} = useSelector(store => store.imageSelector);
 
-  //To further ensure exactly 3 images are uploaded to firestore for each product.
   const productImages = selectedImages.slice(0, 3);
 
   // Function that handles product upload.
@@ -42,9 +43,7 @@ const AddProduct = ({navigation}) => {
 
     if (canNotSave) {
       Alert.alert('Oops!', 'Please provide all product details before adding.');
-      // return <CustomAlert text = {"Can't add product"} />
     } else {
-      //If a user can upload the product, addProduct(available in ProductSlice) will be dispatched
       dispatch(
         addProduct({
           productName,
@@ -56,10 +55,14 @@ const AddProduct = ({navigation}) => {
           date: new Date().toDateString(),
         }),
       );
+
       //After striking the add button
       dispatch(clearImages());
+
       Alert.alert('Product Added', 'you have successfully added a new product');
+
       dispatch(fetchProducts());
+
       navigation.navigate('Products');
     }
   };

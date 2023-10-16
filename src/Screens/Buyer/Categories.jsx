@@ -16,7 +16,7 @@ const Categories = () => {
     if (status === 'idle') {
       dispatch(getAllVendors());
     }
-  }, [status]);
+  }, []);
 
   const renderItem = ({item}) => {
     return <CategoryCard item={item} vendors={vendors} />;

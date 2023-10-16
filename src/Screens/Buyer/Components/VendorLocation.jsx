@@ -1,5 +1,5 @@
 import {View, Text} from 'react-native';
-import {COLORS, FONT} from '../../../../constants';
+import {FONT} from '../../../../constants';
 
 const VendorLocation = ({color}) => {
   return (

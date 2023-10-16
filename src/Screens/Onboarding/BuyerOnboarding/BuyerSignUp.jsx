@@ -16,8 +16,8 @@ const BuyerSignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [pageError, setPageError] = useState(''); // This is used to monitor email format error
-  const [passwordError, setPasswordError] = useState(''); //This is used to monitor password format error
+  const [pageError, setPageError] = useState(''); // This is used to keep email format error
+  const [passwordError, setPasswordError] = useState(''); //This is used to keep password format error
   const [authError, setAuthError] = useState('');
 
   const navigation = useNavigation();
@@ -28,17 +28,11 @@ const BuyerSignUp = () => {
 
   //Function to sign up a user for a buyer account
   const handleSignUp = async () => {
-    /*
-     If statement to check the format of the inputed email.
-     Followed by an else if statement to inspect the length of the inputed password
-    */
-
     if (!email.includes('@') || !email.includes('.com')) {
       setPageError('Please enter a valid email address');
     } else if (password.length < 6) {
       setPasswordError('Password should be at least 6 characters');
     } else {
-      // Initiate loading
       setLoading(true);
       //Create a new user buyer account with firebase method
       await auth()
@@ -61,14 +55,14 @@ const BuyerSignUp = () => {
           database()
             .ref(`users/${res.user.uid}`)
             .set({name: fullname, accountType: 'buyer'});
-          //navigate user to buyer stack
+
           navigation.navigate('BuyerStack');
+
           Alert.alert(
             'Account created',
             'you have successfully created your account',
           );
         })
-        //handles possible signup error
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
             Alert.alert('Email already in use');
