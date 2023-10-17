@@ -20,7 +20,7 @@ const PasswordInput = ({onChangeText, value}) => {
 
   //password visibility icon onpress to show or hide password.
   const onPress = () => {
-    setIsVisible(!isVisible);
+    setIsVisible(prev => !prev);
   };
 
   return (
