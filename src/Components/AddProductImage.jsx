@@ -52,7 +52,6 @@ const AddProductImage = () => {
       <Text style={styles.info}>upload up to 3 product images</Text>
 
       <ImagePreview />
-      {/* <PreviewImages /> */}
     </View>
   );
 };
