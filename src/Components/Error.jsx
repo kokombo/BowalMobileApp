@@ -2,9 +2,7 @@ import {View, Text, Pressable, StyleSheet} from 'react-native';
 import {COLORS} from '../../constants';
 
 const Error = ({error}) => {
-  const handleReset = () => {
-    reset();
-  };
+  const handleReset = () => {};
 
   <View style={styles.wrapper}>
     <Text>{error} </Text>
