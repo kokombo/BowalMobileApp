@@ -8,6 +8,7 @@ const Reviews = () => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   body: {
     flex: 1,

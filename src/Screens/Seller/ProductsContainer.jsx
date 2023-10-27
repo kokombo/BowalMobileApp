@@ -8,30 +8,24 @@ import {useSelector} from 'react-redux';
 const ProductsContainer = ({ListHeaderComponent}) => {
   const {status, productsArray} = useSelector(store => store.product);
 
-  const renderItem = ({item}) => {
-    return <ProductCard data={item} />;
-  };
+  const renderItem = ({item}) => <ProductCard data={item} />;
 
-  let content;
-
-  if (status === 'loading') {
-    content = (
-      <View style={styles.activity_container}>
-        <ActivityIndicator size={'large'} color={COLORS.blue} />
-      </View>
-    );
-  } else if (status === 'failed') {
-    content = <Error error={'Something went wrong, please try again'} />;
-  } else {
-    if (productsArray.length === 0) {
-      content = <NoProduct />;
-    } else {
-      content = (
+  return (
+    <View style={styles.products_container}>
+      {status === 'loading' ? (
+        <View style={styles.activity_container}>
+          <ActivityIndicator size={'large'} color={COLORS.blue} />
+        </View>
+      ) : status === 'failed' ? (
+        <Error error={'Something went wrong, please try again'} />
+      ) : productsArray.length < 1 ? (
+        <NoProduct />
+      ) : (
         <FlatList
           numColumns={2}
           data={productsArray}
           renderItem={renderItem}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.id.toString()}
           showsVerticalScrollIndicator={false}
           refreshControl={<RefreshController />}
           ListHeaderComponent={ListHeaderComponent}
@@ -41,10 +35,9 @@ const ProductsContainer = ({ListHeaderComponent}) => {
             paddingHorizontal: 5,
           }}
         />
-      );
-    }
-  }
-  return <View style={styles.products_container}>{content}</View>;
+      )}
+    </View>
+  );
 };
 const styles = StyleSheet.create({
   products_container: {

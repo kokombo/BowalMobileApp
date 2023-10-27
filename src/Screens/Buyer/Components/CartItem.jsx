@@ -22,15 +22,19 @@ const CartItem = ({item}) => {
             resizeMode="contain"
           />
         </View>
+
         <View style={styles.price_container}>
           <Text style={styles.product_name}>{item?.productName} </Text>
+
           <Text style={styles.product_price}>
             &#8358;{commaNumber(item?.productPrice)}
           </Text>
         </View>
       </View>
+
       <View style={styles.increment_container}>
         <ProductIncrement item={item} />
+
         <TouchableOpacity onPress={handleRemoveFromCart}>
           <Text style={styles.remove_item_text}>Remove Item</Text>
         </TouchableOpacity>

@@ -23,39 +23,31 @@ const SavedBusinesses = () => {
     }
   }, [vendors]);
 
-  const renderItem = ({item}) => {
-    return <VendorCard vendor={item} />;
-  };
+  const renderItem = ({item}) => <VendorCard vendor={item} />;
 
-  let content;
-
-  if (status === 'loading') {
-    content = <ActivityIndicator size={'large'} color={COLORS.blue} />;
-  } else if (status === 'failed') {
-    content = <Error error={error} />;
-  } else {
-    if (vendors.length === 0) {
-      content = (
+  return (
+    <View style={styles.body}>
+      {status === 'loading' ? (
+        <ActivityIndicator size={'large'} color={COLORS.blue} />
+      ) : status === 'failed' ? (
+        <Error error={'Something went wrong, please try again'} />
+      ) : vendors.length < 1 ? (
         <View style={styles.empty_list_container}>
           <Text style={styles.empty_list_text}>Your list is empty!</Text>
           <Text style={styles.empty_list_text}>
             You haven't save any business yet!
           </Text>
         </View>
-      );
-    } else {
-      content = (
+      ) : (
         <FlatList
           data={vendors}
           renderItem={renderItem}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.id.toString()}
           contentContainerStyle={{gap: 30}}
         />
-      );
-    }
-  }
-
-  return <View style={styles.body}>{content}</View>;
+      )}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({

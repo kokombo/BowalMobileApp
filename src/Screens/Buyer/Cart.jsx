@@ -15,32 +15,23 @@ const Cart = () => {
     dispatch(calculateTotalPrice());
   }, [cartItems, quantity]);
 
-  const renderItem = ({item}) => {
-    return <CartItem item={item} />;
-  };
-
-  let content;
-
-  if (cartItems.length === 0) {
-    content = (
-      <View style={styles.empty_cart}>
-        <Text>Your cart is empty, start adding products</Text>
-      </View>
-    );
-  } else {
-    content = (
-      <FlatList
-        renderItem={renderItem}
-        data={cartItems}
-        keyExtractor={item => item.id}
-        contentContainerStyle={{gap: 10}}
-      />
-    );
-  }
+  const renderItem = ({item}) => <CartItem item={item} />;
 
   return (
     <View style={styles.body}>
-      {content}
+      {cartItems.length < 1 ? (
+        <View style={styles.empty_cart}>
+          <Text>Your cart is empty, start adding products</Text>
+        </View>
+      ) : (
+        <FlatList
+          renderItem={renderItem}
+          data={cartItems}
+          keyExtractor={item => item?.id.toString()}
+          contentContainerStyle={{gap: 10}}
+        />
+      )}
+
       {total > 0 && (
         <View style={styles.total}>
           <Text>&#8358;{commaNumber(total.toFixed(2))}</Text>

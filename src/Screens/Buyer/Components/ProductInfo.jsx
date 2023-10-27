@@ -11,6 +11,7 @@ const ProductInfo = ({data}) => {
     <View style={styles.container}>
       <View style={styles.text_wrapper}>
         <Text style={styles.product_name}>{name} </Text>
+
         <Text style={styles.category}>{category} </Text>
       </View>
 

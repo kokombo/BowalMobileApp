@@ -8,6 +8,7 @@ const AddProductIcon = () => {
   return (
     <View style={styles.plus_container}>
       <Text style={{color: COLORS.blue, fontSize: 18}}>Add</Text>
+
       <TouchableOpacity
         onPress={() => {
           navigation.navigate('Add Product');

@@ -6,36 +6,30 @@ import {RefreshController} from '../../Components';
 const VendorsList = ({route}) => {
   const {filteredVendors} = route.params;
 
-  const renderVendor = ({item}) => {
-    return <VendorCard vendor={item} />;
-  };
+  const renderVendor = ({item}) => <VendorCard vendor={item} />;
 
-  let content;
-
-  if (filteredVendors.length === 0) {
-    content = (
-      <View style={styles.no_vendor_container}>
-        <Text style={styles.no_vendor_text}>
-          There are no vendors yet in this category.
-        </Text>
-        <Text style={styles.no_vendor_text}>
-          Please check other categories.
-        </Text>
-      </View>
-    );
-  } else {
-    content = (
-      <FlatList
-        data={filteredVendors}
-        renderItem={renderVendor}
-        keyExtractor={item => item.id}
-        refreshControl={<RefreshController />}
-        contentContainerStyle={{gap: 30}}
-      />
-    );
-  }
-
-  return <View style={styles.body}>{content}</View>;
+  return (
+    <View style={styles.body}>
+      {filteredVendors.length < 1 ? (
+        <View style={styles.no_vendor_container}>
+          <Text style={styles.no_vendor_text}>
+            There are no vendors yet in this category.
+          </Text>
+          <Text style={styles.no_vendor_text}>
+            Please check other categories.
+          </Text>
+        </View>
+      ) : (
+        <FlatList
+          data={filteredVendors}
+          renderItem={renderVendor}
+          keyExtractor={item => item.id.toString()}
+          refreshControl={<RefreshController />}
+          contentContainerStyle={{gap: 30}}
+        />
+      )}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({

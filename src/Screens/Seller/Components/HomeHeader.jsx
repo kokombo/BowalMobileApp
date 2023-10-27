@@ -1,7 +1,7 @@
 import {View, StyleSheet, Text} from 'react-native';
 import {assets, COLORS} from '../../../../constants';
 import {Location, Analytics} from '../../../Components';
-import Greeting from './Greeting';
+
 import {useSelector} from 'react-redux';
 
 const HomeHeader = () => {
@@ -18,16 +18,19 @@ const HomeHeader = () => {
           icon={assets.totalproducts}
           value={productsNumber}
         />
+
         <Analytics
           title={'Total Visitors'}
           icon={assets.visitors}
           value={'12345'}
         />
       </View>
+
       <Text style={styles.product_container_heading}>Products</Text>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   body: {
     gap: 10,

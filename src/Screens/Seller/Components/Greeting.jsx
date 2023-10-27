@@ -6,6 +6,7 @@ const Greeting = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Welcome,</Text>
+
       <DisplayName color={COLORS.grey} />
     </View>
   );

@@ -9,9 +9,7 @@ import {COLORS} from '../../../constants';
 import {accountTabData} from '../../../constants/data';
 
 const Account = () => {
-  const renderItem = ({item}) => {
-    return <NavigationCard data={item} />;
-  };
+  const renderItem = ({item}) => <NavigationCard data={item} />;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -19,16 +17,20 @@ const Account = () => {
         <View style={styles.profile_picture_frame}>
           <ProfilePicture width={100} height={100} style={styles.picture} />
         </View>
+
         <DisplayName color={COLORS.white} />
       </View>
+
       <View style={styles.curve}></View>
+
       <View style={styles.mode_wrapper}>
         <Mode />
       </View>
+
       <FlatList
         data={accountTabData}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         style={{padding: 15}}
         showsVerticalScrollIndicator={false}
       />

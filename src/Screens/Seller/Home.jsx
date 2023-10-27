@@ -10,8 +10,10 @@ const Home = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.welcome}>
         <Greeting />
+
         {/* <Location /> */}
       </View>
+
       <View style={styles.body}>
         <ProductsContainer ListHeaderComponent={HomeHeader} />
       </View>

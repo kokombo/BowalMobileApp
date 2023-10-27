@@ -2,21 +2,17 @@ import {View, StyleSheet, Image, Text} from 'react-native';
 import {COLORS, assets} from '../../../constants';
 
 const Chats = () => {
-  const Content = () => {
-    return (
-      <View style={styles.no_message_container}>
-        <Image source={assets.nomessage} style={styles.no_message_icon} />
-        <Text style={styles.no_message_text}>No messages yet</Text>
-      </View>
-    );
-  };
-
   return (
     <View style={styles.body}>
-      <Content />
+      <View style={styles.no_message_container}>
+        <Image source={assets.nomessage} style={styles.no_message_icon} />
+
+        <Text style={styles.no_message_text}>No messages yet</Text>
+      </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   body: {
     flex: 1,

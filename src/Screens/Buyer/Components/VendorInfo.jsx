@@ -11,6 +11,7 @@ const VendorInfo = ({vendor}) => {
 
       <View style={styles.location_container}>
         <Text style={styles.vendor_name}>{vendor?.businessName}</Text>
+
         <VendorLocation color={COLORS.gray} />
       </View>
     </View>

@@ -10,6 +10,7 @@ const Products = () => {
         <View style={styles.search_container}>
           <Search placeholder={'Search'} />
         </View>
+
         <ProductsContainer />
       </View>
     </SafeAreaView>

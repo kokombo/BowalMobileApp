@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {COLORS} from '../../../constants';
 import {Location, Search} from '../../Components';
 import {Banner, Greeting, FeaturedCategories} from './Components';
@@ -10,8 +10,11 @@ const BuyerHomeHeader = () => {
         <Greeting />
         {/* <Location /> */}
       </View>
+
       <Search placeholder={'What would you like to buy?'} />
+
       <Banner />
+
       <FeaturedCategories />
     </View>
   );

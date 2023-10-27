@@ -9,9 +9,7 @@ import {COLORS} from '../../../constants';
 import {buyerAccountTabData} from '../../../constants/data';
 
 const BuyerAccount = () => {
-  const renderItem = ({item}) => {
-    return <NavigationCard data={item} />;
-  };
+  const renderItem = ({item}) => <NavigationCard data={item} />;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -19,6 +17,7 @@ const BuyerAccount = () => {
         <View style={styles.profile_picture_frame}>
           <ProfilePicture width={100} height={100} style={styles.picture} />
         </View>
+
         <DisplayName color={COLORS.white} />
       </View>
 

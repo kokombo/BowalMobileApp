@@ -2,24 +2,20 @@ import {View, StyleSheet, Image, Text} from 'react-native';
 import {COLORS, assets} from '../../../constants';
 
 const Notifications = () => {
-  const Content = () => {
-    return (
+  return (
+    <View style={styles.body}>
       <View style={styles.empty_notification}>
         <Image
           source={assets.nonotification}
           style={styles.empty_notification_icon}
         />
+
         <Text style={styles.text}>No notifications yet!</Text>
       </View>
-    );
-  };
-
-  return (
-    <View style={styles.body}>
-      <Content />
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   body: {
     flex: 1,

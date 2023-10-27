@@ -6,6 +6,7 @@ const Logistics = () => {
     <View style={styles.body}>
       <View style={styles.icon_container}>
         <Image source={assets.logisticscomingsoon} style={styles.icon} />
+
         <Text style={styles.coming_soon_text}>Coming soon! </Text>
       </View>
     </View>

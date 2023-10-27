@@ -8,6 +8,7 @@ const Greeting = () => {
       <Text style={{fontSize: 20, fontWeight: '600', color: COLORS.grey}}>
         Hi,
       </Text>
+
       <DisplayName color={COLORS.grey} />
 
       <Image source={assets.wave} style={{width: 25, height: 25}} />

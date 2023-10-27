@@ -12,9 +12,13 @@ const HomeHeader = () => {
         <Greeting />
         {/* <Location /> */}
       </View>
+
       <Search placeholder={'What would you like to buy?'} />
+
       <Banner />
+
       <FeaturedCategories />
+
       <View>
         <Text style={styles.heading_text}>Featued Businesses</Text>
       </View>

@@ -17,34 +17,28 @@ const Shop = ({vendor}) => {
     dispatch(getVendorProducts(id));
   }, []);
 
-  let content;
-
-  if (status === 'loading') {
-    content = <ActivityIndicator size="large" color={COLORS.blue} />;
-  } else if (status === 'failed') {
-    content = <Error error={'Something went wrong, please try again'} />;
-  } else {
-    if (products.length === 0) {
-      content = (
+  return (
+    <View style={styles.body}>
+      {status === 'loading' ? (
+        <ActivityIndicator size="large" color={COLORS.blue} />
+      ) : status === 'failed' ? (
+        <Error error={'Something went wrong, please try again'} />
+      ) : products.length < 1 ? (
         <View style={styles.no_products}>
           <Text style={styles.no_products_text}>
             There are no yet products in this shop.
           </Text>
           <Text style={styles.no_products_text}>Please check other shops!</Text>
         </View>
-      );
-    } else {
-      content = (
+      ) : (
         <View style={styles.product_container}>
           {products.map(product => {
             return <ProductCard key={product.id} data={product} />;
           })}
         </View>
-      );
-    }
-  }
-
-  return <View style={styles.body}>{content}</View>;
+      )}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({

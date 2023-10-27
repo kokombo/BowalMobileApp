@@ -7,19 +7,25 @@ const Info = ({vendor}) => {
     <View style={styles.body}>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Business Name</Text>
+
         <Text style={styles.answer}>{vendor?.businessName}</Text>
       </View>
+
       <View style={styles.wrapper}>
         <Text style={styles.label}>Business Description</Text>
+
         <Text style={styles.answer}>{vendor?.businessDescription} </Text>
       </View>
+
       <View style={styles.wrapper}>
         <Text style={styles.label}>Business Location</Text>
+
         <VendorLocation color={COLORS.grey} />
       </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   body: {
     flex: 1,

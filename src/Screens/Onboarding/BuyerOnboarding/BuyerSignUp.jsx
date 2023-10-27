@@ -11,14 +11,27 @@ import database from '@react-native-firebase/database';
 import {useDispatch} from 'react-redux';
 import {login} from '../../../Redux/Slices/currentUserSlice';
 
+const initialErrorState = {
+  emailError: '',
+  passwordError: '',
+  authError: '',
+};
+
 const BuyerSignUp = () => {
   const [fullname, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [pageError, setPageError] = useState(''); // This is used to keep email format error
-  const [passwordError, setPasswordError] = useState(''); //This is used to keep password format error
-  const [authError, setAuthError] = useState('');
+  const [error, setError] = useState(initialErrorState);
+
+  const displayError = ({emailError, passwordError, authError}) => {
+    setError(error => ({
+      ...error,
+      emailError: emailError,
+      passwordError: passwordError,
+      authError: authError,
+    }));
+  };
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -29,19 +42,22 @@ const BuyerSignUp = () => {
   //Function to sign up a user for a buyer account
   const handleSignUp = async () => {
     if (!email.includes('@') || !email.includes('.com')) {
-      setPageError('Please enter a valid email address');
+      displayError({emailError: 'Please enter a valid email address'});
     } else if (password.length < 6) {
-      setPasswordError('Password should be at least 6 characters');
+      displayError({passwordError: 'Password should be at least 6 characters'});
     } else {
       setLoading(true);
+
       //Create a new user buyer account with firebase method
       await auth()
         .createUserWithEmailAndPassword(email, password)
         .then(res => {
           setPassword('');
+
           //update user account to store user's name.
           res.user.updateProfile({displayName: fullname}).then(
             //dispatch login as a buyer and save credentials to user state in currentUserSlice
+
             dispatch(
               login({
                 email: res.user.email,
@@ -51,28 +67,24 @@ const BuyerSignUp = () => {
               }),
             ),
           );
+
           //store user data to firebase firestore
           database()
             .ref(`users/${res.user.uid}`)
             .set({name: fullname, accountType: 'buyer'});
 
           navigation.navigate('BuyerStack');
-
-          Alert.alert(
-            'Account created',
-            'you have successfully created your account',
-          );
         })
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
             Alert.alert('Email already in use');
-            setAuthError('Email already in use');
           }
           if (error.code === 'auth/invalid-email') {
-            setAuthError('Invalid email address');
+            Alert.alert('Invalid email address');
+            displayError({authError: 'Invalid email address'});
           }
           if (error.code === 'auth/weak-password') {
-            setAuthError(
+            Alert.alert(
               'Password not strong enough, please choose a stronger password',
             );
           }
@@ -80,9 +92,6 @@ const BuyerSignUp = () => {
             Alert.alert(
               'Network error!',
               'Please check your internet connection and try again.',
-            );
-            setAuthError(
-              'A network error has occured, please check your connectivity and try again.',
             );
           }
           if (error.code === 'auth/permission-denied') {
@@ -112,23 +121,27 @@ const BuyerSignUp = () => {
               value={fullname}
               onChangeText={setFullName}
             />
+
             <View>
               <Input
                 placeholder={'Email'}
                 value={email}
                 onChangeText={setEmail}
               />
+
               <View>
-                {pageError && (
-                  <Text style={styles.email_error}>{pageError}</Text>
+                {error.emailError && (
+                  <Text style={styles.email_error}>{error.emailError}</Text>
                 )}
               </View>
             </View>
+
             <View>
               <PasswordInput value={password} onChangeText={setPassword} />
+
               <View>
-                {passwordError && (
-                  <Text style={styles.email_error}>{passwordError}</Text> //This displays the email format error when there is one.
+                {error.passwordError && (
+                  <Text style={styles.email_error}>{error.passwordError}</Text>
                 )}
               </View>
             </View>
@@ -142,6 +155,7 @@ const BuyerSignUp = () => {
             />
           </View>
         </View>
+
         <QuickSignIn
           heading={'or sign up with'}
           cta={'Already have an account?'}

@@ -12,12 +12,15 @@ const Home = ({vendor}) => {
           resizeMode="cover"
           style={styles.shop_image}
         />
+
         <View style={styles.save_vendor_wrapper}>
           <SaveVendor vendor={vendor} />
         </View>
       </View>
+
       <View style={styles.vendorinfo_container}>
         <VendorInfo vendor={vendor} />
+
         <Rating />
       </View>
     </View>

@@ -13,10 +13,12 @@ const FeaturedCategories = () => {
   const renderItem = ({item}) => {
     return <CategoryCard item={item} vendors={vendors} />;
   };
+
   return (
     <View>
       <View style={styles.heading_wrapper}>
         <Text style={styles.heading_text}>Categories</Text>
+
         <TouchableOpacity
           onPress={() => {
             navigation.navigate('Categories');
@@ -24,16 +26,15 @@ const FeaturedCategories = () => {
           <Text style={styles.heading_link}>See all</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.category_container}>
-        <FlatList
-          data={cagtegoriesData.slice(0, 6)}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          horizontal
-          contentContainerStyle={{gap: 15}}
-          showsHorizontalScrollIndicator={false}
-        />
-      </View>
+
+      <FlatList
+        data={cagtegoriesData.slice(0, 6)}
+        renderItem={renderItem}
+        keyExtractor={item => item.id.toString()}
+        horizontal
+        contentContainerStyle={{gap: 15}}
+        showsHorizontalScrollIndicator={false}
+      />
     </View>
   );
 };
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: 20,
   },
   heading_text: {
     fontSize: 18,
@@ -53,9 +55,6 @@ const styles = StyleSheet.create({
     color: COLORS.blue,
     fontSize: 18,
     fontWeight: '300',
-  },
-  category_container: {
-    paddingTop: 20,
   },
 });
 

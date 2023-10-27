@@ -28,6 +28,7 @@ const ProductIncrement = ({item}) => {
       <TouchableOpacity style={styles.icon_wrapper} onPress={increaseCount}>
         <Text style={styles.text}>+</Text>
       </TouchableOpacity>
+
       <View style={styles.count_container}>
         <Text style={[styles.text, styles.count]}>{item?.quantity}</Text>
       </View>

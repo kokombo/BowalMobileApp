@@ -5,6 +5,7 @@ const OnboardingHeading = ({heading, subheading}) => {
   return (
     <View style={styles.container}>
       <Text style={styles._heading}>{heading}</Text>
+
       <Text style={styles.sub_heading}>{subheading} </Text>
     </View>
   );

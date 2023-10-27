@@ -10,6 +10,7 @@ const Rating = () => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   rating_container: {
     flexDirection: 'row',

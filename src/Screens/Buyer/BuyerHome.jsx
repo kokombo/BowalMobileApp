@@ -7,17 +7,15 @@ import {RefreshController} from '../../Components';
 
 const BuyerHome = () => {
   const {vendors} = useSelector(store => store.vendors);
-  
-  const renderItem = ({item}) => {
-    return <VendorCard vendor={item} />;
-  };
+
+  const renderItem = ({item}) => <VendorCard vendor={item} />;
 
   return (
     <View style={styles.body}>
       <FlatList
         data={vendors.slice(0, 20)}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item?.id.toString()}
         ListHeaderComponent={HomeHeader}
         contentContainerStyle={{gap: 30, padding: 15}}
         showsVerticalScrollIndicator={false}

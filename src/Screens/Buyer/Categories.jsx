@@ -18,16 +18,14 @@ const Categories = () => {
     }
   }, []);
 
-  const renderItem = ({item}) => {
-    return <CategoryCard item={item} vendors={vendors} />;
-  };
+  const renderItem = ({item}) => <CategoryCard item={item} vendors={vendors} />;
 
   return (
     <View style={styles.body}>
       <FlatList
         data={cagtegoriesData}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item?.id.toString()}
         numColumns={3}
         columnWrapperStyle={{
           alignItems: 'center',

@@ -6,6 +6,7 @@ const ProductQuantity = ({id}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.description}>Quantity</Text>
+
       <ProductIncrement id={id} />
     </View>
   );

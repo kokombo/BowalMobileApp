@@ -11,6 +11,7 @@ const AccountType = ({navigation}) => {
         <View style={styles.tagline_container}>
           <OnboardingHeading heading={'Buy easily, sell swiftly'} />
         </View>
+
         <View style={styles.account_type}>
           <TouchableOpacity
             style={styles.image_container}
@@ -18,21 +19,25 @@ const AccountType = ({navigation}) => {
               navigation.navigate('BuyerSignUp');
             }}>
             <Image source={assets.buyer} style={styles.image} />
+
             <View style={styles.cta}>
               <Text style={styles.cta_text}>Become a buyer</Text>
             </View>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={styles.image_container}
             onPress={() => {
               navigation.navigate('FormA');
             }}>
             <Image source={assets.seller} style={styles.image} />
+
             <View style={styles.cta}>
               <Text style={styles.cta_text}>Become a seller</Text>
             </View>
           </TouchableOpacity>
         </View>
+
         <View style={styles.login}>
           <OnboardingCTA />
         </View>

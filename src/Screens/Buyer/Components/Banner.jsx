@@ -24,11 +24,12 @@ const Banner = () => {
       <FlatList
         data={bannerData}
         renderItem={renderItem}
-        keyExtractor={item => item?.id}
+        keyExtractor={item => item?.id.toString()}
         contentContainerStyle={{gap: 10}}
         horizontal
         showsHorizontalScrollIndicator={false}
       />
+
       <View style={styles.dot_container}>
         {bannerData.map(item => {
           return (

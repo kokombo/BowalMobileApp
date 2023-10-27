@@ -87,8 +87,10 @@ const AddProduct = ({navigation}) => {
             maxLength={20}
           />
         </View>
+
         <View style={styles.input_wrapper}>
           <Text style={styles.label}>Category</Text>
+
           <BusinessCategory
             category={productCategory}
             setCategory={setProductCategory}
@@ -99,8 +101,10 @@ const AddProduct = ({navigation}) => {
             padding={10}
           />
         </View>
+
         <View style={styles.input_wrapper}>
           <Text style={styles.label}>Price</Text>
+
           <TextInput
             style={styles.input}
             keyboardType="numbers-and-punctuation"
@@ -108,8 +112,10 @@ const AddProduct = ({navigation}) => {
             autoCorrect={false}
           />
         </View>
+
         <View style={styles.input_wrapper}>
           <Text style={styles.label}>Description</Text>
+
           <TextInput
             style={[styles.input, styles.description]}
             multiline

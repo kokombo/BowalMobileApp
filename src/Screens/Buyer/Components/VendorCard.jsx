@@ -16,21 +16,27 @@ const VendorCard = ({vendor}) => {
       <View style={styles.image_wrapper}>
         <Image source={assets.seller} resizeMode="cover" style={styles.image} />
       </View>
+
       <View style={styles.business_info_container}>
         <Text style={styles.business_name}>{vendor.businessName}</Text>
+
         <Text style={styles.business_description}>
           {vendor.businessDescription}
         </Text>
+
         <View style={styles.dist_rating_container}>
           <View style={styles.rating_wrapper}>
             <Text style={styles.rating_text}>4.0</Text>
+
             <Image
               source={assets.star}
               resizeMode="contain"
               style={styles.star}
             />
+
             <Text style={styles.rating_text}>(2)</Text>
           </View>
+
           <Text style={styles.rating_text}>xxkm away</Text>
         </View>
       </View>

@@ -8,6 +8,7 @@ const OnboardingCTA = () => {
   return (
     <View style={styles.cta_wrapper}>
       <Text style={styles.question}>Already have an account?</Text>
+
       <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
         <Text style={styles.link}>Sign in</Text>
       </TouchableOpacity>

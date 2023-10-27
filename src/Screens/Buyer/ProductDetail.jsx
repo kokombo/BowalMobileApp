@@ -36,8 +36,6 @@ const ProductDetail = ({route}) => {
     dispatch(addToCart({...data, quantity: 1}));
   };
 
-  let buttonContainer;
-
   //Referencing the database to check user's account type. If the user is a vendor, seleting number of products to cart and cart button will not show on the product details page. Only a buyer have access to the features.
   const ref = database().ref(`users/${user.uid}`);
   ref.on('value', snapshot => {
@@ -45,36 +43,35 @@ const ProductDetail = ({route}) => {
     setAccountType(accountType);
   });
 
-  if (accountType === 'buyer') {
-    buttonContainer = (
-      <View style={styles.buttons_container}>
-        <TouchableOpacity style={[styles.chat_button, styles.button]}>
-          <Text style={styles.chat_text}>chat</Text>
-        </TouchableOpacity>
-
-        {existingIds.includes(id) ? (
-          <TouchableOpacity
-            onPress={handleRemoveFromCart}
-            style={[styles.cart_button, styles.button, styles.remove_button]}>
-            <Text style={styles.cart_text}>Remove</Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            onPress={handleAddToCart}
-            style={[styles.cart_button, styles.button]}>
-            <Text style={styles.cart_text}>Add</Text>
-          </TouchableOpacity>
-        )}
-      </View>
-    );
-  }
-
   return (
     <View style={styles.body}>
       <ProductImages images={images} />
+
       <ProductInfo data={data} />
+
       <ProductDescription description={description} />
-      {buttonContainer}
+
+      {accountType === 'buyer' && (
+        <View style={styles.buttons_container}>
+          <TouchableOpacity style={[styles.chat_button, styles.button]}>
+            <Text style={styles.chat_text}>chat</Text>
+          </TouchableOpacity>
+
+          {existingIds.includes(id) ? (
+            <TouchableOpacity
+              onPress={handleRemoveFromCart}
+              style={[styles.cart_button, styles.button, styles.remove_button]}>
+              <Text style={styles.cart_text}>Remove</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={handleAddToCart}
+              style={[styles.cart_button, styles.button]}>
+              <Text style={styles.cart_text}>Add</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      )}
     </View>
   );
 };

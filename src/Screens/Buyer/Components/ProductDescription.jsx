@@ -13,10 +13,12 @@ const ProductDescription = ({description}) => {
     <View style={styles.wrapper}>
       <View style={styles.description_heading}>
         <Text style={styles.heading_text}>Description</Text>
+
         <Pressable onPress={toggleShow}>
           <Image source={assets.arrowdown} style={styles.icon} />
         </Pressable>
       </View>
+
       <View>
         {showDescription && (
           <Text style={styles.description}>{description}</Text>
@@ -25,6 +27,7 @@ const ProductDescription = ({description}) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'column',

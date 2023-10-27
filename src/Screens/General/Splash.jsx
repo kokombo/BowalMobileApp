@@ -18,6 +18,7 @@ const Splash = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image source={assets.logo} style={styles.logo} />
+
       <Text style={styles.text}>BOWAL</Text>
     </View>
   );
