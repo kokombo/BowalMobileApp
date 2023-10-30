@@ -35,32 +35,28 @@ const BuyerTabNavigator = () => {
                 style={{height: 30, width: 30}}
               />
             );
-          }
-          if (route.name === 'Categories') {
+          } else if (route.name === 'Categories') {
             return (
               <Image
                 source={focused ? assets.focusedcategory : assets.category}
                 style={{height: 30, width: 30}}
               />
             );
-          }
-          if (route.name === 'Chats') {
+          } else if (route.name === 'Chats') {
             return (
               <Image
                 source={focused ? assets.focusedchat : assets.chat}
                 style={{height: 30, width: 30}}
               />
             );
-          }
-          if (route.name === 'Logistics') {
+          } else if (route.name === 'Logistics') {
             return (
               <Image
                 source={focused ? assets.focusedlogistics : assets.logistics}
                 style={{height: 30, width: 30}}
               />
             );
-          }
-          if (route.name === 'Account') {
+          } else {
             return (
               <Image
                 source={focused ? assets.focusedaccount : assets.account}

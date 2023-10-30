@@ -20,32 +20,28 @@ const VendorTabNavigator = () => {
                 style={{height: 30, width: 30}}
               />
             );
-          }
-          if (route.name === 'Products') {
+          } else if (route.name === 'Products') {
             return (
               <Image
                 source={focused ? assets.focusedproduct : assets.product}
                 style={{height: 30, width: 30}}
               />
             );
-          }
-          if (route.name === 'Chats') {
+          } else if (route.name === 'Chats') {
             return (
               <Image
                 source={focused ? assets.focusedchat : assets.chat}
                 style={{height: 30, width: 30}}
               />
             );
-          }
-          if (route.name === 'Orders') {
+          } else if (route.name === 'Orders') {
             return (
               <Image
                 source={focused ? assets.focusedorder : assets.order}
                 style={{height: 30, width: 30}}
               />
             );
-          }
-          if (route.name === 'Account') {
+          } else {
             return (
               <Image
                 source={focused ? assets.focusedaccount : assets.account}
