@@ -7,7 +7,7 @@ const initialState = {
   error: null,
 };
 
-//Function to get saved vendors from backend
+//Function to get saved vendors from backend.
 export const getSavedVendors = createAsyncThunk(
   'savedVendors/getSavedVendors',
   async (_, {getState}) => {
