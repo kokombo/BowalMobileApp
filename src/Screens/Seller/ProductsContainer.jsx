@@ -39,6 +39,7 @@ const ProductsContainer = ({ListHeaderComponent}) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   products_container: {
     width: '100%',
@@ -48,4 +49,5 @@ const styles = StyleSheet.create({
     marginTop: 150,
   },
 });
+
 export default ProductsContainer;

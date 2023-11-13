@@ -3,26 +3,25 @@ import {assets, COLORS} from '../../../../constants';
 import OnboardingHeading from '../Components/OnboardingHeading';
 import {TextInput} from 'react-native-gesture-handler';
 import CustomButton from '../../../Components/Buttons';
-import {useState} from 'react';
 
 const Verify = ({navigation}) => {
-  const [num, setNum] = useState('');
+  const handleChange = () => {};
 
-  const handleChange = value => {
-    setNum(value);
-  };
   return (
     <View style={styles.body}>
       <View style={styles.heading_container}>
         <OnboardingHeading heading={'Verify your account'} />
+
         <Text style={styles.text}>
           We sent a verification code to your email address. Enter the codes
           below
         </Text>
       </View>
+
       <View style={styles.image_container}>
         <Image source={assets.verify} style={styles.image} />
       </View>
+
       <View style={styles.input_container}>
         <TextInput
           keyboardType="numeric"
@@ -32,6 +31,7 @@ const Verify = ({navigation}) => {
           returnKeyType="next"
           textContentType="oneTimeCode"
         />
+
         <TextInput
           keyboardType="numeric"
           style={styles.input}
@@ -40,6 +40,7 @@ const Verify = ({navigation}) => {
           maxLength={1}
           textContentType="oneTimeCode"
         />
+
         <TextInput
           keyboardType="numeric"
           style={styles.input}
@@ -48,6 +49,7 @@ const Verify = ({navigation}) => {
           maxLength={1}
           textContentType="oneTimeCode"
         />
+
         <TextInput
           keyboardType="numeric"
           style={styles.input}
@@ -60,6 +62,7 @@ const Verify = ({navigation}) => {
 
       <View style={styles.cta_wrapper}>
         <Text style={styles.text}> Didn't receive code?</Text>
+
         <TouchableOpacity>
           <Text style={[styles.text, styles.link]}>Resend Code</Text>
         </TouchableOpacity>

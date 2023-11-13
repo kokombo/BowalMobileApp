@@ -19,22 +19,6 @@ const AddProductImage = () => {
     Alert.alert('Warning!', 'You can only select up to three images');
   }
 
-  const ImagePreview = () => {
-    if (selectedImages.length > 0 && selectedImages !== null) {
-      return (
-        <View style={styles.image_preview_container}>
-          {selectedImages?.slice(0, 3).map((item, index) => (
-            <Image
-              source={{uri: `${selectedImages[index]}`}}
-              style={styles.preview_image}
-              key={index}
-            />
-          ))}
-        </View>
-      );
-    }
-  };
-
   const handlePress = () => {
     dispatch(selectImage());
   };
@@ -43,6 +27,7 @@ const AddProductImage = () => {
     <View style={styles.container}>
       <TouchableOpacity style={styles.selectImage} onPress={handlePress}>
         <Image source={assets.selectimage} style={styles.select_icon} />
+
         <Text style={styles.text}>
           <Text style={{color: COLORS.blue}}>Browse</Text> to select product
           image
@@ -51,7 +36,19 @@ const AddProductImage = () => {
 
       <Text style={styles.info}>upload up to 3 product images</Text>
 
-      <ImagePreview />
+      <>
+        {selectedImages !== null && selectedImages.length > 0 ? (
+          <View style={styles.image_preview_container}>
+            {selectedImages?.slice(0, 3).map((item, index) => (
+              <Image
+                source={{uri: `${selectedImages[index]}`}}
+                style={styles.preview_image}
+                key={index}
+              />
+            ))}
+          </View>
+        ) : null}
+      </>
     </View>
   );
 };

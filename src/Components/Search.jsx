@@ -5,6 +5,7 @@ const Search = ({value, placeholder}) => {
   return (
     <View>
       <Image source={assets.searchicon} style={styles.icon} />
+
       <TextInput
         placeholder={placeholder}
         style={styles.search}
@@ -13,6 +14,7 @@ const Search = ({value, placeholder}) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   search: {
     backgroundColor: COLORS.cloud,

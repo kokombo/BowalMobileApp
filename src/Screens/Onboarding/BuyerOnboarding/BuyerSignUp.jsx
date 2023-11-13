@@ -27,9 +27,9 @@ const BuyerSignUp = () => {
   const displayError = ({emailError, passwordError, authError}) => {
     setError(error => ({
       ...error,
-      emailError: emailError,
-      passwordError: passwordError,
-      authError: authError,
+      emailError,
+      passwordError,
+      authError,
     }));
   };
 
@@ -79,21 +79,25 @@ const BuyerSignUp = () => {
           if (error.code === 'auth/email-already-in-use') {
             Alert.alert('Email already in use');
           }
+
           if (error.code === 'auth/invalid-email') {
             Alert.alert('Invalid email address');
             displayError({authError: 'Invalid email address'});
           }
+
           if (error.code === 'auth/weak-password') {
             Alert.alert(
               'Password not strong enough, please choose a stronger password',
             );
           }
+
           if (error.code === 'auth/network-request-failed') {
             Alert.alert(
               'Network error!',
               'Please check your internet connection and try again.',
             );
           }
+
           if (error.code === 'auth/permission-denied') {
             Alert.alert('permission denied');
           }
@@ -174,7 +178,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
   },
-
   body: {
     flex: 1,
     paddingHorizontal: 15,

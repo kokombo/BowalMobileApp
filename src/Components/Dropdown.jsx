@@ -90,6 +90,7 @@ const BusinessCategory = ({
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   modal_view: {
     flex: 1,

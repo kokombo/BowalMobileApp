@@ -6,6 +6,7 @@ const Error = ({error}) => {
 
   <View style={styles.wrapper}>
     <Text>{error} </Text>
+
     <Pressable style={styles.button} onPress={handleReset}>
       <Text>Try again</Text>
     </Pressable>

@@ -11,6 +11,14 @@ import {useDispatch} from 'react-redux';
 import database from '@react-native-firebase/database';
 import {login} from '../../../Redux/Slices/currentUserSlice';
 
+const initialErrorState = {
+  authErrorMessage: ' ',
+  passwordErrorMessage: ' ',
+  phoneErrorMessage: '',
+  emailErrorMessage: ' ',
+  isActive: false,
+};
+
 //Component for vendor signup first screen.
 const FormA = () => {
   const [fullname, setFullname] = useState('');
@@ -18,13 +26,7 @@ const FormA = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState({
-    auth: ' ',
-    password: ' ',
-    phone: '',
-    page: ' ',
-    err: false,
-  });
+  const [error, setError] = useState(initialErrorState);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -32,16 +34,31 @@ const FormA = () => {
   //canSignup checks if a user has inputed signup credentials to enable login button.
   const canSignUp = Boolean(fullname && email && password && phone);
 
+  const displayError = ({
+    authErrorMessage,
+    passwordErrorMessage,
+    phoneErrorMessage,
+    emailErrorMessage,
+  }) => {
+    setError(prev => ({
+      ...prev,
+      authErrorMessage,
+      passwordErrorMessage,
+      phoneErrorMessage,
+      emailErrorMessage,
+      isActive: true,
+    }));
+  };
+
   //Function to sign up a user for a vendor account
   const handleSignUp = async () => {
     if (!email.includes('@') || !email.includes('.com')) {
-      setError({err: true, page: 'Please enter a valid email address'});
+      displayError({emailErrorMessage: 'Please enter a valid email address'});
     } else if (phone.length !== 11) {
-      setError({err: true, phone: 'Phone number should be 11 characters'});
+      displayError({phoneErrorMessage: 'Phone number should be 11 characters'});
     } else if (password.length < 6) {
-      setError({
-        err: true,
-        password: 'Password should be at least 6 characters',
+      displayError({
+        passwordErrorMessage: 'Password should be at least 6 characters',
       });
     } else {
       setLoading(true);
@@ -83,29 +100,37 @@ const FormA = () => {
         .catch(error => {
           if (error.code === 'auth/email-already-in-use') {
             Alert.alert('Error!', 'Email address already in use');
-            setError({err: true, auth: 'Email already in use'});
+
+            displayError({authErrorMessage: 'Email already in use'});
           }
+
           if (error.code === 'auth/invalid-email') {
             Alert.alert('Oops!', 'Invalid email address');
-            setError({err: true, auth: 'Invalid email address'});
+
+            displayError({authErrorMessage: 'Invalid email address'});
           }
+
           if (error.code === 'auth/weak-password') {
             Alert.alert('Weak Password!', 'Please choose a stronger password');
-            setError({
-              err: true,
-              auth: 'Password not strong enough, please choose a stronger password',
+
+            displayError({
+              authErrorMessage:
+                'Password not strong enough, please choose a stronger password',
             });
           }
+
           if (error.code === 'auth/network-request-failed') {
             Alert.alert(
               'Network error!',
               'Please check your internet connection and try again.',
             );
-            setError({
-              err: true,
-              auth: 'A network error has occured, please check your connectivity and try again.',
+
+            displayError({
+              authErrorMessage:
+                'A network error has occured, please check your connectivity and try again.',
             });
           }
+
           if (error.code === 'auth/permission-denied') {
             Alert.alert('permission denied');
           }
@@ -119,8 +144,9 @@ const FormA = () => {
   //useEffect to set timeout for error state
   useEffect(() => {
     const timer = setTimeout(() => {
-      setError({err: false});
+      setError({isActive: false});
     }, 3000);
+
     return () => clearTimeout(timer);
   }, [error]);
 
@@ -141,6 +167,7 @@ const FormA = () => {
             value={fullname}
             onChangeText={setFullname}
           />
+
           <View>
             <Input
               placeholder={'Email'}
@@ -150,8 +177,10 @@ const FormA = () => {
             />
 
             <View>
-              {error.page && (
-                <Text style={styles.email_error}>{error.page}</Text> //This displays the email format error when there is one
+              {error.emailErrorMessage && (
+                <Text style={styles.email_error}>
+                  {error.emailErrorMessage}
+                </Text>
               )}
             </View>
           </View>
@@ -159,8 +188,10 @@ const FormA = () => {
           <View style={styles.number}>
             <View style={styles.country}>
               <Text style={{fontSize: 18}}>+234</Text>
+
               <Image source={assets.dropdown} style={styles.dropdown} />
             </View>
+
             <View style={{width: '91%'}}>
               <Input
                 placeholder={'Phone Number'}
@@ -169,9 +200,12 @@ const FormA = () => {
                 value={phone}
                 onChangeText={setPhone}
               />
+
               <View>
-                {error.phone && (
-                  <Text style={styles.email_error}>{error.phone}</Text>
+                {error.phoneErrorMessage && (
+                  <Text style={styles.email_error}>
+                    {error.phoneErrorMessage}
+                  </Text>
                 )}
               </View>
             </View>
@@ -179,19 +213,24 @@ const FormA = () => {
 
           <View>
             <PasswordInput value={password} onChangeText={setPassword} />
+
             <View>
-              {error.password && (
-                <Text style={styles.email_error}>{error.password}</Text> //This displays the email format error when there is one.
+              {error.passwordErrorMessage && (
+                <Text style={styles.email_error}>
+                  {error.passwordErrorMessage}
+                </Text>
               )}
             </View>
           </View>
         </View>
+
         <CustomButton
           title={'Create My Account'}
           onPress={handleSignUp}
           disabled={!canSignUp}
         />
       </View>
+
       <View style={styles.login}>
         <OnboardingCTA />
       </View>

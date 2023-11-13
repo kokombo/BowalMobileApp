@@ -17,7 +17,7 @@ import {DrawerActions} from '@react-navigation/native';
 import useSignOut from '../utilities/useSignOut';
 
 const Aside = () => {
-  const [data, setData] = useState(sidebarData);
+  const [data] = useState(sidebarData);
 
   const navigation = useNavigation();
 
@@ -37,11 +37,13 @@ const Aside = () => {
         <View style={styles.picture_container}>
           <ProfilePicture width={73} height={73} />
         </View>
+
         <DisplayName color={COLORS.white} />
       </View>
 
       <View style={styles.aside_body}>
         <Text style={styles.menu}>Menu</Text>
+
         <View style={styles.navigations_container}>
           {data.map(item => {
             return (
@@ -55,6 +57,7 @@ const Aside = () => {
                 <View style={styles.icon_wrapper}>
                   <Image source={item.icon} style={styles.icon} />
                 </View>
+
                 <Text style={styles.navigation_name}>{item.text} </Text>
               </TouchableOpacity>
             );
@@ -65,12 +68,14 @@ const Aside = () => {
           <View style={styles.icon_wrapper}>
             <Image source={assets.logout} style={styles.icon} />
           </View>
+
           <Text style={styles.navigation_name}>Log out </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
+
 const styles = StyleSheet.create({
   picture_container: {
     width: 80,

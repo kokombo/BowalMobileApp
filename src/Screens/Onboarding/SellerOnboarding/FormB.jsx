@@ -51,6 +51,7 @@ const FormB = () => {
   return (
     <View style={styles.body}>
       {loading && <Loader />}
+
       <OnboardingHeading
         heading={'Almost there!'}
         subheading={'Set up your store details'}
@@ -77,6 +78,7 @@ const FormB = () => {
             placeholder={'Select your business category'}
             height={32}
           />
+
           <View>
             <TextInput
               placeholder={'Write a brief description of your business...'}
@@ -91,6 +93,7 @@ const FormB = () => {
             )}
           </View>
         </View>
+
         <CustomButton
           title="continue"
           onPress={handleSubmit}
@@ -100,6 +103,7 @@ const FormB = () => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   body: {
     flex: 1,

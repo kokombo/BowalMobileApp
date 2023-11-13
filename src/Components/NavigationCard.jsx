@@ -40,7 +40,7 @@ const NavigationCard = ({data}) => {
     if (user === null) {
       logOut();
     }
-  }, []);
+  }, [user]);
 
   //function handling the process of the renderedItems in the flatlist in vendor's account tab
   const handlePress = () => {

@@ -5,6 +5,7 @@ const Mode = () => {
   return (
     <View style={[styles.container, styles.shadowProp]}>
       <Text style={styles.text}>Buyers Mode</Text>
+
       <Image source={assets.mode} style={styles.mode_icon} />
     </View>
   );

@@ -6,10 +6,12 @@ const Analytics = ({title, icon, value}) => {
     <View style={[styles.container, styles.shadowProp]}>
       <View style={styles.heading}>
         <Text style={styles.title}>{title}</Text>
+
         <View style={styles.icon_container}>
           <Image source={icon} style={styles.image} />
         </View>
       </View>
+
       <View style={styles.value_container}>
         <Text style={styles.value}> {value}</Text>
       </View>

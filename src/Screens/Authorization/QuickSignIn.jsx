@@ -30,10 +30,10 @@ const QuickSignIn = ({heading, cta, link, onPressLink}) => {
       if (res) {
         dispatch(
           login({
-            email: res.user.email,
-            displayName: res.user.name,
-            uid: res.user.id,
-            picture: res.user.photo,
+            email: res.user?.email,
+            displayName: res.user?.name,
+            uid: res.user?.id,
+            picture: res.user?.photo,
           }),
         );
 
@@ -62,6 +62,7 @@ const QuickSignIn = ({heading, cta, link, onPressLink}) => {
 
       <View style={styles.cta_wrapper}>
         <Text style={styles.text}>{cta}</Text>
+
         <TouchableOpacity onPress={onPressLink}>
           <Text style={[styles.text, styles.link]}>{link}</Text>
         </TouchableOpacity>

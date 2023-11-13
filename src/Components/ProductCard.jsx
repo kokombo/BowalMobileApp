@@ -24,8 +24,10 @@ const ProductCard = ({data}) => {
           style={styles.product_image}
         />
       </View>
+
       <View style={styles.product_info_container}>
         <Text style={styles.product_name}>{name}</Text>
+
         <Text style={styles.product_price}>&#8358; {price} </Text>
       </View>
     </TouchableOpacity>

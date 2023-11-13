@@ -11,7 +11,7 @@ import CustomButton from '../../Components/Buttons';
 import {COLORS, FONT} from '../../../constants';
 import {useSelector, useDispatch} from 'react-redux';
 import {addProduct} from '../../Redux/Slices/ProductSlice';
-import {CustomAlert, AddProductImage} from '../../Components';
+import {AddProductImage} from '../../Components';
 import {clearImages} from '../../Redux/Slices/ImageSelectorSlice';
 import {BusinessCategory} from '../../Components';
 import firestore from '@react-native-firebase/firestore';
