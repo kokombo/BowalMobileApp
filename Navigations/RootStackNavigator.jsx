@@ -1,6 +1,5 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import {Animated} from 'react-native';
-import {TouchableOpacity, Image} from 'react-native';
 import OnboardingStack from './OnboardingStack';
 import VendorStack from './VendorStack';
 import {Notifications} from '../src/Screens/Seller';
@@ -45,7 +44,6 @@ const RootStackNavigator = () => {
 
   return (
     <Stack.Navigator
-      //   initialRouteName="OnboardingStack"
       screenListeners={{
         focus: () => {
           Animated.timing(av, {
@@ -69,47 +67,42 @@ const RootStackNavigator = () => {
         component={Splash}
         options={{headerShown: false}}
       />
+
       <Stack.Screen
         name="OnboardingStack"
         component={OnboardingStack}
         options={{headerShown: false}}
       />
+
       <Stack.Screen
         name="VendorStack"
         component={VendorStack}
         options={{headerShown: false, gestureEnabled: false}}
       />
+
       <Stack.Screen
         name="BuyerStack"
         component={BuyerStack}
         options={{headerShown: false}}
       />
+
       <Stack.Screen
         name="Signin"
         component={LoginPage}
         options={{
           gestureEnabled: false,
-          headerLeftContainerStyle: {display: 'none'},
           headerStyle: {backgroundColor: COLORS.blue},
           title: '',
+          headerLeft: () => <GoBack source={assets.arrowback} />,
         }}
       />
+
       <Stack.Screen
         name="Notifications"
         component={Notifications}
         options={{
           headerBackgroundContainerStyle: {backgroundColor: COLORS.white},
-          headerBackImage: () => (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.goBack();
-              }}>
-              <Image
-                source={assets.arrowbackblue}
-                style={{width: 20, height: 17, marginLeft: 10}}
-              />
-            </TouchableOpacity>
-          ),
+          headerLeft: () => <GoBack source={assets.arrowbackblue} />,
         }}
       />
     </Stack.Navigator>

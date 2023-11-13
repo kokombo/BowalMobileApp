@@ -8,9 +8,8 @@ import {
 } from '../src/Screens/Buyer';
 import {Chats} from '../src/Screens/Seller';
 import {COLORS, FONT, assets} from '../constants';
-import {SideBarToggle} from '../src/Components';
+import {SideBarToggle, TabImage} from '../src/Components';
 import {useNavigation} from '@react-navigation/native';
-import {CartIcon} from '../src/Components';
 import {useSelector} from 'react-redux';
 
 const BuyerTabNavigator = () => {
@@ -23,44 +22,40 @@ const BuyerTabNavigator = () => {
     <Tab.Navigator
       screenOptions={({route}) => ({
         headerLeft: () => <SideBarToggle />,
+
         headerLeftContainerStyle: {paddingLeft: 15},
+
         headerRightContainerStyle: {paddingRight: 15},
+
         headerTitleStyle: {color: COLORS.grey, fontSize: 20, fontWeight: '600'},
+
         headerShadowVisible: false,
+
         tabBarIcon: ({focused}) => {
           if (route.name === 'Home') {
             return (
-              <Image
-                source={focused ? assets.focusedhome : assets.home}
-                style={{height: 30, width: 30}}
-              />
+              <TabImage source={focused ? assets.focusedhome : assets.home} />
             );
           } else if (route.name === 'Categories') {
             return (
-              <Image
+              <TabImage
                 source={focused ? assets.focusedcategory : assets.category}
-                style={{height: 30, width: 30}}
               />
             );
           } else if (route.name === 'Chats') {
             return (
-              <Image
-                source={focused ? assets.focusedchat : assets.chat}
-                style={{height: 30, width: 30}}
-              />
+              <TabImage source={focused ? assets.focusedchat : assets.chat} />
             );
           } else if (route.name === 'Logistics') {
             return (
-              <Image
+              <TabImage
                 source={focused ? assets.focusedlogistics : assets.logistics}
-                style={{height: 30, width: 30}}
               />
             );
           } else {
             return (
-              <Image
+              <TabImage
                 source={focused ? assets.focusedaccount : assets.account}
-                style={{height: 30, width: 30}}
               />
             );
           }
@@ -101,21 +96,29 @@ const BuyerTabNavigator = () => {
             </TouchableOpacity>
           ),
           headerTitle: '',
-        }}></Tab.Screen>
-      <Tab.Screen name="Categories" component={Categories}></Tab.Screen>
-      <Tab.Screen name="Chats" component={Chats}></Tab.Screen>
-      <Tab.Screen name="Logistics" component={Logistics}></Tab.Screen>
+        }}
+      />
+
+      <Tab.Screen name="Categories" component={Categories} />
+
+      <Tab.Screen name="Chats" component={Chats} />
+
+      <Tab.Screen name="Logistics" component={Logistics} />
+
       <Tab.Screen
         name="Account"
         component={BuyerAccount}
         options={{
           headerTitle: 'Profile',
+
           headerStyle: {backgroundColor: COLORS.blue},
+
           headerTitleStyle: {
             color: COLORS.white,
             fontSize: 20,
             fontWeight: '600',
           },
+
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {
@@ -127,7 +130,8 @@ const BuyerTabNavigator = () => {
               />
             </TouchableOpacity>
           ),
-        }}></Tab.Screen>
+        }}
+      />
     </Tab.Navigator>
   );
 };

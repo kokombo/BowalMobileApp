@@ -38,6 +38,7 @@ const ShopTopTab = ({route}) => {
       <View>
         <Home vendor={vendor} />
       </View>
+
       <View style={{flex: 1, minHeight: 500}}>
         <Tab.Navigator
           screenOptions={{
@@ -47,19 +48,24 @@ const ShopTopTab = ({route}) => {
               width: 115,
               marginLeft: 15,
             },
+
             tabBarIndicatorContainerStyle: {
               borderBottomWidth: 1,
               borderBottomColor: COLORS.gray,
             },
+
             tabBarActiveTintColor: COLORS.blue,
+
             tabBarInactiveTintColor: COLORS.gray,
           }}>
           <Tab.Screen name="Shop">
             {props => <Shop {...props} vendor={vendor} />}
           </Tab.Screen>
+
           <Tab.Screen name="Info">
             {props => <Info {...props} vendor={vendor} />}
           </Tab.Screen>
+
           <Tab.Screen name="Reviews">
             {props => <Reviews {...props} vendor={vendor} />}
           </Tab.Screen>

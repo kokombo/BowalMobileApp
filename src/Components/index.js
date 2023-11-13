@@ -19,6 +19,7 @@ import GoBack from './GoBack';
 import DisplayName from './DisplayName';
 import Error from './Error';
 import CartIcon from './CartIcon';
+import TabImage from './TabImage';
 
 export {
   Input,
@@ -42,4 +43,5 @@ export {
   DisplayName,
   Error,
   CartIcon,
+  TabImage,
 };

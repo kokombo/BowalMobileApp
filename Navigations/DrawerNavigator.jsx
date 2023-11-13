@@ -10,7 +10,9 @@ const DrawerNavigator = () => {
       drawerContent={() => <Aside />}
       screenOptions={{
         drawerType: 'front',
+
         drawerStyle: {width: 350, backgroundColor: COLORS.blue},
+
         drawerLabelStyle: {color: COLORS.grey, fontSize: 18, fontWeight: '300'},
       }}>
       <Drawer.Screen
@@ -18,8 +20,10 @@ const DrawerNavigator = () => {
         component={BuyerTabNavigator}
         options={{
           headerShown: false,
+
           drawerLabelStyle: {display: 'none'},
-        }}></Drawer.Screen>
+        }}
+      />
     </Drawer.Navigator>
   );
 };

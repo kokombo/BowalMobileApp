@@ -1,7 +1,7 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import {AccountType, FormA, FormB, Verify} from '../src/Screens/Onboarding';
 import {BuyerSignUp} from '../src/Screens/Onboarding/BuyerOnboarding';
-import {COLORS} from '../constants';
+import {COLORS, assets} from '../constants';
 import {GoBack} from '../src/Components';
 
 const Stack = createStackNavigator();
@@ -17,17 +17,17 @@ const OnboardingStack = () => {
           title: '',
         }}
       />
+
       <Stack.Screen
         name="FormA"
         component={FormA}
         options={{
           headerStyle: {backgroundColor: COLORS.blue},
           title: '',
-          headerLeft: () => {
-            return <GoBack />;
-          },
+          headerLeft: () => <GoBack source={assets.arrowback} />,
         }}
       />
+
       <Stack.Screen
         name="FormB"
         component={FormB}
@@ -39,6 +39,7 @@ const OnboardingStack = () => {
           headerLeftContainerStyle: {display: 'none'},
         }}
       />
+
       <Stack.Screen
         name="Verify"
         component={Verify}
@@ -50,13 +51,12 @@ const OnboardingStack = () => {
           headerLeftContainerStyle: {display: 'none'},
         }}
       />
+
       <Stack.Screen
         name="BuyerSignUp"
         component={BuyerSignUp}
         options={{
-          headerLeft: () => {
-            return <GoBack />;
-          },
+          headerLeft: () => <GoBack source={assets.arrowback} />,
           headerStyle: {backgroundColor: COLORS.blue},
           title: '',
         }}

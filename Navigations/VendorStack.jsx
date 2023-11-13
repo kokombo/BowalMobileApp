@@ -7,7 +7,7 @@ import {clearImages} from '../src/Redux/Slices/ImageSelectorSlice';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {ProductDetail} from '../src/Screens/Buyer';
-import {CartIcon} from '../src/Components';
+import {GoBack} from '../src/Components';
 
 const Stack = createStackNavigator();
 
@@ -25,12 +25,15 @@ const VendorStack = () => {
         component={VendorTabNavigator}
         options={{headerShown: false}}
       />
+
       <Stack.Screen
         name="Add Product"
         component={AddProduct}
         options={{
           headerBackgroundContainerStyle: {backgroundColor: COLORS.white},
+
           headerBackTitleVisible: false,
+
           headerBackImage: () => (
             <TouchableOpacity
               onPress={() => {
@@ -51,14 +54,12 @@ const VendorStack = () => {
         component={ProductDetail}
         options={{
           headerShadowVisible: false,
+
           headerBackTitleVisible: false,
+
           title: '',
-          headerBackImage: () => (
-            <Image
-              source={assets.arrowbackblue}
-              style={{width: 20, height: 17, marginLeft: 10}}
-            />
-          ),
+
+          headerLeft: () => <GoBack source={assets.arrowbackblue} />,
         }}
       />
     </Stack.Navigator>

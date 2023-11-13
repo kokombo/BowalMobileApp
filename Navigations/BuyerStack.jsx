@@ -1,5 +1,4 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import {Image} from 'react-native';
 import DrawerNavigator from './DrawerNavigator';
 import {
   SavedBusinesses,
@@ -9,6 +8,7 @@ import {
 } from '../src/Screens/Buyer';
 import {COLORS, FONT, assets} from '../constants';
 import ShopTopTab from './ShopTopTab';
+import {GoBack} from '../src/Components';
 
 const Stack = createStackNavigator();
 
@@ -21,25 +21,21 @@ const BuyerStack = () => {
           fontSize: FONT.lg,
           fontWeight: '600',
         },
+        headerShadowVisible: false,
+        headerBackTitle: false,
       }}>
       <Stack.Screen
         name="BuyerHome"
         component={DrawerNavigator}
         options={{headerShown: false, gestureEnabled: false}}
       />
+
       <Stack.Screen
         name="Saved Businesses"
         component={SavedBusinesses}
         options={{
           title: 'Saved Businesses',
-          headerBackTitleVisible: false,
-          headerShadowVisible: false,
-          headerBackImage: () => (
-            <Image
-              source={assets.arrowbackblue}
-              style={{width: 20, height: 17, marginLeft: 10}}
-            />
-          ),
+          headerLeft: () => <GoBack source={assets.arrowbackblue} />,
         }}
       />
 
@@ -50,14 +46,7 @@ const BuyerStack = () => {
           title: route.params.filteredVendors
             ?.slice(0, 1)
             .map(item => item.category),
-          headerShadowVisible: false,
-          headerBackTitleVisible: false,
-          headerBackImage: () => (
-            <Image
-              source={assets.arrowbackblue}
-              style={{width: 20, height: 17, marginLeft: 10}}
-            />
-          ),
+          headerLeft: () => <GoBack source={assets.arrowbackblue} />,
         })}
       />
 
@@ -65,16 +54,9 @@ const BuyerStack = () => {
         name="VendorShopHome"
         component={ShopTopTab}
         options={{
-          headerShadowVisible: false,
           title: '',
-          headerBackTitleVisible: false,
           headerStyle: {backgroundColor: COLORS.blue},
-          headerBackImage: () => (
-            <Image
-              source={assets.arrowback}
-              style={{width: 20, height: 17, marginLeft: 10}}
-            />
-          ),
+          headerLeft: () => <GoBack source={assets.arrowback} />,
         }}
       />
 
@@ -82,29 +64,16 @@ const BuyerStack = () => {
         name="Cart"
         component={Cart}
         options={{
-          headerShadowVisible: false,
-          headerBackTitleVisible: false,
-          headerBackImage: () => (
-            <Image
-              source={assets.arrowbackblue}
-              style={{width: 20, height: 17, marginLeft: 10}}
-            />
-          ),
+          headerLeft: () => <GoBack source={assets.arrowbackblue} />,
         }}
       />
+
       <Stack.Screen
         name="ProductDetail"
         component={ProductDetail}
         options={{
-          headerShadowVisible: false,
-          headerBackTitleVisible: false,
           title: '',
-          headerBackImage: () => (
-            <Image
-              source={assets.arrowbackblue}
-              style={{width: 20, height: 17, marginLeft: 10}}
-            />
-          ),
+          headerLeft: () => <GoBack source={assets.arrowbackblue} />,
         }}
       />
     </Stack.Navigator>

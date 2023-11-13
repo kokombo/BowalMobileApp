@@ -1,8 +1,7 @@
 import {View, TouchableOpacity, StyleSheet, Image} from 'react-native';
-import {assets} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
 
-const GoBack = () => {
+const GoBack = ({source}) => {
   const navigation = useNavigation();
 
   return (
@@ -11,7 +10,7 @@ const GoBack = () => {
         onPress={() => {
           navigation.goBack();
         }}>
-        <Image source={assets.arrowback} style={styles.icon} />
+        <Image source={source} style={styles.icon} />
       </TouchableOpacity>
     </View>
   );
