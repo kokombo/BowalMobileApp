@@ -43,7 +43,7 @@ const AddProductImage = () => {
               <Image
                 source={{uri: `${selectedImages[index]}`}}
                 style={styles.preview_image}
-                key={index}
+                key={index.toString()}
               />
             ))}
           </View>
